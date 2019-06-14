@@ -1,6 +1,6 @@
 import React from "react";
 import App, { Container } from "next/app";
-import "./styles/app.scss";
+import "./_app.scss";
 
 class CustomApp extends App {
   static async getInitialProps({ Component, ctx }) {

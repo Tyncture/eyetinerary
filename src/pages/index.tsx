@@ -1,15 +1,17 @@
 import { Component } from "react";
+import BaseContainer from "./components/base/baseContainer";
+import "./index.scss";
+import Sidebar from "./components/base/sidebar";
+import Main from "./components/base/main";
 
 export class IndexPage extends Component {
   render() {
     return (
       <div>
-        <div className="main-sidebar">
-        Next.js test.
-        </div>
-        <main className="main-content">
-          Next.js test.
-        </main>
+        <BaseContainer>
+          <Sidebar />
+          <Main />
+        </BaseContainer>
       </div>
     );
   }
