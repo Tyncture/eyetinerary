@@ -9,19 +9,16 @@ Built using [TypeScript](https://www.typescriptlang.org/), [Next.js](https://nex
 
 ## Development
 
-### `npm start`
+### `npm run dev`
 
-Runs the app in the development mode.<br>
+Runs the app in development watch mode.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
 
 ## Deployment
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.<br>
+Builds static assets for the app.
 
 ## License
 ```
