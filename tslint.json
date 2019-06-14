@@ -3,8 +3,12 @@
     "extends": [
         "tslint:recommended",
         "tslint-config-standard",
-        "tslint-react"
+        "tslint-react",
+        "tslint-config-prettier"
     ],
     "jsRules": {},
+    "rules": {
+        "ordered-imports": false
+    },
     "rulesDirectory": []
 }
