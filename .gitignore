@@ -25,3 +25,6 @@ yarn-error.log*
 # Next.js
 src/.next
 /dist
+
+# dotenv
+.env

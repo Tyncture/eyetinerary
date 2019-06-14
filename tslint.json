@@ -10,7 +10,8 @@
         "ordered-imports": false,
         "no-console": false,
         "member-access": false,
-        "object-curly-spacing": true
+        "object-curly-spacing": true,
+        "semicolon": true
     },
     "rulesDirectory": []
 }
