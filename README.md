@@ -20,6 +20,10 @@ Runs the app in development watch mode.
 
 Builds static assets for the app.
 
+### `npm run export`
+
+Exports the built assets to a static HTML website.
+
 ## License
 ```
 Copyright (C) 2019 John Su
