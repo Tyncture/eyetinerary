@@ -1,5 +1,6 @@
 // As per https://github.com/zeit/next-plugins/tree/master/packages/next-typescript
 const withTypescript = require('@zeit/next-typescript');
+const withSass = require('@zeit/next-sass');
 const nextEnv = require('next-env');
 const dotenvLoad = require('dotenv-load');
 
@@ -10,5 +11,13 @@ const withNextEnv = nextEnv({
 });
 
 module.exports = withNextEnv(
-  withTypescript({})
+  withTypescript(
+    withSass({
+      cssModules: true,
+      cssLoaderOptions: {
+        importLoaders: 1,
+        localIdentName: "[local]___[hash:base64:5]",
+      }
+    })
+  )
 )
