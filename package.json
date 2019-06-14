@@ -1,7 +1,9 @@
 {
   "name": "eyetinerary",
   "version": "0.1.0",
-  "private": true,
+  "author": "John Su",
+  "repository": "github:Tyncture/Eyetinerary",
+  "license": "AGPL-3.0-or-later",
   "dependencies": {
     "@types/jest": "^24.0.14",
     "@types/node": "^12.0.8",
