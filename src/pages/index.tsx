@@ -7,12 +7,10 @@ import Main from "./components/base/main";
 export class IndexPage extends Component {
   render() {
     return (
-      <div>
-        <BaseContainer>
+      <BaseContainer>
           <Sidebar />
           <Main />
         </BaseContainer>
-      </div>
     );
   }
 }
