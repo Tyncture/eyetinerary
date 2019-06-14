@@ -2,7 +2,16 @@ import { Component } from "react";
 
 export class IndexPage extends Component {
   render() {
-    return <main>Next.js test.</main>;
+    return (
+      <div>
+        <div className="main-sidebar">
+        Next.js test.
+        </div>
+        <main className="main-content">
+          Next.js test.
+        </main>
+      </div>
+    );
   }
 }
 
