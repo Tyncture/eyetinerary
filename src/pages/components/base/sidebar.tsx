@@ -9,10 +9,11 @@ class Sidebar extends React.Component {
   render() {
     return (
       <div className="sidebar">
-        <header className="sidebar-header" />
-        <div className="sidebar-content">
-          {this.props.children}
-        </div>
+        <header className="sidebar-header">
+          <div className="sidebar-header-logo" />
+          <div className="sidebar-header-controls" />
+        </header>
+        <div className="sidebar-content">{this.props.children}</div>
         <footer className="sidebar-footer" />
       </div>
     );
