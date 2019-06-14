@@ -24,3 +24,4 @@ yarn-error.log*
 
 # Next.js
 src/.next
+/dist
