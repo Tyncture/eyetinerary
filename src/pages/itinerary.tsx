@@ -6,6 +6,7 @@ import ItineraryHeader from "../components/itinerary/itineraryHeader";
 import ItineraryPageList from "../components/itinerary/itineraryPageList";
 import { IItinerary } from "../components/itinerary/types";
 import validator from "validator";
+import Head from 'next/head';
 import "./itinerary.scss";
 
 interface IProps {
@@ -77,6 +78,9 @@ class Itinerary extends React.Component<IProps, IState> {
   render() {
     return (
       <BaseContainer>
+        <Head>
+          <title>{this.state.itinerary ? `${this.state.itinerary.title} - ` : ""}Eyetinerary</title>
+        </Head>
         <Sidebar />
         <Main>
           {this.props.query.id && !this.state.invalidIdFormat && (
