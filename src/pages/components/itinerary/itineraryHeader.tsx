@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faGlobeEurope,
   faCalendarAlt,
-  faClock
 } from "@fortawesome/free-solid-svg-icons";
 import "./itineraryHeader.scss";
 
