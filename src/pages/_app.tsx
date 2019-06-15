@@ -1,6 +1,6 @@
-import React from "react";
-import App, { Container } from "next/app";
-import "./_app.scss";
+import React from 'react';
+import App, { Container } from 'next/app';
+import './_app.scss';
 
 class CustomApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -18,7 +18,7 @@ class CustomApp extends App {
 
     return (
       <Container>
-        <Component {...pageProps} className="app-container"/>
+        <Component {...pageProps} className="app-container" />
       </Container>
     );
   }

@@ -1,5 +1,5 @@
-import React from "react";
-import "./baseContainer.scss";
+import React from 'react';
+import './baseContainer.scss';
 class BaseContainer extends React.Component {
   constructor(props) {
     super(props);

@@ -1,5 +1,5 @@
-import React from "react";
-import "./main.scss";
+import React from 'react';
+import './main.scss';
 
 class Main extends React.Component {
   constructor(props) {
@@ -7,7 +7,11 @@ class Main extends React.Component {
   }
 
   render() {
-    return <div className="main">{this.props.children}</div>;
+    return (
+      <div className="main">
+        <div className="main-inner">{this.props.children}</div>
+      </div>
+    );
   }
 }
 

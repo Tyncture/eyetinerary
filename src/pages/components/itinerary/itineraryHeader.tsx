@@ -1,19 +1,13 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faGlobeEurope,
   faCalendarAlt,
-} from "@fortawesome/free-solid-svg-icons";
-import "./itineraryHeader.scss";
+} from '@fortawesome/free-solid-svg-icons';
+import './itineraryHeader.scss';
+import { IItinerary } from './types';
 
-interface IProps {
-  title: string;
-  description?: string;
-  location?: string;
-  countryCode?: string;
-}
-
-class ItineraryHeader extends React.Component<IProps> {
+class ItineraryHeader extends React.Component<IItinerary> {
   constructor(props) {
     super(props);
   }
@@ -39,7 +33,6 @@ class ItineraryHeader extends React.Component<IProps> {
             <div>Trip Duration: 3 days</div>
           </div>
         </div>
-        {this.props.children}
       </div>
     );
   }
