@@ -90,21 +90,21 @@ class Itinerary extends React.Component<IProps, IState> {
             <div>
               {this.state.itinerary && (
                 <div className="itinerary">
-                  <div className="itinerary-section">
+                  <section className="itinerary-section">
                     <ItineraryHeader
                       title={this.state.itinerary.title}
                       description="This thing works and will continue to work"
                       location="Bangkok"
                       countryCode="Thailand"
                     />
-                  </div>
+                  </section>
                   {this.state.itinerary.pages.length > 0 && (
-                    <div className="itinerary-section">
+                    <section className="itinerary-section">
                       <h1>Pages</h1>
                       <ItineraryPageList pages={this.state.itinerary.pages} />
-                    </div>
+                    </section>
                   )}
-                  <div className="itinerary-section">
+                  <section className="itinerary-section">
                     <h1>About</h1>
                     <div>
                       <div>
@@ -120,7 +120,7 @@ class Itinerary extends React.Component<IProps, IState> {
                         <div>Last Updated: Unknown</div>
                       </div>
                     </div>
-                  </div>
+                  </section>
                 </div>
               )}
               {this.state.apiErrorCode === 404 && (
