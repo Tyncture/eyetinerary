@@ -12,7 +12,8 @@
         "member-access": false,
         "object-curly-spacing": true,
         "semicolon": true,
-        "object-literal-sort-keys": false
+        "object-literal-sort-keys": false,
+        "no-namespace": false
     },
     "rulesDirectory": []
 }
