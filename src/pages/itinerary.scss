@@ -1,0 +1,16 @@
+.itinerary {
+  display: grid;
+  grid-auto-flow: row;
+  grid-gap: 22.5px;
+  margin-bottom: 50px;
+}
+
+.itinerary-section {
+  display: grid;
+  grid-auto-flow: row;
+  grid-gap: 5px;
+  &>h1{
+    font-size: 24px;
+    font-weight: 500;
+  }
+}

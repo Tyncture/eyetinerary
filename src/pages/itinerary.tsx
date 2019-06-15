@@ -6,7 +6,7 @@ import ItineraryHeader from "../components/itinerary/itineraryHeader";
 import ItineraryPageList from "../components/itinerary/itineraryPageList";
 import { IItinerary } from "../components/itinerary/types";
 import validator from "validator";
-import Head from 'next/head';
+import Head from "next/head";
 import "./itinerary.scss";
 
 interface IProps {
@@ -79,7 +79,10 @@ class Itinerary extends React.Component<IProps, IState> {
     return (
       <BaseContainer>
         <Head>
-          <title>{this.state.itinerary ? `${this.state.itinerary.title} - ` : ""}Eyetinerary</title>
+          <title>
+            {this.state.itinerary ? `${this.state.itinerary.title} - ` : ""}
+            Eyetinerary
+          </title>
         </Head>
         <Sidebar />
         <Main>
@@ -87,13 +90,37 @@ class Itinerary extends React.Component<IProps, IState> {
             <div>
               {this.state.itinerary && (
                 <div className="itinerary">
-                  <ItineraryHeader
-                    title={this.state.itinerary.title}
-                    description="This thing works and will continue to work"
-                    location="Bangkok"
-                    countryCode="Thailand"
-                  />
-                  <ItineraryPageList pages={this.state.itinerary.pages} />
+                  <div className="itinerary-section">
+                    <ItineraryHeader
+                      title={this.state.itinerary.title}
+                      description="This thing works and will continue to work"
+                      location="Bangkok"
+                      countryCode="Thailand"
+                    />
+                  </div>
+                  {this.state.itinerary.pages.length > 0 && (
+                    <div className="itinerary-section">
+                      <h1>Pages</h1>
+                      <ItineraryPageList pages={this.state.itinerary.pages} />
+                    </div>
+                  )}
+                  <div className="itinerary-section">
+                    <h1>About</h1>
+                    <div>
+                      <div>
+                        <div />
+                        <div>Author: Unknown</div>
+                      </div>
+                      <div>
+                        <div />
+                        <div>Created: Unknown</div>
+                      </div>
+                      <div>
+                        <div />
+                        <div>Last Updated: Unknown</div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               )}
               {this.state.apiErrorCode === 404 && (
