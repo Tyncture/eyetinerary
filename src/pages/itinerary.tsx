@@ -1,9 +1,9 @@
 import React from 'react';
-import BaseContainer from './components/base/baseContainer';
-import Sidebar from './components/base/sidebar';
-import Main from './components/base/main';
-import ItineraryHeader from './components/itinerary/itineraryHeader';
-import ItineraryPageList from './components/itinerary/itineraryPageList';
+import BaseContainer from '../components/base/baseContainer';
+import Sidebar from '../components/base/sidebar';
+import Main from '../components/base/main';
+import ItineraryHeader from '../components/itinerary/itineraryHeader';
+import ItineraryPageList from '../components/itinerary/itineraryPageList';
 import './itinerary.scss';
 
 class Itinerary extends React.Component {
