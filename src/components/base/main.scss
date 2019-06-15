@@ -5,13 +5,13 @@
 
 .main-inner {
   padding: 50px;
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto 0 auto;
 }
 
 @media only screen and (max-width: 900px) {
   .main-inner {
     width: 100%;
-    padding: 0 30px 0 30px;
+    padding: 50 30px 50px 30px;
   }
 }
