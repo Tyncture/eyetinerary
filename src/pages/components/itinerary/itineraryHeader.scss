@@ -1,0 +1,32 @@
+.itinerary-header {
+  display: grid;
+  grid-auto-flow: row;
+  grid-gap: 12px;
+
+  * {
+    margin: 0;
+  }
+
+  h1 {
+    font-size: 40px;
+    font-weight: 500;
+  }
+
+  h2 {
+    font-weight: normal;
+    color: #909090;
+    font-size: 20px;
+  }
+}
+
+.itinerary-header-info {
+  color: #A0A0A0;
+  line-height: 24px;
+  font-size: 14px;
+}
+
+.itinerary-header-info-group {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 18px auto;
+}
