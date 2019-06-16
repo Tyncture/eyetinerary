@@ -75,6 +75,7 @@ class Itinerary extends React.Component<IProps, IState> {
         console.log(json);
       }
     } catch (e) {
+      console.log(e.message);
       this.setState({ apiErrorCode: -1 });
     }
   }
@@ -109,7 +110,7 @@ class Itinerary extends React.Component<IProps, IState> {
                     </section>
                   )}
                   <section className="itinerary-section">
-                    <ItineraryAbout intinerary={this.state.itinerary}/>
+                    <ItineraryAbout subject={this.state.itinerary}/>
                   </section>
                 </div>
               )}

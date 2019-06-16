@@ -1,6 +1,6 @@
 import React from "react";
 import moment, { Moment } from "moment";
-import { IItinerary } from "./types";
+import { IItinerary, IPage, IItem } from "./types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
@@ -8,18 +8,21 @@ import {
   faCalendarDay
 } from "@fortawesome/free-solid-svg-icons";
 import "./itineraryAbout.scss";
+import { resolve } from "path";
 
 interface IProps {
-  intinerary: IItinerary;
+  subject: IItinerary | IPage | IItem;
 }
 
 interface IState {
+  authorId: number;
   author: {
     username: string;
   };
 }
 
 const initialState: IState = {
+  authorId: null,
   author: null
 };
 
@@ -34,21 +37,22 @@ class ItineraryAbout extends React.Component<IProps, IState> {
   }
 
   async componentDidUpdate(prevProps: IProps) {
-    if (this.props.intinerary !== prevProps.intinerary) {
+    if (this.props.subject !== prevProps.subject) {
       this.setState(initialState);
       await this.bootstrapState();
     }
   }
 
   async bootstrapState(): Promise<void> {
+    await this.determineAndSetAuthorId();
     await this.fetchAuthor();
   }
 
   async fetchAuthor(): Promise<void> {
     try {
-      if (this.props.intinerary.owner) {
+      if (this.state.authorId) {
         const response = await fetch(
-          `${process.env.EYET_API}/user/${this.props.intinerary.owner.id}`
+          `${process.env.EYET_API}/user/${this.state.authorId}`
         );
         const json = await response.json();
         if (response.status === 200) {
@@ -62,27 +66,56 @@ class ItineraryAbout extends React.Component<IProps, IState> {
     }
   }
 
-  computeLastUpdated(itinerary: IItinerary): Moment {
-    let lastUpdated = moment(itinerary.updated);
-    itinerary.pages.forEach(page => {
-      const pageUpdated = moment(page.updated);
-      if (pageUpdated.isAfter(lastUpdated)) {
-        lastUpdated = pageUpdated;
-      }
-      page.items.forEach(item => {
-        const itemUpdated = moment(item.updated);
+  async determineAndSetAuthorId() {
+    // Support IItinerary, IIPage and IItem subjects
+    let owner;
+    if ("owner" in this.props.subject) {
+      // IItinerary
+      owner = this.props.subject.owner;
+    } else if ("itinerary" in this.props.subject) {
+      // IIPage
+      owner = this.props.subject.itinerary.owner;
+    } else if ("page" in this.props.subject) {
+      // IItem
+      owner = this.props.subject.page.itinerary.owner;
+    }
+
+    if (owner) {
+      // Set authorId if there is an owner
+      // Use resolve as callback as setState is asynchrnous
+      this.setState({ authorId: owner.id }, resolve);
+    }
+  }
+
+  computeLastUpdated(
+    payload: IItinerary | IPage | IItem,
+    previous?: Moment
+  ): Moment {
+    // Support IItinerary, IIPage and IItem subjects
+    let lastUpdated = previous ? previous : moment(payload.updated);
+    if ("pages" in payload) {
+      // Payload is an IItinerary
+      payload.pages.forEach(page => {
+        const pageUpdated = this.computeLastUpdated(page, lastUpdated);
+        if (pageUpdated.isAfter(lastUpdated)) {
+          lastUpdated = pageUpdated;
+        }
+      });
+    } else if ("items" in payload) {
+      // Payload is an IIPage
+      payload.items.forEach(item => {
+        const itemUpdated = this.computeLastUpdated(item, lastUpdated);
         if (itemUpdated.isAfter(lastUpdated)) {
           lastUpdated = itemUpdated;
         }
       });
-    });
+    }
     return lastUpdated;
   }
 
   render() {
-    const readyToDisplayAuthor =
-      !this.props.intinerary.owner || this.state.author;
-    const authorToDisplay = this.props.intinerary.owner
+    const readyToDisplayAuthor = !this.state.authorId || this.state.author;
+    const authorToDisplay = this.state.authorId
       ? readyToDisplayAuthor
         ? this.state.author.username
         : ""
@@ -101,7 +134,7 @@ class ItineraryAbout extends React.Component<IProps, IState> {
           <div>
             <FontAwesomeIcon icon={faCalendarPlus} />
           </div>
-          <div>Created: {moment(this.props.intinerary.created).fromNow()}</div>
+          <div>Created: {moment(this.props.subject.created).fromNow()}</div>
         </div>
         <div className="itinerary-about-info-group">
           <div>
@@ -109,7 +142,7 @@ class ItineraryAbout extends React.Component<IProps, IState> {
           </div>
           <div>
             Last Updated:{" "}
-            {this.computeLastUpdated(this.props.intinerary).fromNow()}
+            {this.computeLastUpdated(this.props.subject).fromNow()}
           </div>
         </div>
       </div>
