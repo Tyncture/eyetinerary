@@ -102,7 +102,7 @@ class Itinerary extends React.Component<IProps, IState> {
                       countryCode="Thailand"
                     />
                   </section>
-                  {this.state.itinerary.pages.length > 0 && (
+                  {this.state.itinerary.pages.length > 0 && !this.props.query.page && (
                     <section className="itinerary-section">
                       <h1>Pages</h1>
                       <ItineraryPageList pages={this.state.itinerary.pages} />
