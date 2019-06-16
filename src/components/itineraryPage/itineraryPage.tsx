@@ -5,6 +5,7 @@ import ItineraryListItem from "../itineraryBase/itineraryListItem";
 import { fetchItinerary } from "../itineraryUtilities/fetcher";
 import { IItem, IItinerary, IPage } from "../itineraryUtilities/types";
 import "../itineraryBase/itineraryCommon.scss";
+import Head from "next/head";
 
 interface IProps {
   itineraryId: number;
@@ -71,6 +72,9 @@ class ItineraryPage extends React.Component<IProps, IState> {
       <div className="itinerary">
         {this.state.page && (
           <div className="itinerary-section">
+            <Head>
+              <title>{`${this.state.page.title} - Eyetinerary`}</title>
+            </Head>
             <ItineraryHeader
               title={this.state.itinerary.title}
               description={this.state.itinerary.description}

@@ -1,10 +1,11 @@
+import Head from "next/head";
 import React from "react";
 import ItineraryAbout from "../itineraryBase/itineraryAbout";
+import "../itineraryBase/itineraryCommon.scss";
 import ItineraryHeader from "../itineraryBase/itineraryHeader";
 import ItineraryListItem from "../itineraryBase/itineraryListItem";
 import { fetchItinerary } from "../itineraryUtilities/fetcher";
 import { IItinerary, IPage } from "../itineraryUtilities/types";
-import "../itineraryBase/itineraryCommon.scss";
 
 interface IProps {
   id: number;
@@ -63,6 +64,9 @@ class ItineraryOverview extends React.Component<IProps, IState> {
       <div>
         {this.state.itinerary && (
           <div className="itinerary">
+            <Head>
+              <title>{`${this.state.itinerary.title} - Eyetinerary`}</title>
+            </Head>
             <section className="itinerary-section">
               <ItineraryHeader
                 title={this.state.itinerary.title}
