@@ -92,7 +92,6 @@ class ItineraryOverview extends React.Component<IProps, IState> {
                 <h1>Pages</h1>
                 <div className="itinerary-sublist">
                   {this.sortPages(this.state.itinerary.pages).map(page => (
-                    // `/itinerary?id=${this.props.id}&page=${page.rankInItinerary}`
                     <ItineraryListItem
                       onClick={this.handlePageClick.bind(
                         this,
