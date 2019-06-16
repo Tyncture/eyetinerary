@@ -1,13 +1,19 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faGlobeEurope,
-  faCalendarAlt,
-} from '@fortawesome/free-solid-svg-icons';
-import './itineraryHeader.scss';
-import { IItinerary } from './types';
+  faCalendarAlt
+} from "@fortawesome/free-solid-svg-icons";
+import "./itineraryHeader.scss";
 
-class ItineraryHeader extends React.Component<IItinerary> {
+interface IProps {
+  title: string;
+  description?: string;
+  location?: string;
+  countryCode?: string;
+}
+
+class ItineraryHeader extends React.Component<IProps> {
   constructor(props) {
     super(props);
   }
