@@ -13,6 +13,7 @@ export interface IPage {
   description?: string;
   items?: IItem[];
   itinerary?: IItinerary;
+  rankInItinerary?: number;
   created?: string;
   updated?: string;
 }
