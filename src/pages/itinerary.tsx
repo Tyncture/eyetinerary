@@ -4,7 +4,7 @@ import Sidebar from "../components/base/sidebar";
 import Main from "../components/base/main";
 import ItineraryHeader from "../components/itinerary/itineraryHeader";
 import ItineraryPageList from "../components/itinerary/itineraryPageList";
-import { IItinerary } from "../components/itinerary/types";
+import { IItinerary, IPage, IItem } from "../components/itinerary/types";
 import validator from "validator";
 import Head from "next/head";
 import "./itinerary.scss";
@@ -14,6 +14,7 @@ interface IProps {
   query: {
     id: string;
     page?: string;
+    item?: string;
   };
 }
 
@@ -80,7 +81,37 @@ class Itinerary extends React.Component<IProps, IState> {
     }
   }
 
+  filterById(array: any[], id: number) {
+    for (const element of array) {
+      if (element.id === id) {
+        return element;
+      }
+    }
+    return null;
+  }
+
   render() {
+    /* COMPUTED PROPERTIES */
+    // Find page specified in the URL query and only if valid itinerary loaded
+    const queryPage: IPage =
+      this.props.query.page && this.state.itinerary
+        ? this.filterById(
+            this.state.itinerary.pages,
+            Number(this.props.query.page)
+          )
+        : null;
+    // Find item specified in the URL query and only if valid page loaded
+    const queryItem: IItem =
+      this.props.query.item && queryPage
+        ? this.filterById(queryPage.items, Number(this.props.query.item))
+        : null;
+    // Determine whether itinerary, page or item is the focus subject
+    const subject: IItinerary | IPage | IItem = queryItem
+      ? queryItem
+      : queryPage
+      ? queryPage
+      : this.state.itinerary;
+
     return (
       <BaseContainer>
         <Head>
@@ -103,14 +134,15 @@ class Itinerary extends React.Component<IProps, IState> {
                       countryCode="Thailand"
                     />
                   </section>
-                  {this.state.itinerary.pages.length > 0 && !this.props.query.page && (
-                    <section className="itinerary-section">
-                      <h1>Pages</h1>
-                      <ItineraryPageList pages={this.state.itinerary.pages} />
-                    </section>
-                  )}
+                  {this.state.itinerary.pages.length > 0 &&
+                    !this.props.query.page && (
+                      <section className="itinerary-section">
+                        <h1>Pages</h1>
+                        <ItineraryPageList pages={this.state.itinerary.pages} />
+                      </section>
+                    )}
                   <section className="itinerary-section">
-                    <ItineraryAbout subject={this.state.itinerary}/>
+                    <ItineraryAbout subject={subject} />
                   </section>
                 </div>
               )}
@@ -132,7 +164,11 @@ class Itinerary extends React.Component<IProps, IState> {
                       expected.
                     </p>
                     <p>
-                      <i>{this.state.apiErrorCode === -1 ? "Backend connection failed." : `HTTP Status Code: {this.state.apiErrorCode}` }</i>
+                      <i>
+                        {this.state.apiErrorCode === -1
+                          ? "Backend connection failed."
+                          : `HTTP Status Code: {this.state.apiErrorCode}`}
+                      </i>
                     </p>
                   </div>
                 )}
