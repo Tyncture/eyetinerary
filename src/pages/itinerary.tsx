@@ -9,6 +9,7 @@ import validator from "validator";
 import Head from "next/head";
 import "./itinerary.scss";
 import ItineraryAbout from "../components/itinerary/itineraryAbout";
+import ItineraryPageFull from "../components/itinerary/itineraryPageFull";
 
 interface IProps {
   query: {
@@ -81,9 +82,9 @@ class Itinerary extends React.Component<IProps, IState> {
     }
   }
 
-  filterById(array: any[], id: number) {
+  filterBy(array: any[], attribute: string, match: any) {
     for (const element of array) {
-      if (element.id === id) {
+      if (element[attribute] === match) {
         return element;
       }
     }
@@ -95,15 +96,15 @@ class Itinerary extends React.Component<IProps, IState> {
     // Find page specified in the URL query and only if valid itinerary loaded
     const queryPage: IPage =
       this.props.query.page && this.state.itinerary
-        ? this.filterById(
-            this.state.itinerary.pages,
+        ? this.filterBy(
+            this.state.itinerary.pages, "rankInItinerary",
             Number(this.props.query.page)
           )
         : null;
     // Find item specified in the URL query and only if valid page loaded
     const queryItem: IItem =
       this.props.query.item && queryPage
-        ? this.filterById(queryPage.items, Number(this.props.query.item))
+        ? this.filterBy(queryPage.items, "rankInPage", Number(this.props.query.item))
         : null;
     // Determine whether itinerary, page or item is the focus subject
     const subject: IItinerary | IPage | IItem = queryItem
@@ -124,7 +125,8 @@ class Itinerary extends React.Component<IProps, IState> {
         <Main>
           {this.props.query.id && !this.state.invalidIdFormat && (
             <div>
-              {this.state.itinerary && (
+              {/* If valid itinerary loaded */
+              this.state.itinerary && (
                 <div className="itinerary">
                   <section className="itinerary-section">
                     <ItineraryHeader
@@ -134,13 +136,21 @@ class Itinerary extends React.Component<IProps, IState> {
                       countryCode="Thailand"
                     />
                   </section>
-                  {this.state.itinerary.pages.length > 0 &&
+                  {/* If at least one page available and not querying page */
+                  this.state.itinerary.pages.length > 0 &&
                     !this.props.query.page && (
                       <section className="itinerary-section">
                         <h1>Pages</h1>
                         <ItineraryPageList pages={this.state.itinerary.pages} />
                       </section>
                     )}
+                  {/* If auerying page*/
+                  queryPage && (
+                    <section className="itinerary-section">
+                      <h1>Items</h1>
+                      <ItineraryPageFull page={queryPage}/>
+                    </section>
+                  )}
                   <section className="itinerary-section">
                     <ItineraryAbout subject={subject} />
                   </section>

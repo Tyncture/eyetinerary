@@ -13,7 +13,8 @@
         "object-curly-spacing": true,
         "semicolon": true,
         "object-literal-sort-keys": false,
-        "no-namespace": false
+        "no-namespace": false,
+        "no-string-literal": false
     },
     "rulesDirectory": []
 }

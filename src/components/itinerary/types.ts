@@ -3,6 +3,7 @@ export interface IItem {
   title?: string;
   body?: string;
   page?: IPage;
+  rankInPage?: number;
   created?: string;
   updated?: string;
 }
