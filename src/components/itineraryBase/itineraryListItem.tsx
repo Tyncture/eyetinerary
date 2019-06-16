@@ -4,6 +4,7 @@ import './itineraryListItem.scss';
 interface IProps {
   h1: string;
   h2: string;
+  onClick?: () => void;
 }
 
 class ItineraryListItem extends React.Component<IProps> {
@@ -13,7 +14,7 @@ class ItineraryListItem extends React.Component<IProps> {
 
   render() {
     return (
-      <div className="itinerary-pagelist-item">
+      <div className="itinerary-pagelist-item" onClick={this.props.onClick}>
         <div className="itinerary-pagelist-item-body">
           <h1>{this.props.h1}</h1>
           <h2>

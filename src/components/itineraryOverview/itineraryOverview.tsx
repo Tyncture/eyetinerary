@@ -6,6 +6,7 @@ import ItineraryHeader from "../itineraryBase/itineraryHeader";
 import ItineraryListItem from "../itineraryBase/itineraryListItem";
 import { fetchItinerary } from "../itineraryUtilities/fetcher";
 import { IItinerary, IPage } from "../itineraryUtilities/types";
+import Router from "next/router";
 
 interface IProps {
   id: number;
@@ -50,6 +51,12 @@ class ItineraryOverview extends React.Component<IProps, IState> {
     const response = await fetchItinerary(this.props.id);
     if (response.success) {
       this.setState({ itinerary: response.body });
+      this.state.itinerary.pages.forEach(page => {
+        // Prefetch pages in itinerary
+        Router.prefetch(
+          `/itinerary?id=${this.props.id}&page=${page.rankInItinerary}`
+        );
+      });
     } else {
       this.setState({ apiErrorCode: response.statusCode });
     }
@@ -57,6 +64,11 @@ class ItineraryOverview extends React.Component<IProps, IState> {
 
   sortPages(pages: IPage[]): IPage[] {
     return pages.sort((a, b) => a.rankInItinerary - b.rankInItinerary);
+  }
+
+  handlePageClick(path: string, as: string, e: React.MouseEvent<HTMLElement>) {
+    e.preventDefault();
+    Router.push(path, as);
   }
 
   render() {
@@ -80,7 +92,15 @@ class ItineraryOverview extends React.Component<IProps, IState> {
                 <h1>Pages</h1>
                 <div className="itinerary-sublist">
                   {this.sortPages(this.state.itinerary.pages).map(page => (
+                    // `/itinerary?id=${this.props.id}&page=${page.rankInItinerary}`
                     <ItineraryListItem
+                      onClick={this.handlePageClick.bind(
+                        this,
+                        `/itinerary?id=${this.props.id}&page=${
+                          page.rankInItinerary
+                        }`,
+                        `/itinerary/${this.props.id}/${page.rankInItinerary}`
+                      )}
                       key={page.id}
                       h1={page.title}
                       h2="Placeholder"
