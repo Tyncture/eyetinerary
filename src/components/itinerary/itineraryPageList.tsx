@@ -13,7 +13,7 @@ class ItineraryPageList extends React.Component<IProps> {
   }
 
   sortPages(pages: IPage[]): IPage[] {
-    return this.props.pages.sort(
+    return pages.sort(
       (a, b) => a.rankInItinerary - b.rankInItinerary
     );
   }
