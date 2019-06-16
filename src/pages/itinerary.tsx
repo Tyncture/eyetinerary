@@ -145,7 +145,7 @@ class Itinerary extends React.Component<IProps, IState> {
                       </section>
                     )}
                   {/* If auerying page*/
-                  queryPage && (
+                  queryPage && queryPage.items.length > 0 && (
                     <section className="itinerary-section">
                       <h1>Items</h1>
                       <ItineraryPageFull page={queryPage}/>
