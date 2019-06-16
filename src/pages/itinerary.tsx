@@ -8,6 +8,7 @@ import { IItinerary } from "../components/itinerary/types";
 import validator from "validator";
 import Head from "next/head";
 import "./itinerary.scss";
+import ItineraryAbout from "../components/itinerary/itineraryAbout";
 
 interface IProps {
   query: {
@@ -22,26 +23,29 @@ interface IState {
   invalidIdFormat: boolean;
 }
 
+const initialState: IState = {
+  itinerary: null,
+  apiErrorCode: 200,
+  invalidIdFormat: false
+};
+
 class Itinerary extends React.Component<IProps, IState> {
   static getInitialProps({ query }) {
     return { query };
   }
 
-  constructor(props) {
+  constructor(props: IProps) {
     super(props);
-    this.state = {
-      itinerary: null,
-      apiErrorCode: 200,
-      invalidIdFormat: false
-    };
+    this.state = initialState;
   }
 
   async componentDidMount() {
     await this.bootstrapState();
   }
 
-  async componentDidUpdate(prevProps) {
+  async componentDidUpdate(prevProps: IProps) {
     if (this.props.query !== prevProps.query) {
+      this.setState(initialState);
       await this.bootstrapState();
     }
   }
@@ -105,21 +109,7 @@ class Itinerary extends React.Component<IProps, IState> {
                     </section>
                   )}
                   <section className="itinerary-section">
-                    <h1>About</h1>
-                    <div>
-                      <div>
-                        <div />
-                        <div>Author: Unknown</div>
-                      </div>
-                      <div>
-                        <div />
-                        <div>Created: Unknown</div>
-                      </div>
-                      <div>
-                        <div />
-                        <div>Last Updated: Unknown</div>
-                      </div>
-                    </div>
+                    <ItineraryAbout intinerary={this.state.itinerary}/>
                   </section>
                 </div>
               )}

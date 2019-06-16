@@ -2,6 +2,9 @@ export interface IItem {
   id?: number;
   title?: string;
   body?: string;
+  page?: IPage;
+  created?: string;
+  updated?: string;
 }
 
 export interface IPage {
@@ -9,6 +12,9 @@ export interface IPage {
   title?: string;
   description?: string;
   items?: IItem[];
+  itinerary?: IItinerary;
+  created?: string;
+  updated?: string;
 }
 
 export interface IItinerary {
@@ -18,5 +24,10 @@ export interface IItinerary {
   location?: string;
   countryCode?: string;
   pages?: IPage[];
+  owner?: {
+    id: number
+  };
+  created?: string;
+  updated?: string;
 }
 

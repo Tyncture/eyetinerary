@@ -8,9 +8,8 @@
 .itinerary-section {
   display: grid;
   grid-auto-flow: row;
-  grid-gap: 5px;
   &>h1{
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 500;
   }
 }
