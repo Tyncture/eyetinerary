@@ -131,7 +131,7 @@ class Itinerary extends React.Component<IProps, IState> {
                       expected.
                     </p>
                     <p>
-                      <i>HTTP Status Code: {this.state.apiErrorCode}</i>
+                      <i>{this.state.apiErrorCode === -1 ? "Backend connection failed." : `HTTP Status Code: {this.state.apiErrorCode}` }</i>
                     </p>
                   </div>
                 )}
