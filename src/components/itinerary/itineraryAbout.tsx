@@ -92,7 +92,11 @@ class ItineraryAbout extends React.Component<IProps, IState> {
     previous?: Moment
   ): Moment {
     // Support IItinerary, IIPage and IItem subjects
-    let lastUpdated = previous ? previous : moment(payload.updated);
+    let lastUpdated = moment(payload.updated);
+    if (previous && previous.isAfter(lastUpdated)) {
+      lastUpdated = previous;
+    }
+
     if ("pages" in payload) {
       // Payload is an IItinerary
       payload.pages.forEach(page => {
