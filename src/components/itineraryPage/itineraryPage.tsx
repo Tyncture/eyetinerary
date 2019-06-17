@@ -34,7 +34,10 @@ class ItineraryPage extends React.Component<IProps, IState> {
   }
 
   async componentDidUpdate(prevProps: IProps) {
-    if (this.props !== prevProps) {
+    if (
+      this.props.itineraryId !== prevProps.itineraryId ||
+      this.props.pageNumber !== prevProps.pageNumber
+    ) {
       this.setState(initialState);
       await this.bootstrapState();
     }

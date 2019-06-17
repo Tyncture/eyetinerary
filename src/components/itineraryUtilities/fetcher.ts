@@ -27,6 +27,7 @@ async function genericApiFetch(pathWithoutSlashPrefix: string): Promise<IRespons
 }
 
 export async function fetchItinerary(id: number): Promise<IResponse> {
+  console.log(this);
   return await genericApiFetch(`/itinerary/${id}`);
 }
 
