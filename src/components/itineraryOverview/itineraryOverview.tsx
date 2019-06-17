@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Router from "next/router";
+import { SingletonRouter, withRouter } from "next/router";
 import React from "react";
 import ItineraryAbout from "../itineraryBase/itineraryAbout";
 import "../itineraryBase/itineraryCommon.scss";
@@ -9,6 +9,7 @@ import { IItinerary, IPage } from "../itineraryUtilities/types";
 
 interface IProps {
   id: number;
+  router: SingletonRouter;
 }
 
 interface IState {
@@ -52,7 +53,7 @@ class ItineraryOverview extends React.Component<IProps, IState> {
       this.setState({ itinerary: response.body });
       this.state.itinerary.pages.forEach(page => {
         // Prefetch pages in itinerary
-        Router.prefetch(
+        this.props.router.prefetch(
           `/itinerary?id=${this.props.id}&page=${page.rankInItinerary}`
         );
       });
@@ -67,7 +68,7 @@ class ItineraryOverview extends React.Component<IProps, IState> {
 
   handlePageClick(path: string, as: string, e: React.MouseEvent<HTMLElement>) {
     e.preventDefault();
-    Router.push(path, as);
+    this.props.router.push(path, as);
   }
 
   render() {
@@ -109,4 +110,4 @@ class ItineraryOverview extends React.Component<IProps, IState> {
   }
 }
 
-export default ItineraryOverview;
+export default withRouter(ItineraryOverview);
