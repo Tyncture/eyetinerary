@@ -1,11 +1,10 @@
+import Head from "next/head";
 import React from "react";
 import ItineraryAbout from "../itineraryBase/itineraryAbout";
-import ItineraryHeader from "../itineraryBase/itineraryHeader";
+import "../itineraryBase/itineraryCommon.scss";
 import ItineraryListItem from "../itineraryBase/itineraryListItem";
 import { fetchItinerary } from "../itineraryUtilities/fetcher";
 import { IItem, IItinerary, IPage } from "../itineraryUtilities/types";
-import "../itineraryBase/itineraryCommon.scss";
-import Head from "next/head";
 
 interface IProps {
   itineraryId: number;
@@ -69,39 +68,33 @@ class ItineraryPage extends React.Component<IProps, IState> {
 
   render() {
     return (
-      <div className="itinerary">
+      <div>
         {this.state.page && (
-          <div className="itinerary-section">
-            <Head>
-              <title>{`${this.state.page.title} - Eyetinerary`}</title>
-            </Head>
-            <ItineraryHeader
-              title={this.state.itinerary.title}
-              description="This thing works and will continue to work"
-              location="Bangkok"
-              countryCode="Thailand"
-            />
-          </div>
+          <Head>
+            <title>{`${this.state.page.title} - Eyetinerary`}</title>
+          </Head>
         )}
-        {this.state.page && this.state.page.items.length > 0 && (
-          <div className="itinerary-section">
-            <h1>Items</h1>
-            <div className="itinerary-sublist">
-              {this.sortItems(this.state.page.items).map(item => (
-                <ItineraryListItem
-                  key={item.id}
-                  h1={item.title}
-                  h2="Placeholder"
-                />
-              ))}
-            </div>
-          </div>
-        )}
-        {this.state.page && (
-          <div className="itinerary-section">
-            <ItineraryAbout subject={this.state.page} />
-          </div>
-        )}
+        <div className="itinerary">
+          {this.state.page && this.state.page.items.length > 0 && (
+            <section className="itinerary-section">
+              <h1>Items</h1>
+              <div className="itinerary-sublist">
+                {this.sortItems(this.state.page.items).map(item => (
+                  <ItineraryListItem
+                    key={item.id}
+                    h1={item.title}
+                    h2="Placeholder"
+                  />
+                ))}
+              </div>
+            </section>
+          )}
+          {this.state.page && (
+            <section className="itinerary-section">
+              <ItineraryAbout subject={this.state.page} />
+            </section>
+          )}
+        </div>
       </div>
     );
   }

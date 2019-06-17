@@ -1,9 +1,9 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faGlobeEurope,
-  faCalendarAlt
+  faCalendarAlt,
+  faGlobeEurope
 } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
 import "./itineraryHeader.scss";
 
 interface IProps {
@@ -11,6 +11,7 @@ interface IProps {
   description?: string;
   location?: string;
   countryCode?: string;
+  className?: string;
 }
 
 class ItineraryHeader extends React.Component<IProps> {
@@ -19,8 +20,11 @@ class ItineraryHeader extends React.Component<IProps> {
   }
 
   render() {
+    const inheritedClassNames = this.props.className
+      ? this.props.className
+      : "";
     return (
-      <div className="itinerary-header">
+      <div className={`itinerary-header ${inheritedClassNames}`}>
         <h1>{this.props.title}</h1>
         <h2>{this.props.description}</h2>
         <div className="itinerary-header-info">

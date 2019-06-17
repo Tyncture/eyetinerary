@@ -1,12 +1,11 @@
 import Head from "next/head";
+import Router from "next/router";
 import React from "react";
 import ItineraryAbout from "../itineraryBase/itineraryAbout";
 import "../itineraryBase/itineraryCommon.scss";
-import ItineraryHeader from "../itineraryBase/itineraryHeader";
 import ItineraryListItem from "../itineraryBase/itineraryListItem";
 import { fetchItinerary } from "../itineraryUtilities/fetcher";
 import { IItinerary, IPage } from "../itineraryUtilities/types";
-import Router from "next/router";
 
 interface IProps {
   id: number;
@@ -79,14 +78,6 @@ class ItineraryOverview extends React.Component<IProps, IState> {
             <Head>
               <title>{`${this.state.itinerary.title} - Eyetinerary`}</title>
             </Head>
-            <section className="itinerary-section">
-              <ItineraryHeader
-                title={this.state.itinerary.title}
-                description="This thing works and will continue to work"
-                location="Bangkok"
-                countryCode="Thailand"
-              />
-            </section>
             {this.state.itinerary.pages.length > 0 && (
               <section className="itinerary-section">
                 <h1>Pages</h1>
