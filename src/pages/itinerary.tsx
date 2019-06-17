@@ -32,7 +32,7 @@ class Itinerary extends React.Component<IProps, IState> {
     return { query };
   }
 
-  constructor(props) {
+  constructor(props: IProps) {
     super(props);
     this.state = initialState;
   }
