@@ -27,13 +27,19 @@ const initialState: IState = {
 };
 
 class ItineraryAbout extends React.Component<IProps, IState> {
+  private _mounted: boolean;
   constructor(props: IProps) {
     super(props);
     this.state = initialState;
   }
 
   async componentDidMount() {
+    this._mounted = true;
     await this.bootstrapState();
+  }
+
+  componentWillUnmount() {
+    this._mounted = false;
   }
 
   async componentDidUpdate(prevProps: IProps) {
@@ -55,10 +61,12 @@ class ItineraryAbout extends React.Component<IProps, IState> {
           `${process.env.EYET_API}/user/${this.state.authorId}`
         );
         const json = await response.json();
-        if (response.status === 200) {
-          this.setState({ author: json });
-        } else {
-          console.log(json);
+        if (this._mounted) {
+          if (response.status === 200) {
+            this.setState({ author: json });
+          } else {
+            console.log(json);
+          }
         }
       }
     } catch (e) {
