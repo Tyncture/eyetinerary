@@ -77,7 +77,7 @@ class ItineraryPage extends React.Component<IProps, IState> {
             </Head>
             <ItineraryHeader
               title={this.state.itinerary.title}
-              description={this.state.itinerary.description}
+              description="This thing works and will continue to work"
               location="Bangkok"
               countryCode="Thailand"
             />
