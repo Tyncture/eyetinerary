@@ -1,0 +1,45 @@
+.login-form {
+  display: grid;
+  grid-auto-flow: row;
+  grid-gap: 22.5px;
+  * {
+    font-size: 18px;
+  }
+
+  input {
+    padding: 7.5px;
+    outline: none;
+    max-width: 300px;
+    border: 1px solid #E8E8E8;
+    border-radius: 2px;
+  }
+
+  input[type="button"] {
+    background-color: white;
+    padding: 6px;
+    border: 1px solid #E8E8E8;
+    border-radius: 2px;
+    outline: none;
+  }
+}
+
+.login-form--subgroup {
+  display: grid;
+  grid-auto-flow: row;
+  grid-gap: 12px;
+  .login-form--checkbox-group {
+    * {
+      font-size: 15px;
+    }
+    input[type="checkbox"] {
+      margin-right: 5px;
+    }
+  }
+}
+
+.login-form--checkbox-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+}
