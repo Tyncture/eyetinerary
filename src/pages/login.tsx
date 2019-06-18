@@ -110,6 +110,7 @@ class Login extends React.Component<any, IState> {
                   <label htmlFor="login-form-username">Username</label>
                   <input
                     type="text"
+                    id="login-form-username"
                     name="login-form-username"
                     value={this.state.username}
                     onChange={this.handleUsernameChange}
@@ -120,6 +121,7 @@ class Login extends React.Component<any, IState> {
                   <label htmlFor="login-form-password">Password</label>
                   <input
                     type="password"
+                    id="login-form-password"
                     name="login-form-password"
                     value={this.state.password}
                     onChange={this.handlePasswordChange}
@@ -129,6 +131,7 @@ class Login extends React.Component<any, IState> {
                 <div>
                   <input
                     type="checkbox"
+                    id="login-form-remember-me"
                     name="login-form-remember-me"
                     checked={this.state.rememberMe}
                     onChange={this.handleRememberMeChange}
@@ -138,6 +141,7 @@ class Login extends React.Component<any, IState> {
                 <div>
                   <input
                     type="button"
+                    id="login-form-submit"
                     name="login-form-submit"
                     value={this.state.loginLabel}
                     onClick={this.handleSubmit}
