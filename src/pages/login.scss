@@ -6,6 +6,10 @@
     font-size: 18px;
   }
 
+  label {
+    user-select: none;
+  }
+
   input {
     padding: 7.5px;
     outline: none;
