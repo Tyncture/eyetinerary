@@ -2,17 +2,24 @@ import React from "react";
 import BaseContainer from "../components/base/baseContainer";
 import Sidebar from "../components/base/sidebar";
 import Main from "../components/base/main";
+import Router from "next/router";
 
 interface IState {
   username: string;
   password: string;
   rememberMe: boolean;
+  incorrectCredentials: boolean;
+  apiCommunicationFailed: boolean;
+  loginLabel: string;
 }
 
 const initialState: IState = {
   username: "",
   password: "",
-  rememberMe: true
+  rememberMe: true,
+  incorrectCredentials: false,
+  apiCommunicationFailed: false,
+  loginLabel: "Login"
 };
 
 class Login extends React.Component<any, IState> {
@@ -24,7 +31,6 @@ class Login extends React.Component<any, IState> {
     this.handleRememberMeChange = this.handleRememberMeChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
   handleUsernameChange(e: React.ChangeEvent<HTMLInputElement>) {
     this.setState({ username: e.target.value });
   }
@@ -37,9 +43,37 @@ class Login extends React.Component<any, IState> {
     this.setState({ rememberMe: e.target.checked });
   }
 
-  handleSubmit(e: React.MouseEvent<HTMLInputElement, MouseEvent>) {
+  async handleSubmit(e: React.MouseEvent<HTMLInputElement, MouseEvent>) {
     e.preventDefault();
-    e.currentTarget.value = "Working...";
+    this.setState({ loginLabel: "Working..." });
+    try {
+      const response = await fetch(`${process.env.EYET_API}/login`, {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          username: this.state.username,
+          password: this.state.password
+        })
+      });
+      switch (response.status) {
+        case 200:
+          Router.push("/");
+          break;
+        case 401:
+          this.setState({ incorrectCredentials: true, apiCommunicationFailed: false });
+          break;
+        default:
+          this.setState({ incorrectCredentials: false, apiCommunicationFailed: true });
+      } 
+    } catch (e) {
+      console.error(e.message);
+      this.setState({ apiCommunicationFailed: true });
+    } finally {
+      this.setState({ loginLabel: "Login" });
+    }
   }
 
   render() {
@@ -82,7 +116,7 @@ class Login extends React.Component<any, IState> {
                     <label htmlFor="login-form-remember-me">Remember me</label>
                   </div>
                   <div>
-                    <input type="button" name="login-form-submit" value="Login" onClick={this.handleSubmit}/>
+                    <input type="button" name="login-form-submit" value={this.state.loginLabel} onClick={this.handleSubmit}/>
                   </div>
                 </form>
               </main>
