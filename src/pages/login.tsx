@@ -13,6 +13,7 @@ interface IState {
   apiCommunicationFailed: boolean;
   loginButtonEnabled: boolean;
   loginButtonText: string;
+  formValid: boolean;
 }
 
 const initialState: IState = {
@@ -22,7 +23,8 @@ const initialState: IState = {
   incorrectCredentials: false,
   apiCommunicationFailed: false,
   loginButtonEnabled: true,
-  loginButtonText: "Login"
+  loginButtonText: "Login",
+  formValid: true
 };
 
 class Login extends React.Component<any, IState> {
@@ -56,7 +58,7 @@ class Login extends React.Component<any, IState> {
   }
 
   handleEnterKey(e: React.KeyboardEvent) {
-    if (e.keyCode === 13) {
+    if (e.keyCode === 13 && this.validateForm()) {
       e.preventDefault();
       this.login();
     }
@@ -64,7 +66,19 @@ class Login extends React.Component<any, IState> {
 
   handleSubmit(e: React.MouseEvent<HTMLInputElement, MouseEvent>) {
     e.preventDefault();
-    this.login();
+    if (this.validateForm()) {
+      this.login();
+    }
+  }
+
+  validateForm(): boolean {
+    if (this.state.username.length === 0 ||  this.state.password.length === 0) {
+      this.setState({ formValid: false });
+      return false;
+    } else {
+      this.setState({ formValid: true });
+      return true;
+    }
   }
 
   async login() {
@@ -160,6 +174,11 @@ class Login extends React.Component<any, IState> {
                     </div> */}
                   </div>
                 </div>
+                {!this.state.formValid && (
+                  <div className="input-form--warning">
+                    Please double check all fields.
+                  </div>
+                )}
                 {this.state.incorrectCredentials && (
                   <div className="input-form--warning">
                     Incorrect username or password.
