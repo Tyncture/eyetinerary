@@ -1,8 +1,8 @@
+import Router from "next/router";
 import React from "react";
 import BaseContainer from "../components/base/baseContainer";
-import Sidebar from "../components/base/sidebar";
 import Main from "../components/base/main";
-import Router from "next/router";
+import Sidebar from "../components/base/sidebar";
 
 interface IState {
   username: string;
@@ -31,6 +31,7 @@ class Login extends React.Component<any, IState> {
     this.handleRememberMeChange = this.handleRememberMeChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
   handleUsernameChange(e: React.ChangeEvent<HTMLInputElement>) {
     this.setState({ username: e.target.value });
   }
@@ -63,11 +64,17 @@ class Login extends React.Component<any, IState> {
           Router.push("/");
           break;
         case 401:
-          this.setState({ incorrectCredentials: true, apiCommunicationFailed: false });
+          this.setState({
+            incorrectCredentials: true,
+            apiCommunicationFailed: false
+          });
           break;
         default:
-          this.setState({ incorrectCredentials: false, apiCommunicationFailed: true });
-      } 
+          this.setState({
+            incorrectCredentials: false,
+            apiCommunicationFailed: true
+          });
+      }
     } catch (e) {
       console.error(e.message);
       this.setState({ apiCommunicationFailed: true });
@@ -116,7 +123,12 @@ class Login extends React.Component<any, IState> {
                     <label htmlFor="login-form-remember-me">Remember me</label>
                   </div>
                   <div>
-                    <input type="button" name="login-form-submit" value={this.state.loginLabel} onClick={this.handleSubmit}/>
+                    <input
+                      type="button"
+                      name="login-form-submit"
+                      value={this.state.loginLabel}
+                      onClick={this.handleSubmit}
+                    />
                   </div>
                 </form>
               </main>
