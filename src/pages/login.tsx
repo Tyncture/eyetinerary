@@ -85,8 +85,7 @@ class Login extends React.Component<any, IState> {
 
   render() {
     return (
-      <div>
-        <BaseContainer>
+      <BaseContainer>
           <Sidebar />
           <Main>
             <div className="login">
@@ -135,7 +134,6 @@ class Login extends React.Component<any, IState> {
             </div>
           </Main>
         </BaseContainer>
-      </div>
     );
   }
 }
