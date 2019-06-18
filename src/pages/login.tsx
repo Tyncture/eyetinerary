@@ -3,6 +3,7 @@ import React from "react";
 import BaseContainer from "../components/base/baseContainer";
 import Main from "../components/base/main";
 import Sidebar from "../components/base/sidebar";
+import "./login.scss";
 
 interface IState {
   username: string;
@@ -10,7 +11,8 @@ interface IState {
   rememberMe: boolean;
   incorrectCredentials: boolean;
   apiCommunicationFailed: boolean;
-  loginLabel: string;
+  loginButtonEnabled: boolean;
+  loginButtonText: string;
 }
 
 const initialState: IState = {
@@ -19,7 +21,8 @@ const initialState: IState = {
   rememberMe: true,
   incorrectCredentials: false,
   apiCommunicationFailed: false,
-  loginLabel: "Login"
+  loginButtonEnabled: true,
+  loginButtonText: "Login"
 };
 
 class Login extends React.Component<any, IState> {
@@ -58,7 +61,7 @@ class Login extends React.Component<any, IState> {
   }
 
   async login() {
-    this.setState({ loginLabel: "Working..." });
+    this.setState({ loginButtonEnabled: false, loginButtonText: "Logging in.." });
     try {
       const response = await fetch(`${process.env.EYET_API}/login`, {
         method: "POST",
@@ -91,7 +94,7 @@ class Login extends React.Component<any, IState> {
       console.error(e.message);
       this.setState({ apiCommunicationFailed: true });
     } finally {
-      this.setState({ loginLabel: "Login" });
+      this.setState({ loginButtonEnabled: true, loginButtonText: "Login" });
     }
   }
 
@@ -105,45 +108,47 @@ class Login extends React.Component<any, IState> {
               <h1>Login</h1>
             </header>
             <main>
-              <form name="login-form">
-                <div>
-                  <label htmlFor="login-form-username">Username</label>
-                  <input
-                    type="text"
-                    id="login-form-username"
-                    name="login-form-username"
-                    value={this.state.username}
-                    onChange={this.handleUsernameChange}
-                    onKeyUpCapture={this.handleEnterKey}
-                  />
+              <form name="login-form" className="login-form">
+                <div className="login-form--group">
+                  <div className="login-form--subgroup">
+                    <input
+                      type="text"
+                      id="login-form-username"
+                      name="login-form-username"
+                      value={this.state.username}
+                      placeholder="Username"
+                      spellCheck={false}
+                      onChange={this.handleUsernameChange}
+                      onKeyUpCapture={this.handleEnterKey}
+                    />
+                    <input
+                      type="password"
+                      id="login-form-password"
+                      name="login-form-password"
+                      value={this.state.password}
+                      placeholder="Password"
+                      onChange={this.handlePasswordChange}
+                      onKeyUp={this.handleEnterKey}
+                    />
+                    <div className="login-form--checkbox-group">
+                      <input
+                        type="checkbox"
+                        id="login-form-rememberme"
+                        name="login-form-rememberme"
+                        checked={this.state.rememberMe}
+                        onChange={this.handleRememberMeChange}
+                      />
+                      <label htmlFor="login-form-rememberme">Remember me</label>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <label htmlFor="login-form-password">Password</label>
-                  <input
-                    type="password"
-                    id="login-form-password"
-                    name="login-form-password"
-                    value={this.state.password}
-                    onChange={this.handlePasswordChange}
-                    onKeyUp={this.handleEnterKey}
-                  />
-                </div>
-                <div>
-                  <input
-                    type="checkbox"
-                    id="login-form-remember-me"
-                    name="login-form-remember-me"
-                    checked={this.state.rememberMe}
-                    onChange={this.handleRememberMeChange}
-                  />
-                  <label htmlFor="login-form-remember-me">Remember me</label>
-                </div>
-                <div>
+                <div className="login-form--group">
                   <input
                     type="button"
                     id="login-form-submit"
                     name="login-form-submit"
-                    value={this.state.loginLabel}
+                    value={this.state.loginButtonText}
+                    disabled={!this.state.loginButtonEnabled}
                     onClick={this.handleSubmit}
                   />
                 </div>
