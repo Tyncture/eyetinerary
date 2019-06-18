@@ -130,7 +130,7 @@ class Login extends React.Component<any, IState> {
                       onChange={this.handlePasswordChange}
                       onKeyUp={this.handleEnterKey}
                     />
-                    <div className="login-form--checkbox-group">
+                    {/* <div className="login-form--checkbox-group">
                       <input
                         type="checkbox"
                         id="login-form-rememberme"
@@ -139,7 +139,7 @@ class Login extends React.Component<any, IState> {
                         onChange={this.handleRememberMeChange}
                       />
                       <label htmlFor="login-form-rememberme">Remember me</label>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
                 <div className="login-form--group">
