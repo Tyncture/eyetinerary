@@ -90,10 +90,13 @@ class Itinerary extends React.Component<IProps, IState> {
                   className="itinerary-header--with-margin-bottom"
                 />
               )}
-              {this.props.query.id && !this.props.query.page && (
+              {/* Dynamic URL routing /itinerary/:id/:page for Next.js */}
+              {/* /itinerary/:id */
+              this.props.query.id && !this.props.query.page && (
                 <ItineraryOverview id={Number(this.props.query.id)} />
               )}
-              {this.props.query.id && this.props.query.page && (
+              {/* /itinerary/:id/:page */
+              this.props.query.id && this.props.query.page && (
                 <ItineraryPage
                   itineraryId={Number(this.props.query.id)}
                   pageNumber={Number(this.props.query.page)}
