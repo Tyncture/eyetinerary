@@ -50,14 +50,29 @@ class Login extends React.Component<any, IState> {
                 <form name="login-form">
                   <div>
                     <label htmlFor="login-form-username">Username</label>
-                    <input type="text" name="login-form-username" onChange={this.handleUsernameChange}/>
+                    <input
+                      type="text"
+                      name="login-form-username"
+                      value={this.state.username}
+                      onChange={this.handleUsernameChange}
+                    />
                   </div>
                   <div>
                     <label htmlFor="login-form-password">Password</label>
-                    <input type="password" name="login-form-password" onChange={this.handlePasswordChange}/>
+                    <input
+                      type="password"
+                      name="login-form-password"
+                      value={this.state.password}
+                      onChange={this.handlePasswordChange}
+                    />
                   </div>
                   <div>
-                    <input type="checkbox" name="login-form-remember-me" defaultChecked={this.state.rememberMe} onChange={this.handleRememberMeChange}/>
+                    <input
+                      type="checkbox"
+                      name="login-form-remember-me"
+                      checked={this.state.rememberMe}
+                      onChange={this.handleRememberMeChange}
+                    />
                     <label htmlFor="login-form-remember-me">Remember me</label>
                   </div>
                 </form>
