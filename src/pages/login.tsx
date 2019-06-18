@@ -52,7 +52,7 @@ class Login extends React.Component<any, IState> {
     }
   }
 
-  async handleSubmit(e: React.MouseEvent<HTMLInputElement, MouseEvent>) {
+  handleSubmit(e: React.MouseEvent<HTMLInputElement, MouseEvent>) {
     e.preventDefault();
     this.login();
   }
