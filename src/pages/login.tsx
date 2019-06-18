@@ -10,8 +10,8 @@ interface IState {
 }
 
 const initialState: IState = {
-  username: null,
-  password: null,
+  username: "",
+  password: "",
   rememberMe: true
 };
 
@@ -22,6 +22,7 @@ class Login extends React.Component<any, IState> {
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleRememberMeChange = this.handleRememberMeChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleUsernameChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -34,6 +35,11 @@ class Login extends React.Component<any, IState> {
 
   handleRememberMeChange(e: React.ChangeEvent<HTMLInputElement>) {
     this.setState({ rememberMe: e.target.checked });
+  }
+
+  handleSubmit(e: React.MouseEvent<HTMLInputElement, MouseEvent>) {
+    e.preventDefault();
+    e.currentTarget.value = "Working...";
   }
 
   render() {
@@ -74,6 +80,9 @@ class Login extends React.Component<any, IState> {
                       onChange={this.handleRememberMeChange}
                     />
                     <label htmlFor="login-form-remember-me">Remember me</label>
+                  </div>
+                  <div>
+                    <input type="button" name="login-form-submit" value="Login" onClick={this.handleSubmit}/>
                   </div>
                 </form>
               </main>
