@@ -15,7 +15,13 @@
     outline: none;
     max-width: 300px;
     border: 1px solid #E8E8E8;
-    border-radius: 2px;
+    border-radius: 4px;
+  }
+
+  input[type="text"], input[type="password"] {
+    &:focus {
+      border: 1px solid rgb(215, 215, 215);
+    }
   }
 
   input[type="button"] {
