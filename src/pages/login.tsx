@@ -30,6 +30,7 @@ class Login extends React.Component<any, IState> {
     super(props);
     this.state = initialState;
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
+    this.handleUsernameKeyDown = this.handleUsernameKeyDown.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleRememberMeChange = this.handleRememberMeChange.bind(this);
     this.handleEnterKey = this.handleEnterKey.bind(this);
@@ -38,6 +39,12 @@ class Login extends React.Component<any, IState> {
 
   handleUsernameChange(e: React.ChangeEvent<HTMLInputElement>) {
     this.setState({ username: e.target.value });
+  }
+
+  handleUsernameKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (!e.key.match(/[a-zA-Z0-9_-]/)) {
+      e.preventDefault();
+    }
   }
 
   handlePasswordChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -121,6 +128,7 @@ class Login extends React.Component<any, IState> {
                       placeholder="Username"
                       spellCheck={false}
                       onChange={this.handleUsernameChange}
+                      onKeyDown={this.handleUsernameKeyDown}
                       onKeyUpCapture={this.handleEnterKey}
                     />
                     <input
