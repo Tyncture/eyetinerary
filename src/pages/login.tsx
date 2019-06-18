@@ -115,6 +115,8 @@ class Login extends React.Component<any, IState> {
                       type="text"
                       id="login-form-username"
                       name="login-form-username"
+                      required={true}
+                      maxLength={50}
                       value={this.state.username}
                       placeholder="Username"
                       spellCheck={false}
@@ -126,6 +128,8 @@ class Login extends React.Component<any, IState> {
                       id="login-form-password"
                       name="login-form-password"
                       value={this.state.password}
+                      required={true}
+                      maxLength={72}
                       placeholder="Password"
                       onChange={this.handlePasswordChange}
                       onKeyUp={this.handleEnterKey}
