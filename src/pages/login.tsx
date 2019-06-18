@@ -29,6 +29,7 @@ class Login extends React.Component<any, IState> {
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleRememberMeChange = this.handleRememberMeChange.bind(this);
+    this.handleEnterKey = this.handleEnterKey.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -44,8 +45,19 @@ class Login extends React.Component<any, IState> {
     this.setState({ rememberMe: e.target.checked });
   }
 
+  handleEnterKey(e: React.KeyboardEvent) {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      this.login();
+    }
+  }
+
   async handleSubmit(e: React.MouseEvent<HTMLInputElement, MouseEvent>) {
     e.preventDefault();
+    this.login();
+  }
+
+  async login() {
     this.setState({ loginLabel: "Working..." });
     try {
       const response = await fetch(`${process.env.EYET_API}/login`, {
@@ -86,54 +98,56 @@ class Login extends React.Component<any, IState> {
   render() {
     return (
       <BaseContainer>
-          <Sidebar />
-          <Main>
-            <div className="login">
-              <header className="login-header">
-                <h1>Login</h1>
-              </header>
-              <main>
-                <form name="login-form">
-                  <div>
-                    <label htmlFor="login-form-username">Username</label>
-                    <input
-                      type="text"
-                      name="login-form-username"
-                      value={this.state.username}
-                      onChange={this.handleUsernameChange}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="login-form-password">Password</label>
-                    <input
-                      type="password"
-                      name="login-form-password"
-                      value={this.state.password}
-                      onChange={this.handlePasswordChange}
-                    />
-                  </div>
-                  <div>
-                    <input
-                      type="checkbox"
-                      name="login-form-remember-me"
-                      checked={this.state.rememberMe}
-                      onChange={this.handleRememberMeChange}
-                    />
-                    <label htmlFor="login-form-remember-me">Remember me</label>
-                  </div>
-                  <div>
-                    <input
-                      type="button"
-                      name="login-form-submit"
-                      value={this.state.loginLabel}
-                      onClick={this.handleSubmit}
-                    />
-                  </div>
-                </form>
-              </main>
-            </div>
-          </Main>
-        </BaseContainer>
+        <Sidebar />
+        <Main>
+          <div className="login">
+            <header className="login-header">
+              <h1>Login</h1>
+            </header>
+            <main>
+              <form name="login-form">
+                <div>
+                  <label htmlFor="login-form-username">Username</label>
+                  <input
+                    type="text"
+                    name="login-form-username"
+                    value={this.state.username}
+                    onChange={this.handleUsernameChange}
+                    onKeyUpCapture={this.handleEnterKey}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="login-form-password">Password</label>
+                  <input
+                    type="password"
+                    name="login-form-password"
+                    value={this.state.password}
+                    onChange={this.handlePasswordChange}
+                    onKeyUp={this.handleEnterKey}
+                  />
+                </div>
+                <div>
+                  <input
+                    type="checkbox"
+                    name="login-form-remember-me"
+                    checked={this.state.rememberMe}
+                    onChange={this.handleRememberMeChange}
+                  />
+                  <label htmlFor="login-form-remember-me">Remember me</label>
+                </div>
+                <div>
+                  <input
+                    type="button"
+                    name="login-form-submit"
+                    value={this.state.loginLabel}
+                    onClick={this.handleSubmit}
+                  />
+                </div>
+              </form>
+            </main>
+          </div>
+        </Main>
+      </BaseContainer>
     );
   }
 }
