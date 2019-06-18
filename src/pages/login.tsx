@@ -68,7 +68,10 @@ class Login extends React.Component<any, IState> {
   }
 
   async login() {
-    this.setState({ loginButtonEnabled: false, loginButtonText: "Logging in.." });
+    this.setState({
+      loginButtonEnabled: false,
+      loginButtonText: "Logging in.."
+    });
     try {
       const response = await fetch(`${process.env.EYET_API}/login`, {
         method: "POST",
@@ -99,7 +102,10 @@ class Login extends React.Component<any, IState> {
       }
     } catch (e) {
       console.error(e.message);
-      this.setState({ incorrectCredentials: false, apiCommunicationFailed: true });
+      this.setState({
+        incorrectCredentials: false,
+        apiCommunicationFailed: true
+      });
     } finally {
       this.setState({ loginButtonEnabled: true, loginButtonText: "Login" });
     }
@@ -152,14 +158,18 @@ class Login extends React.Component<any, IState> {
                       />
                       <label htmlFor="login-form-rememberme">Remember me</label>
                     </div> */}
-                    {this.state.incorrectCredentials && <div className="input-form--warning">
-                      Incorrect username or password.
-                    </div>}
-                    {this.state.apiCommunicationFailed && <div className="input-form--warning">
-                      Server error.
-                    </div>}
                   </div>
                 </div>
+                {this.state.incorrectCredentials && (
+                  <div className="input-form--warning">
+                    Incorrect username or password.
+                  </div>
+                )}
+                {this.state.apiCommunicationFailed && (
+                  <div className="input-form--warning">
+                    An error has occured.
+                  </div>
+                )}
                 <div className="login-form--group">
                   <input
                     type="button"
