@@ -2,6 +2,7 @@ import React from "react";
 import BaseContainer from "../components/base/baseContainer";
 import Sidebar from "../components/base/sidebar";
 import Main from "../components/base/main";
+import "./createItinerary.scss";
 
 interface IPageBuilder {
   name: string;
@@ -16,9 +17,17 @@ interface IState {
   private: boolean;
 }
 
+const initialState: IState = {
+  name: "",
+  description: "",
+  pages: [],
+  private: false
+};
+
 class CreateItinerary extends React.Component<any, IState> {
   constructor(props) {
     super(props);
+    this.state = initialState;
   }
 
   render() {
@@ -30,25 +39,49 @@ class CreateItinerary extends React.Component<any, IState> {
             <header className="create-itinerary-header">
               <h1>Create Itinerary</h1>
             </header>
-            <main>
-              <section>
-                <header>
+            <main className="create-itinerary-main">
+              <section className="create-itinerary-section">
+                <header className="create-itinerary-section-header">
                   <h2>Itinerary</h2>
                 </header>
-                <div>
-                  <label>Let's give your itinerary a name. What do you want to call it?</label>
-                </div>
+                <main className="create-itinerary-section-main">
+                  <div className="create-itinerary-field">
+                    <label>
+                      Let's give your itinerary a name. What do you want to call
+                      it?
+                    </label>
+                    <input
+                      type="text"
+                      value={this.state.name}
+                      placeholder="Bangkok in December"
+                      maxLength={100}
+                      required={true}
+                    />
+                  </div>
+                  <div className="create-itinerary-field">
+                    <label>
+                      And optionally, give it a description to provide more detail.
+                    </label>
+                    <input
+                      type="ext"
+                      value={this.state.name}
+                      placeholder="Two weeks on a budget of $1000"
+                      maxLength={100}
+                      required={true}
+                    />
+                  </div>
+                </main>
               </section>
-              <section>
-                <header>
+              <section className="create-itinerary-section">
+                <header  className="create-itinerary-section-header">
                   <h2>Pages</h2>
                 </header>
-                <div>
+                <main  className="create-itinerary-section-main">
                   <label>
                     Now let's add some pages to your itinerary. Use a page to
                     represent a single day or whatever unit of time you prefer.
                   </label>
-                </div>
+                </main>
               </section>
             </main>
           </div>
