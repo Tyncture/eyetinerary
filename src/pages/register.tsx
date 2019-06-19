@@ -9,13 +9,17 @@ interface IState {
   password: string;
   email: string;
   location: string;
+  emptyRequiredFields: boolean;
+  passwordTooShort: boolean;
 }
 
 const initialState: IState = {
   username: "",
   password: "",
   email: "",
-  location: ""
+  location: "",
+  emptyRequiredFields: false,
+  passwordTooShort: false
 };
 
 class Register extends React.Component<any, IState> {
@@ -26,6 +30,8 @@ class Register extends React.Component<any, IState> {
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handleLocationChange = this.handleLocationChange.bind(this);
+    this.handleSubmitClick = this.handleSubmitClick.bind(this);
+    this.handleEnter = this.handleEnter.bind(this);
   }
 
   handleUsernameChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -55,6 +61,41 @@ class Register extends React.Component<any, IState> {
     this.setState({ location: e.target.value });
   }
 
+  handleSubmitClick() {
+    if (this.verifyForm()) {
+      this.submitForm();
+    }
+  }
+
+  handleEnter(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.keyCode === 13) {
+      if (this.verifyForm()) {
+        this.submitForm();
+      }
+    }
+  }
+
+  verifyForm(): boolean {
+    let valid = true;
+    if (this.state.username.length === 0 || this.state.password.length === 0) {
+      this.setState({ emptyRequiredFields: true });
+      valid = false;
+    } else {
+      this.setState({ emptyRequiredFields: false });
+    }
+    if (this.state.password.length < 8) {
+      this.setState({ passwordTooShort: true });
+      valid = false;
+    } else {
+      this.setState({ passwordTooShort: false });
+    }
+    return valid;
+  }
+
+  async submitForm() {
+    console.log("submitted");
+  }
+
   render() {
     return (
       <BaseContainer>
@@ -75,6 +116,7 @@ class Register extends React.Component<any, IState> {
                     value={this.state.username}
                     onChange={this.handleUsernameChange}
                     onKeyDown={this.handleUsernameKeyDown}
+                    onKeyUp={this.handleEnter}
                     placeholder="Username"
                     required={true}
                     maxLength={50}
@@ -88,6 +130,7 @@ class Register extends React.Component<any, IState> {
                     name="register-form-password"
                     value={this.state.password}
                     onChange={this.handlePasswordChange}
+                    onKeyUp={this.handleEnter}
                     placeholder="Password"
                     required={true}
                     maxLength={72}
@@ -105,6 +148,7 @@ class Register extends React.Component<any, IState> {
                     value={this.state.email}
                     onChange={this.handleEmailChange}
                     onKeyDown={this.handleEmailKeyDown}
+                    onKeyUp={this.handleEnter}
                     placeholder="example@outlook.com"
                     maxLength={140}
                   />
@@ -120,12 +164,13 @@ class Register extends React.Component<any, IState> {
                     name="register-form-location"
                     value={this.state.location}
                     onChange={this.handleLocationChange}
+                    onKeyUp={this.handleEnter}
                     placeholder="Bangkok, Thailand"
                     maxLength={50}
                   />
                 </div>
                 <div className="register-form--group">
-                  <input type="button" value="Submit" />
+                  <input type="button" value="Submit" onClick={this.handleSubmitClick}/>
                 </div>
               </form>
             </main>
