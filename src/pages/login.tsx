@@ -1,8 +1,8 @@
 import Router from "next/router";
 import React from "react";
 import BaseContainer from "../components/base/baseContainer";
-import Main from "../components/base/main";
 import Sidebar from "../components/base/sidebar";
+import Main from "../components/base/main";
 import "./login.scss";
 
 interface IState {
