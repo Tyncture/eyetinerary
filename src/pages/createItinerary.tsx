@@ -13,6 +13,7 @@ interface IState {
   name: string;
   description: string;
   pages: IPageBuilder[];
+  private: boolean;
 }
 
 class CreateItinerary extends React.Component<any, IState> {
