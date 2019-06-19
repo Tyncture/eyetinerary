@@ -2,7 +2,9 @@ import React from "react";
 import BaseContainer from "../components/base/baseContainer";
 import Sidebar from "../components/base/sidebar";
 import Main from "../components/base/main";
+import validator from "validator";
 import "./register.scss";
+import Router from "next/router";
 
 interface IState {
   username: string;
@@ -11,6 +13,8 @@ interface IState {
   location: string;
   emptyRequiredFields: boolean;
   passwordTooShort: boolean;
+  invalidEmail: boolean;
+  apiError: boolean;
 }
 
 const initialState: IState = {
@@ -19,7 +23,9 @@ const initialState: IState = {
   email: "",
   location: "",
   emptyRequiredFields: false,
-  passwordTooShort: false
+  passwordTooShort: false,
+  invalidEmail: false,
+  apiError: false
 };
 
 class Register extends React.Component<any, IState> {
@@ -89,11 +95,54 @@ class Register extends React.Component<any, IState> {
     } else {
       this.setState({ passwordTooShort: false });
     }
+    if (this.state.password.length < 8) {
+      this.setState({ passwordTooShort: true });
+      valid = false;
+    } else {
+      this.setState({ passwordTooShort: false });
+    }
+    if (this.state.email.length > 0 && !validator.isEmail(this.state.email)) {
+      this.setState({ invalidEmail: true });
+      valid = false;
+    } else {
+      this.setState({ invalidEmail: false });
+    }
     return valid;
   }
 
   async submitForm() {
-    console.log("submitted");
+    this.setState({ apiError: false });
+    const body = {
+      username: this.state.username,
+      password: this.state.password
+    };
+    if (this.state.email.length !== 0 && !this.state.invalidEmail) {
+      Object.assign(body, { email: this.state.email });
+    }
+    if (this.state.location.length !== 0) {
+      Object.assign(body, { location: this.state.location });
+    }
+    try {
+      const response = await fetch(`${process.env.EYET_API}/user`, {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
+      });
+      switch (response.status) {
+        case 201:
+          // TODO: Store id and token to redux
+          Router.push("/");
+          break;
+        default:
+          this.setState({ apiError: true });
+      }
+    } catch (e) {
+      console.error(e.message);
+      this.setState({ apiError: true });
+    }
   }
 
   render() {
@@ -170,7 +219,11 @@ class Register extends React.Component<any, IState> {
                   />
                 </div>
                 <div className="register-form--group">
-                  <input type="button" value="Submit" onClick={this.handleSubmitClick}/>
+                  <input
+                    type="button"
+                    value="Submit"
+                    onClick={this.handleSubmitClick}
+                  />
                 </div>
               </form>
             </main>
