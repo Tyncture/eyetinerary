@@ -28,6 +28,16 @@ class CreateItinerary extends React.Component<any, IState> {
   constructor(props) {
     super(props);
     this.state = initialState;
+    this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
+  }
+
+  handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {
+    this.setState({ name: e.target.value });
+  }
+
+  handleDescriptionChange(e: React.ChangeEvent<HTMLInputElement>) {
+    this.setState({ description: e.target.value });
   }
 
   render() {
@@ -56,6 +66,7 @@ class CreateItinerary extends React.Component<any, IState> {
                       placeholder="Bangkok in December"
                       maxLength={100}
                       required={true}
+                      onChange={this.handleNameChange}
                     />
                   </div>
                   <div className="create-itinerary-field">
@@ -64,10 +75,11 @@ class CreateItinerary extends React.Component<any, IState> {
                     </label>
                     <input
                       type="ext"
-                      value={this.state.name}
+                      value={this.state.description}
                       placeholder="Two weeks on a budget of $1000"
                       maxLength={100}
                       required={true}
+                      onChange={this.handleDescriptionChange}
                     />
                   </div>
                 </main>
