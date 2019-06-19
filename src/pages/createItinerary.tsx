@@ -3,7 +3,19 @@ import BaseContainer from "../components/base/baseContainer";
 import Sidebar from "../components/base/sidebar";
 import Main from "../components/base/main";
 
-class CreateItinerary extends React.Component {
+interface IPageBuilder {
+  name: string;
+  description: string;
+  rankInItinerary: number;
+}
+
+interface IState {
+  name: string;
+  description: string;
+  pages: IPageBuilder[];
+}
+
+class CreateItinerary extends React.Component<any, IState> {
   constructor(props) {
     super(props);
   }
