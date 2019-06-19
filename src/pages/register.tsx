@@ -244,7 +244,7 @@ class Register extends React.Component<any, IState> {
                 <div className="register-form--group">
                   <input
                     type="button"
-                    value="Submit"
+                    value="Register"
                     onClick={this.handleSubmitClick}
                   />
                 </div>
