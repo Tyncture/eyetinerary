@@ -223,16 +223,19 @@ class Register extends React.Component<any, IState> {
                     Please double check all required fields.
                   </div>
                 )}
-                {!this.state.emptyRequiredFields && this.state.passwordTooShort && (
-                  <div className="input-form--warning">
-                    Password must be at least 8 characters long.
-                  </div>
-                )}
-                {!this.state.emptyRequiredFields && !this.state.passwordTooShort && this.state.invalidEmail && (
-                  <div className="input-form--warning">
-                    Please double check your email.
-                  </div>
-                )}
+                {!this.state.emptyRequiredFields &&
+                  this.state.passwordTooShort && (
+                    <div className="input-form--warning">
+                      Password must be at least 8 characters long.
+                    </div>
+                  )}
+                {!this.state.emptyRequiredFields &&
+                  !this.state.passwordTooShort &&
+                  this.state.invalidEmail && (
+                    <div className="input-form--warning">
+                      Please double check your email.
+                    </div>
+                  )}
                 {this.state.apiError && (
                   <div className="input-form--warning">
                     An error has occured.
