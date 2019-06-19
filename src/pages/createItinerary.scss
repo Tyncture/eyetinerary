@@ -1,0 +1,42 @@
+.create-itinerary-main {
+  display: grid;
+  grid-auto-flow: row;
+  grid-gap: 15px;
+}
+
+.create-itinerary-section {
+  header {
+    h2 {
+      font-size: 24px;
+      font-weight: 500;
+    }
+  }
+}
+
+.create-itinerary-section-main {
+  display: grid;
+  grid-auto-flow: row;
+  grid-gap: 18px;
+  font-size: 18px;
+}
+
+.create-itinerary-field {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    margin-bottom: 12.5px;
+    font-size: 18px;
+  }
+  input {
+    padding: 7.5px;
+    outline: none;
+    border: 1px solid #E8E8E8;
+    border-radius: 4px;
+  }
+  input[type="text"] {
+    &:focus {
+      box-shadow: inset 0px -2.5px 1px -1px rgb(223, 223, 223);
+    }
+  }
+}
