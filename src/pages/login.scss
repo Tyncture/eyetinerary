@@ -15,8 +15,11 @@
     outline: none;
     border: 1px solid #E8E8E8;
     border-radius: 4px;
+  }
+
+  input[type="text"], input[type="email"], input[type="password"] {
     &:focus {
-      box-shadow: inset 0px -2.4px 1px -1px rgb(223, 223, 223);
+      box-shadow: inset 0px -2.5px 1px -1px rgb(223, 223, 223);
     }
   }
 
