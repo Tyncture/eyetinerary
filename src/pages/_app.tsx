@@ -1,6 +1,12 @@
-import React from 'react';
-import App, { Container } from 'next/app';
-import './_app.scss';
+import React from "react";
+import App, { Container } from "next/app";
+import "./_app.scss";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { store } from "../store";
+
+const storeInstance = createStore(store, composeWithDevTools());
 
 class CustomApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -18,7 +24,9 @@ class CustomApp extends App {
 
     return (
       <Container>
-        <Component {...pageProps} className="app-container" />
+        <Provider store={storeInstance}>
+          <Component {...pageProps} className="app-container" />
+        </Provider>
       </Container>
     );
   }

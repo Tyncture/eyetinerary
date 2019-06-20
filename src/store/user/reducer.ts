@@ -12,18 +12,16 @@ const initialState: IUser = {
   token: null
 };
 
-export function user(
-  state: IUser = initialState,
-  action: UserActionTypes
-): IUser {
+export function user(state: IUser, action: UserActionTypes): IUser {
+  const prevState = state ? state : initialState;
   switch (action.type) {
     case SET_USER_ID:
-      return Object.assign({}, state, { id: action.id });
+      return Object.assign({}, prevState, { id: action.id });
     case SET_USERNAME:
-      return Object.assign({}, state, { username: action.username });
+      return Object.assign({}, prevState, { username: action.username });
     case SET_USER_TOKEN:
-      return Object.assign({}, state, { token: action.token });
+      return Object.assign({}, prevState, { token: action.token });
     default:
-      return state;
+      return prevState;
   }
 }

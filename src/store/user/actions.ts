@@ -20,7 +20,7 @@ export function setUsername(username: string): UserActionTypes {
   };
 }
 
-export function setToken(token: string): UserActionTypes {
+export function setUserToken(token: string): UserActionTypes {
   return {
     type: SET_USER_TOKEN,
     token
