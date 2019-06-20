@@ -1,6 +1,6 @@
 import React from "react";
 import moment, { Moment } from "moment";
-import { IItinerary, IPage, IItem } from "../itineraryUtilities/types";
+import { IItinerary, IPage, IItem } from "../utilities/types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,

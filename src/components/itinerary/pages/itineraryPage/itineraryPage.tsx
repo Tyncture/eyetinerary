@@ -1,10 +1,10 @@
 import Head from "next/head";
 import React from "react";
-import ItineraryAbout from "../itineraryBase/itineraryAbout";
+import ItineraryAbout from "../../base/itineraryAbout";
 import "../itineraryBase/itineraryCommon.scss";
-import ItineraryListItem from "../itineraryBase/itineraryListItem";
-import { getItinerary } from "../../common/requests";
-import { IItem, IItinerary, IPage } from "../itineraryUtilities/types";
+import ItineraryListItem from "../../base/itineraryListItem";
+import { getItinerary } from "../../../../common/requests";
+import { IItem, IItinerary, IPage } from "../../utilities/types";
 
 interface IProps {
   itineraryId: number;
