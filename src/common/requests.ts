@@ -1,4 +1,4 @@
-import { IItinerary } from "../components/itineraryUtilities/types";
+import { IItinerary } from "../components/itinerary/utilities/types";
 
 interface IResponse {
   body?: any;
