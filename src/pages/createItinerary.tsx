@@ -15,13 +15,17 @@ interface IState {
   description: string;
   pages: IPageBuilder[];
   private: boolean;
+  pageBuilderName: string;
+  pageBuilderDescription: string;
 }
 
 const initialState: IState = {
   name: "",
   description: "",
   pages: [],
-  private: false
+  private: false,
+  pageBuilderName: "",
+  pageBuilderDescription: ""
 };
 
 class CreateItinerary extends React.Component<any, IState> {
@@ -30,6 +34,8 @@ class CreateItinerary extends React.Component<any, IState> {
     this.state = initialState;
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
+    this.handlePageNameChange = this.handlePageNameChange.bind(this);
+    this.handlePageDescriptionChange = this.handlePageDescriptionChange.bind(this);
   }
 
   handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -38,6 +44,14 @@ class CreateItinerary extends React.Component<any, IState> {
 
   handleDescriptionChange(e: React.ChangeEvent<HTMLInputElement>) {
     this.setState({ description: e.target.value });
+  }
+
+  handlePageNameChange(e: React.ChangeEvent<HTMLInputElement>) {
+    this.setState({ pageBuilderName: e.target.value });
+  }
+
+  handlePageDescriptionChange(e: React.ChangeEvent<HTMLInputElement>) {
+    this.setState({ pageBuilderDescription: e.target.value });
   }
 
   render() {
@@ -71,10 +85,11 @@ class CreateItinerary extends React.Component<any, IState> {
                   </div>
                   <div className="create-itinerary-field">
                     <label>
-                      And optionally, give it a description to provide more detail.
+                      And optionally, give it a description to provide more
+                      detail.
                     </label>
                     <input
-                      type="ext"
+                      type="text"
                       value={this.state.description}
                       placeholder="Two weeks on a budget of $1000"
                       maxLength={100}
@@ -85,14 +100,38 @@ class CreateItinerary extends React.Component<any, IState> {
                 </main>
               </section>
               <section className="create-itinerary-section">
-                <header  className="create-itinerary-section-header">
+                <header className="create-itinerary-section-header">
                   <h2>Pages</h2>
                 </header>
-                <main  className="create-itinerary-section-main">
-                  <label>
+                <main className="create-itinerary-section-main">
+                  <div>
                     Now let's add some pages to your itinerary. Use a page to
                     represent a single day or whatever unit of time you prefer.
-                  </label>
+                  </div>
+                  <div className="create-itinerary-page-builder">
+                    <div className="create-itinerary-page-builder-field">
+                      <label>Name</label>
+                      <input
+                        type="text"
+                        value={this.state.pageBuilderName}
+                        placeholder="Day 1: Arriving from the airport"
+                        maxLength={100}
+                        required={true}
+                        onChange={this.handlePageNameChange}
+                      />
+                    </div>
+                    <div className="create-itinerary-page-builder-field">
+                      <label>Description</label>
+                      <input
+                        type="text"
+                        value={this.state.pageBuilderDescription}
+                        placeholder="Checking into the hostel and making use of the rest of evening."
+                        maxLength={100}
+                        required={true}
+                        onChange={this.handlePageDescriptionChange}
+                      />
+                    </div>
+                  </div>
                 </main>
               </section>
             </main>
