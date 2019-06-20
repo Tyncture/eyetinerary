@@ -4,7 +4,7 @@ import React from "react";
 import ItineraryAbout from "../itineraryBase/itineraryAbout";
 import "../itineraryBase/itineraryCommon.scss";
 import ItineraryListItem from "../itineraryBase/itineraryListItem";
-import { fetchItinerary } from "../itineraryUtilities/fetcher";
+import { getItinerary } from "../../common/requests";
 import { IItinerary, IPage } from "../itineraryUtilities/types";
 
 interface IProps {
@@ -48,7 +48,7 @@ class ItineraryOverview extends React.Component<IProps, IState> {
   }
 
   async loadItinerary() {
-    const response = await fetchItinerary(this.props.id);
+    const response = await getItinerary(this.props.id);
     if (response.success) {
       this.setState({ itinerary: response.body });
       this.state.itinerary.pages.forEach(page => {

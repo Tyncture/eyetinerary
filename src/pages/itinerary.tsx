@@ -5,7 +5,7 @@ import Main from "../components/base/main";
 import ItineraryOverview from "../components/itineraryOverview/itineraryOverview";
 import ItineraryPage from "../components/itineraryPage/itineraryPage";
 import { IItinerary } from "../components/itineraryUtilities/types";
-import { fetchItinerary } from "../components/itineraryUtilities/fetcher";
+import { getItinerary } from "../common/requests";
 import validator from "validator";
 import ItineraryHeader from "../components/itineraryBase/itineraryHeader";
 
@@ -50,7 +50,7 @@ class Itinerary extends React.Component<IProps, IState> {
 
   async bootstrapState() {
     if (this.propsAcceptable()) {
-      const response = await fetchItinerary(Number(this.props.query.id));
+      const response = await getItinerary(Number(this.props.query.id));
       if (response.success) {
         this.setState({ itinerary: response.body });
       } else {
