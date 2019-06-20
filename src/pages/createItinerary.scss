@@ -42,11 +42,18 @@
 
 .create-itinerary-page-builder {
   display: grid;
-  grid-auto-flow: row;
-  grid-gap: 10px;
-  background-color: white;
+  grid-auto-flow: column;
+  grid-template-columns: 1fr min-content;
+  grid-gap: 15px;
   padding: 25px;
   border-radius: 4px;
+  background-color: white;
+}
+
+.create-itinerary-page-section {
+  display: grid;
+  grid-auto-flow: row;
+  grid-gap: 10px;
 }
 
 .create-itinerary-page-builder-field {
@@ -64,6 +71,27 @@
     border-radius: 3px;
     &:focus {
       background-color: #FCFCFC;
+    }
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .create-itinerary-page-builder {
+    grid-auto-flow: row;
+    grid-template-columns: 1fr;
+    grid-gap: 22.5px;
+  }
+
+  .create-itinerary-page-section {
+    grid-gap: 20px;
+  }
+
+  .create-itinerary-page-builder-field {
+    grid-auto-flow: row;
+    grid-template-columns: 1fr;
+    label {
+      text-align: left;
+      padding-bottom: 12.5px;
     }
   }
 }

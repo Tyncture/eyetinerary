@@ -35,7 +35,9 @@ class CreateItinerary extends React.Component<any, IState> {
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
     this.handlePageNameChange = this.handlePageNameChange.bind(this);
-    this.handlePageDescriptionChange = this.handlePageDescriptionChange.bind(this);
+    this.handlePageDescriptionChange = this.handlePageDescriptionChange.bind(
+      this
+    );
   }
 
   handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -109,27 +111,32 @@ class CreateItinerary extends React.Component<any, IState> {
                     represent a single day or whatever unit of time you prefer.
                   </div>
                   <div className="create-itinerary-page-builder">
-                    <div className="create-itinerary-page-builder-field">
-                      <label>Name</label>
-                      <input
-                        type="text"
-                        value={this.state.pageBuilderName}
-                        placeholder="Day 1: Arriving from the airport"
-                        maxLength={100}
-                        required={true}
-                        onChange={this.handlePageNameChange}
-                      />
+                    <div className="create-itinerary-page-section">
+                      <div className="create-itinerary-page-builder-field">
+                        <label>Name</label>
+                        <input
+                          type="text"
+                          value={this.state.pageBuilderName}
+                          placeholder="Day 1: Arriving from the airport"
+                          maxLength={100}
+                          required={true}
+                          onChange={this.handlePageNameChange}
+                        />
+                      </div>
+                      <div className="create-itinerary-page-builder-field">
+                        <label>Description</label>
+                        <input
+                          type="text"
+                          value={this.state.pageBuilderDescription}
+                          placeholder="Checking into the hostel"
+                          maxLength={100}
+                          required={true}
+                          onChange={this.handlePageDescriptionChange}
+                        />
+                      </div>
                     </div>
-                    <div className="create-itinerary-page-builder-field">
-                      <label>Description</label>
-                      <input
-                        type="text"
-                        value={this.state.pageBuilderDescription}
-                        placeholder="Checking into the hostel and making use of the rest of evening."
-                        maxLength={100}
-                        required={true}
-                        onChange={this.handlePageDescriptionChange}
-                      />
+                    <div className="create-itinerary-page-section">
+                      <input type="button" value="Add" />
                     </div>
                   </div>
                 </main>
