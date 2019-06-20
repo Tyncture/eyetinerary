@@ -3,7 +3,19 @@ import React from "react";
 import BaseContainer from "../components/base/baseContainer";
 import Sidebar from "../components/base/sidebar";
 import Main from "../components/base/main";
+import {
+  setUserId,
+  setUsername,
+  setUserToken,
+} from "../store/user/actions";
 import "./login.scss";
+import { connect } from "react-redux";
+
+interface IProps {
+  setUserId(id: number): void;
+  setUsername(username: string): void;
+  setUserToken(token: string): void;
+}
 
 interface IState {
   username: string;
@@ -27,7 +39,7 @@ const initialState: IState = {
   formValid: true
 };
 
-class Login extends React.Component<any, IState> {
+class Login extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = initialState;
@@ -72,7 +84,7 @@ class Login extends React.Component<any, IState> {
   }
 
   validateForm(): boolean {
-    if (this.state.username.length === 0 ||  this.state.password.length === 0) {
+    if (this.state.username.length === 0 || this.state.password.length === 0) {
       this.setState({ formValid: false });
       return false;
     } else {
@@ -100,6 +112,11 @@ class Login extends React.Component<any, IState> {
       });
       switch (response.status) {
         case 200:
+          const responseBody = await response.json();
+          console.log(responseBody);
+          this.props.setUserId(responseBody.user.id);
+          this.props.setUsername(responseBody.user.username);
+          this.props.setUserToken(responseBody.token);
           Router.push("/");
           break;
         case 401:
@@ -208,4 +225,14 @@ class Login extends React.Component<any, IState> {
   }
 }
 
-export default Login;
+const mapStateToProps = state => ({
+  contextUser: state.user
+});
+
+const mapDispatchToProps = dispatch => ({
+  setUserId: (id: number) => dispatch(setUserId(id)),
+  setUsername: (username: string) => dispatch(setUsername(username)),
+  setUserToken: (token: string) => dispatch(setUserToken(token))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

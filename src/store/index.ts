@@ -1,8 +1,8 @@
-import { IUser, UserActionTypes } from "./user/types";
+import { IContextUser, UserActionTypes } from "./user/types";
 import { user } from "./user/reducer";
 
 interface IStore {
-  user: IUser;
+  user: IContextUser;
 }
 
 const initialState: IStore = {

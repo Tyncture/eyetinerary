@@ -28,7 +28,7 @@ export type UserActionTypes =
   | ISetUserTokenAction
   | IClearUserAction;
 
-export interface IUser {
+export interface IContextUser {
   id: number;
   username: string;
   token: string;

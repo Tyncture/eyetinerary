@@ -1,18 +1,18 @@
 import {
-  IUser,
+  IContextUser,
   SET_USERNAME,
   SET_USER_ID,
   SET_USER_TOKEN,
   UserActionTypes
 } from "./types";
 
-const initialState: IUser = {
+const initialState: IContextUser = {
   id: null,
   username: null,
   token: null
 };
 
-export function user(state: IUser, action: UserActionTypes): IUser {
+export function user(state: IContextUser, action: UserActionTypes): IContextUser {
   const prevState = state ? state : initialState;
   switch (action.type) {
     case SET_USER_ID:
