@@ -139,6 +139,9 @@ class CreateItinerary extends React.Component<any, IState> {
                       <input type="button" value="Add" />
                     </div>
                   </div>
+                  <div>
+                    Here are the pages you have added so far.
+                  </div>
                 </main>
               </section>
             </main>

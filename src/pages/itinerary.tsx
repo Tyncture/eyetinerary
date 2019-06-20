@@ -42,9 +42,9 @@ class Itinerary extends React.Component<IProps, IState> {
   }
 
   async componentDidUpdate(prevProps: IProps) {
-    if (this.props !== prevProps) {
-      this.setState(initialState);
-      await this.bootstrapState();
+    if (this.props.query.id !== prevProps.query.id) {
+      const callback = () => this.bootstrapState();
+      this.setState({ itinerary: null, apiErrorCode: null }, callback);
     }
   }
 
@@ -82,25 +82,27 @@ class Itinerary extends React.Component<IProps, IState> {
           {this.propsAcceptable() && (
             <div>
               {this.state.itinerary && (
-                <ItineraryHeader
-                  title={this.state.itinerary.title}
-                  description="Testing React Frontend"
-                  location="Chiang Mai"
-                  countryCode="Thailand"
-                  className="itinerary-header--with-margin-bottom"
-                />
-              )}
-              {/* Dynamic URL routing /itinerary/:id/:page for Next.js */}
-              {/* /itinerary/:id */
-              this.props.query.id && !this.props.query.page && (
-                <ItineraryOverview id={Number(this.props.query.id)} />
-              )}
-              {/* /itinerary/:id/:page */
-              this.props.query.id && this.props.query.page && (
-                <ItineraryPage
-                  itineraryId={Number(this.props.query.id)}
-                  pageNumber={Number(this.props.query.page)}
-                />
+                <div>
+                  <ItineraryHeader
+                    title={this.state.itinerary.title}
+                    description="Testing React Frontend"
+                    location="Chiang Mai"
+                    countryCode="Thailand"
+                    className="itinerary-header--with-margin-bottom"
+                  />
+                  {/* Dynamic URL routing /itinerary/:id/:page for Next.js */}
+                  {/* /itinerary/:id */
+                  !this.props.query.page && (
+                    <ItineraryOverview id={Number(this.props.query.id)} />
+                  )}
+                  {/* /itinerary/:id/:page */
+                  this.props.query.page && !this.props.query.item && (
+                    <ItineraryPage
+                      itineraryId={Number(this.props.query.id)}
+                      pageNumber={Number(this.props.query.page)}
+                    />
+                  )}
+                </div>
               )}
             </div>
           )}
