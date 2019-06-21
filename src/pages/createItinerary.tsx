@@ -201,24 +201,32 @@ class CreateItinerary extends React.Component<any, IState> {
                     </div>
                   </div>
                   <div>Here are the pages you have added so far.</div>
-                  <div>
+                  <ol className="create-itinerary-page-list">
                     {this.state.pages.map(page => (
-                      <div key={page.rankInItinerary}>
-                        <div>
-                          <div>{page.name}</div>
-                          <div>{page.description}</div>
+                      <li
+                        key={page.rankInItinerary}
+                        className="create-itinerary-page-list-item"
+                      >
+                        <div className="create-itinerary-page-list-item-info">
+                          <div className="create-itinerary-page-list-info-name">
+                            {page.name}
+                          </div>
+                          <div className="create-itinerary-page-list-info-description">
+                            {page.description}
+                          </div>
                         </div>
                         <input
                           type="button"
+                          className="create-itinerary-page-list-remove"
                           value="Remove"
                           onClick={this.handlePageRemove.bind(
                             this,
                             page.rankInItinerary
                           )}
                         />
-                      </div>
+                      </li>
                     ))}
-                  </div>
+                  </ol>
                 </main>
               </section>
             </main>
