@@ -1,23 +1,23 @@
+.create-itinerary {
+  display: grid;
+  grid-auto-flow: row;
+  grid-gap: 10px;
+}
+
 .create-itinerary-main {
   display: grid;
   grid-auto-flow: row;
-  grid-gap: 15px;
+  grid-gap: 20px;
 }
 
-.create-itinerary-section {
-  header {
-    h2 {
-      font-size: 24px;
-      font-weight: 500;
-    }
-  }
+.create-itinerary-section-header {
+  margin-bottom: 10px;
 }
 
 .create-itinerary-section-main {
   display: grid;
   grid-auto-flow: row;
-  grid-gap: 18px;
-  font-size: 18px;
+  grid-gap: 10px;
   input {
     padding: 7.5px;
     outline: none;
@@ -31,7 +31,6 @@
   flex-direction: column;
   label {
     margin-bottom: 12.5px;
-    font-size: 18px;
   }
   input[type="text"] {
     &:focus {
@@ -63,7 +62,6 @@
   align-items: center;
   label {
     color: rgb(115, 115, 115);
-    font-size: 15px;
     text-align: right;
     padding-right: 10px;
   }

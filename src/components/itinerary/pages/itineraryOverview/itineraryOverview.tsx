@@ -2,7 +2,7 @@ import Head from "next/head";
 import { SingletonRouter, withRouter } from "next/router";
 import React from "react";
 import ItineraryAbout from "../../base/itineraryAbout";
-import "../itineraryBase/itineraryCommon.scss";
+import "../../base/itineraryCommon.scss";
 import ItineraryListItem from "../../base/itineraryListItem";
 import { getItinerary } from "../../../../common/requests";
 import { IItinerary, IPage } from "../../utilities/types";
@@ -81,7 +81,7 @@ class ItineraryOverview extends React.Component<IProps, IState> {
             </Head>
             {this.state.itinerary.pages.length > 0 && (
               <section className="itinerary-section">
-                <h1>Pages</h1>
+                <h3>Pages</h3>
                 <div className="itinerary-sublist">
                   {this.sortPages(this.state.itinerary.pages).map(page => (
                     <ItineraryListItem

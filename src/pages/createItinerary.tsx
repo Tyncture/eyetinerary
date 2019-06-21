@@ -68,7 +68,7 @@ class CreateItinerary extends React.Component<any, IState> {
             <main className="create-itinerary-main">
               <section className="create-itinerary-section">
                 <header className="create-itinerary-section-header">
-                  <h2>Itinerary</h2>
+                  <h3>Itinerary</h3>
                 </header>
                 <main className="create-itinerary-section-main">
                   <div className="create-itinerary-field">
@@ -103,7 +103,7 @@ class CreateItinerary extends React.Component<any, IState> {
               </section>
               <section className="create-itinerary-section">
                 <header className="create-itinerary-section-header">
-                  <h2>Pages</h2>
+                  <h3>Pages</h3>
                 </header>
                 <main className="create-itinerary-section-main">
                   <div>
@@ -139,9 +139,7 @@ class CreateItinerary extends React.Component<any, IState> {
                       <input type="button" value="Add" />
                     </div>
                   </div>
-                  <div>
-                    Here are the pages you have added so far.
-                  </div>
+                  <div>Here are the pages you have added so far.</div>
                 </main>
               </section>
             </main>

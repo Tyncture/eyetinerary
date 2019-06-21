@@ -1,32 +1,17 @@
 .itinerary-header {
   display: grid;
   grid-auto-flow: row;
-  grid-gap: 15px;
 
-  * {
-    margin: 0;
+  h3 {
+    color: rgb(104, 104, 104);
   }
-
-  h1 {
-    font-size: 50px;
-    font-weight: 500;
-  }
-
-  h2 {
-    font-weight: normal;
-    color: #747474;
-    font-size: 22px;
-  }
-}
-
-.itinerary-header--with-margin-bottom {
-  margin-bottom: 15px;
 }
 
 .itinerary-header-info {
+  margin-top: 10px;
   display: grid;
   grid-auto-flow: row;
-  grid-gap: 12px;
+  grid-gap: 7.5px;
   color: #909090;
   font-size: 15px;
 }

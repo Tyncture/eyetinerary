@@ -2,12 +2,12 @@ import React from "react";
 import BaseContainer from "../components/base/baseContainer";
 import Sidebar from "../components/base/sidebar";
 import Main from "../components/base/main";
-import ItineraryOverview from "../components/itineraryOverview/itineraryOverview";
-import ItineraryPage from "../components/itineraryPage/itineraryPage";
-import { IItinerary } from "../components/itineraryUtilities/types";
+import ItineraryOverview from "../components/itinerary/pages/itineraryOverview/itineraryOverview";
+import ItineraryPage from "../components/itinerary/pages/itineraryPage/itineraryPage";
+import { IItinerary } from "../components/itinerary/utilities/types";
 import { getItinerary } from "../common/requests";
 import validator from "validator";
-import ItineraryHeader from "../components/itineraryBase/itineraryHeader";
+import ItineraryHeader from "../components/itinerary/base/itineraryHeader";
 
 interface IProps {
   query: {
@@ -88,7 +88,7 @@ class Itinerary extends React.Component<IProps, IState> {
                     description="Testing React Frontend"
                     location="Chiang Mai"
                     countryCode="Thailand"
-                    className="itinerary-header--with-margin-bottom"
+                    className="itinerary-header pb-5"
                   />
                   {/* Dynamic URL routing /itinerary/:id/:page for Next.js */}
                   {/* /itinerary/:id */

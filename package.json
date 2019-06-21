@@ -18,7 +18,6 @@
     "@types/validator": "^10.11.1",
     "@zeit/next-sass": "^1.0.1",
     "@zeit/next-typescript": "^1.1.1",
-    "bulma": "^0.7.5",
     "dotenv-load": "^2.0.0",
     "moment": "^2.24.0",
     "next": "^8.1.0",
@@ -31,10 +30,13 @@
     "react-scripts": "3.0.1",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
+    "tailwind": "^4.0.0",
+    "tailwindcss": "^1.0.4",
     "typescript": "^3.5.2",
     "validator": "^11.0.0"
   },
   "scripts": {
+    "tailwind-build": "tailwind build src/common/tailwindcss/tailwind.src.css -o src/common/tailwindcss/tailwind.css",
     "dev": "next src -p 8080",
     "build": "next build src",
     "start": "next start src -p 8080",

@@ -1,7 +1,7 @@
 import Head from "next/head";
 import React from "react";
 import ItineraryAbout from "../../base/itineraryAbout";
-import "../itineraryBase/itineraryCommon.scss";
+import "../../base/itineraryCommon.scss";
 import ItineraryListItem from "../../base/itineraryListItem";
 import { getItinerary } from "../../../../common/requests";
 import { IItem, IItinerary, IPage } from "../../utilities/types";
@@ -80,7 +80,7 @@ class ItineraryPage extends React.Component<IProps, IState> {
         <div className="itinerary">
           {this.state.page && this.state.page.items.length > 0 && (
             <section className="itinerary-section">
-              <h1>Items</h1>
+              <h3>Items</h3>
               <div className="itinerary-sublist">
                 {this.sortItems(this.state.page.items).map(item => (
                   <ItineraryListItem

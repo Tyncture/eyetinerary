@@ -26,7 +26,7 @@ class ItineraryHeader extends React.Component<IProps> {
     return (
       <div className={`itinerary-header ${inheritedClassNames}`}>
         <h1>{this.props.title}</h1>
-        <h2>{this.props.description}</h2>
+        <h3>{this.props.description}</h3>
         <div className="itinerary-header-info">
           <div className="itinerary-header-info-group">
             <div>
