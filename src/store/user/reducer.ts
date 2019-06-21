@@ -12,15 +12,18 @@ const initialState: IContextUser = {
   token: null
 };
 
-export function user(state: IContextUser, action: UserActionTypes): IContextUser {
+export function user(
+  state: IContextUser,
+  action: UserActionTypes
+): IContextUser {
   const prevState = state ? state : initialState;
   switch (action.type) {
     case SET_USER_ID:
-      return Object.assign({}, prevState, { id: action.id });
+      return { ...prevState, id: action.id };
     case SET_USERNAME:
-      return Object.assign({}, prevState, { username: action.username });
+      return { ...prevState, username: action.username };
     case SET_USER_TOKEN:
-      return Object.assign({}, prevState, { token: action.token });
+      return { ...prevState, token: action.token };
     default:
       return prevState;
   }
