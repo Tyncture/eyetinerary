@@ -2,11 +2,10 @@ import React from "react";
 import App, { Container } from "next/app";
 import "./_app.scss";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
-import { composeWithDevTools } from 'redux-devtools-extension';
-import { store } from "../store";
+import { createPersistedStore } from "../store";
+import { PersistGate } from "redux-persist/integration/react";
 
-const storeInstance = createStore(store, composeWithDevTools());
+const {store, persistor} = createPersistedStore();
 
 class CustomApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -24,8 +23,10 @@ class CustomApp extends App {
 
     return (
       <Container>
-        <Provider store={storeInstance}>
-          <Component {...pageProps} className="app-container" />
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <Component {...pageProps} className="app-container" />
+          </PersistGate>
         </Provider>
       </Container>
     );
