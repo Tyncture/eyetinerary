@@ -5,6 +5,15 @@ import Main from "../components/base/main";
 import validator from "validator";
 import "./register.scss";
 import Router from "next/router";
+import { connect } from "react-redux";
+import { postLogin, apiPost} from "../common/requests";
+import { setUserId, setUsername, setUserToken } from "../store/user/actions";
+
+interface IProps {
+  setUserId(id: number): void;
+  setUsername(username: string): void;
+  setUserToken(token: string): void;
+}
 
 interface IState {
   username: string;
@@ -28,7 +37,7 @@ const initialState: IState = {
   apiError: false
 };
 
-class Register extends React.Component<any, IState> {
+class Register extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = initialState;
@@ -114,30 +123,27 @@ class Register extends React.Component<any, IState> {
     this.setState({ apiError: false });
     const body = {
       username: this.state.username,
-      password: this.state.password
+      password: this.state.password,
+      email:
+        this.state.email.length !== 0 && !this.state.invalidEmail
+          ? this.state.email
+          : undefined,
+      location: this.state.location.length !== 0 ? this.state.location : undefined
     };
-    if (this.state.email.length !== 0 && !this.state.invalidEmail) {
-      Object.assign(body, { email: this.state.email });
-    }
-    if (this.state.location.length !== 0) {
-      Object.assign(body, { location: this.state.location });
-    }
     try {
-      const response = await fetch(`${process.env.EYET_API}/user`, {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(body)
-      });
-      switch (response.status) {
-        case 201:
-          // TODO: Store id and token to redux
+      const registerResponse = await apiPost("/user", body);
+      if (registerResponse.success) {
+        const loginResponse = await postLogin(body.username, body.password);
+        if (loginResponse.success) {
+          this.props.setUserId(loginResponse.body.user.id);
+          this.props.setUsername(loginResponse.body.user.username);
+          this.props.setUserToken(loginResponse.body.token);
           Router.push("/");
-          break;
-        default:
+        } else {
           this.setState({ apiError: true });
+        }
+      } else {
+        this.setState({ apiError: true });
       }
     } catch (e) {
       console.error(e.message);
@@ -257,4 +263,13 @@ class Register extends React.Component<any, IState> {
   }
 }
 
-export default Register;
+const mapDispatchToProps = dispatch => ({
+  setUserId: (id: number) => dispatch(setUserId(id)),
+  setUsername: (username: string) => dispatch(setUsername(username)),
+  setUserToken: (token: string) => dispatch(setUserToken(token))
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Register);

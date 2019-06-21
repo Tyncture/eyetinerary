@@ -202,10 +202,6 @@ class Login extends React.Component<IProps, IState> {
   }
 }
 
-const mapStateToProps = state => ({
-  contextUser: state.user
-});
-
 const mapDispatchToProps = dispatch => ({
   setUserId: (id: number) => dispatch(setUserId(id)),
   setUsername: (username: string) => dispatch(setUsername(username)),
@@ -213,6 +209,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(Login);

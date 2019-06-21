@@ -4,7 +4,7 @@ interface IResponse {
   statusCode: number;
 }
 
-async function genericApiGet(
+export async function apiGet(
   pathWithSlashPrefix: string,
   token?: string
 ): Promise<IResponse> {
@@ -34,7 +34,7 @@ async function genericApiGet(
   }
 }
 
-async function genericApiPost(
+export async function apiPost(
   pathWithSlashPrefix: string,
   body: {},
   token?: string
@@ -68,17 +68,17 @@ async function genericApiPost(
 }
 
 export async function getItinerary(id: number): Promise<IResponse> {
-  return await genericApiGet(`/itinerary/${id}`);
+  return await apiGet(`/itinerary/${id}`);
 }
 
 export async function getPage(id: number): Promise<IResponse> {
-  return await genericApiGet(`/page/${id}`);
+  return await apiGet(`/page/${id}`);
 }
 
 export async function getItem(id: number): Promise<IResponse> {
-  return await genericApiGet(`/item/${id}`);
+  return await apiGet(`/item/${id}`);
 }
 
 export async function postLogin(username: string, password: string) {
-  return await genericApiPost("/login", { username, password });
+  return await apiPost("/login", { username, password });
 }
