@@ -15,6 +15,7 @@ interface IState {
   description: string;
   pages: IPageBuilder[];
   private: boolean;
+  anonymous: boolean;
   pageBuilderName: string;
   pageBuilderDescription: string;
 }
@@ -24,6 +25,7 @@ const initialState: IState = {
   description: "",
   pages: [],
   private: false,
+  anonymous: false,
   pageBuilderName: "",
   pageBuilderDescription: ""
 };
