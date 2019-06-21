@@ -67,6 +67,21 @@ class CreateItinerary extends React.Component<any, IState> {
     }
   }
 
+  handlePageRemove(pageNumberToRemove: number) {
+    const remainingPages = this.state.pages
+      .filter(page => page.rankInItinerary !== pageNumberToRemove)
+      .map(page => ({
+        ...page,
+        rankInItinerary:
+          page.rankInItinerary > pageNumberToRemove
+            ? page.rankInItinerary - 1
+            : page.rankInItinerary
+      }));
+    this.setState({
+      pages: remainingPages
+    });
+  }
+
   handlePageSubmit() {
     this.setState({
       pageBuilderName: "",
@@ -151,7 +166,7 @@ class CreateItinerary extends React.Component<any, IState> {
                           name="create-itinerary-page-builder-name"
                           id="create-itinerary-page-builder-name"
                           value={this.state.pageBuilderName}
-                          ref={(el => this.pageBuilderNameField = el)}
+                          ref={el => (this.pageBuilderNameField = el)}
                           placeholder="Day 1: Arriving from the airport"
                           maxLength={100}
                           required={true}
@@ -184,6 +199,24 @@ class CreateItinerary extends React.Component<any, IState> {
                     </div>
                   </div>
                   <div>Here are the pages you have added so far.</div>
+                  <div>
+                    {this.state.pages.map(page => (
+                      <div key={page.rankInItinerary}>
+                        <div>
+                          <div>{page.name}</div>
+                          <div>{page.description}</div>
+                        </div>
+                        <input
+                          type="button"
+                          value="Remove"
+                          onClick={this.handlePageRemove.bind(
+                            this,
+                            page.rankInItinerary
+                          )}
+                        />
+                      </div>
+                    ))}
+                  </div>
                 </main>
               </section>
             </main>
