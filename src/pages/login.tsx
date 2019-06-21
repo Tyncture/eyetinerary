@@ -3,13 +3,10 @@ import React from "react";
 import BaseContainer from "../components/base/baseContainer";
 import Sidebar from "../components/base/sidebar";
 import Main from "../components/base/main";
-import {
-  setUserId,
-  setUsername,
-  setUserToken,
-} from "../store/user/actions";
+import { setUserId, setUsername, setUserToken } from "../store/user/actions";
 import "./login.scss";
 import { connect } from "react-redux";
+import { postLogin } from "../common/requests";
 
 interface IProps {
   setUserId(id: number): void;
@@ -98,48 +95,28 @@ class Login extends React.Component<IProps, IState> {
       loginButtonEnabled: false,
       loginButtonText: "Logging in.."
     });
-    try {
-      const response = await fetch(`${process.env.EYET_API}/login`, {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          username: this.state.username,
-          password: this.state.password
-        })
-      });
-      switch (response.status) {
-        case 200:
-          const responseBody = await response.json();
-          console.log(responseBody);
-          this.props.setUserId(responseBody.user.id);
-          this.props.setUsername(responseBody.user.username);
-          this.props.setUserToken(responseBody.token);
-          Router.push("/");
-          break;
-        case 401:
-          this.setState({
-            incorrectCredentials: true,
-            apiCommunicationFailed: false
-          });
-          break;
-        default:
-          this.setState({
-            incorrectCredentials: false,
-            apiCommunicationFailed: true
-          });
-      }
-    } catch (e) {
-      console.error(e.message);
-      this.setState({
-        incorrectCredentials: false,
-        apiCommunicationFailed: true
-      });
-    } finally {
-      this.setState({ loginButtonEnabled: true, loginButtonText: "Login" });
+    const response = await postLogin(this.state.username, this.state.password);
+    switch (response.statusCode) {
+      case 200:
+        const responseBody = response.body;
+        this.props.setUserId(responseBody.user.id);
+        this.props.setUsername(responseBody.user.username);
+        this.props.setUserToken(responseBody.token);
+        Router.push("/");
+        break;
+      case 401:
+        this.setState({
+          incorrectCredentials: true,
+          apiCommunicationFailed: false
+        });
+        break;
+      default:
+        this.setState({
+          incorrectCredentials: false,
+          apiCommunicationFailed: true
+        });
     }
+    this.setState({ loginButtonEnabled: true, loginButtonText: "Login" });
   }
 
   render() {
@@ -235,4 +212,7 @@ const mapDispatchToProps = dispatch => ({
   setUserToken: (token: string) => dispatch(setUserToken(token))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);
