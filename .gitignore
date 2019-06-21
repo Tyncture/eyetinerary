@@ -28,3 +28,6 @@ src/.next
 
 # dotenv
 .env
+
+# tailwindcss
+src/common/tailwindcss/tailwind.css
