@@ -37,11 +37,11 @@
     "validator": "^11.0.0"
   },
   "scripts": {
-    "tailwind-build": "tailwind build src/common/tailwindcss/tailwind.src.css -o src/common/tailwindcss/tailwind.css",
-    "dev": "next src -p 8080",
-    "build": "next build src",
-    "start": "next start src -p 8080",
-    "export": "next export src -o ./dist"
+    "tailwind-build": "tailwind build common/tailwindcss/tailwind.src.css -o common/tailwindcss/tailwind.css",
+    "dev": "next -p 8080",
+    "build": "next build",
+    "start": "next start -p 8080",
+    "export": "next export -o ./dist"
   },
   "eslintConfig": {
     "extends": "react-app"

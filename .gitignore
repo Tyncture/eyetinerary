@@ -23,11 +23,11 @@ yarn-debug.log*
 yarn-error.log*
 
 # Next.js
-src/.next
+.next
 /dist
 
 # dotenv
 .env
 
 # tailwindcss
-src/common/tailwindcss/tailwind.css
+common/tailwindcss/tailwind.css

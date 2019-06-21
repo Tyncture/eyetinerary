@@ -85,18 +85,20 @@ class CreateItinerary extends React.Component<any, IState> {
   }
 
   handlePageSubmit() {
-    this.setState({
-      pageBuilderName: "",
-      pageBuilderDescription: "",
-      pages: [
-        ...this.state.pages,
-        {
-          name: this.state.pageBuilderName,
-          description: this.state.pageBuilderDescription,
-          rankInItinerary: this.state.pages.length + 1
-        }
-      ]
-    });
+    if (this.state.pageBuilderName.length > 0) {
+      this.setState({
+        pageBuilderName: "",
+        pageBuilderDescription: "",
+        pages: [
+          ...this.state.pages,
+          {
+            name: this.state.pageBuilderName,
+            description: this.state.pageBuilderDescription,
+            rankInItinerary: this.state.pages.length + 1
+          }
+        ]
+      });
+    }
   }
 
   render() {
