@@ -29,6 +29,8 @@ const initialState: IState = {
 };
 
 class CreateItinerary extends React.Component<any, IState> {
+  private pageBuilderNameField: HTMLInputElement;
+
   constructor(props) {
     super(props);
     this.state = initialState;
@@ -38,6 +40,8 @@ class CreateItinerary extends React.Component<any, IState> {
     this.handlePageDescriptionChange = this.handlePageDescriptionChange.bind(
       this
     );
+    this.handlePageEnter = this.handlePageEnter.bind(this);
+    this.handlePageSubmit = this.handlePageSubmit.bind(this);
   }
 
   handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -56,6 +60,28 @@ class CreateItinerary extends React.Component<any, IState> {
     this.setState({ pageBuilderDescription: e.target.value });
   }
 
+  handlePageEnter(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.keyCode === 13) {
+      this.handlePageSubmit();
+      this.pageBuilderNameField.focus();
+    }
+  }
+
+  handlePageSubmit() {
+    this.setState({
+      pageBuilderName: "",
+      pageBuilderDescription: "",
+      pages: [
+        ...this.state.pages,
+        {
+          name: this.state.pageBuilderName,
+          description: this.state.pageBuilderDescription,
+          rankInItinerary: this.state.pages.length + 1
+        }
+      ]
+    });
+  }
+
   render() {
     return (
       <BaseContainer>
@@ -72,12 +98,14 @@ class CreateItinerary extends React.Component<any, IState> {
                 </header>
                 <main className="create-itinerary-section-main">
                   <div className="create-itinerary-field">
-                    <label>
+                    <label htmlFor="create-itinerary-name">
                       Let's give your itinerary a name. What do you want to call
                       it?
                     </label>
                     <input
                       type="text"
+                      name="create-itinerary-name"
+                      id="create-itinerary-name"
                       value={this.state.name}
                       placeholder="Bangkok in December"
                       maxLength={100}
@@ -86,12 +114,14 @@ class CreateItinerary extends React.Component<any, IState> {
                     />
                   </div>
                   <div className="create-itinerary-field">
-                    <label>
+                    <label htmlFor="create-itinerary-description">
                       And optionally, give it a description to provide more
                       detail.
                     </label>
                     <input
                       type="text"
+                      name="create-itinerary-description"
+                      id="create-itinerary-description"
                       value={this.state.description}
                       placeholder="Two weeks on a budget of $1000"
                       maxLength={100}
@@ -113,10 +143,15 @@ class CreateItinerary extends React.Component<any, IState> {
                   <div className="create-itinerary-page-builder">
                     <div className="create-itinerary-page-section">
                       <div className="create-itinerary-page-builder-field">
-                        <label>Name</label>
+                        <label id="create-itinerary-page-builder-name">
+                          Name
+                        </label>
                         <input
                           type="text"
+                          name="create-itinerary-page-builder-name"
+                          id="create-itinerary-page-builder-name"
                           value={this.state.pageBuilderName}
+                          ref={(el => this.pageBuilderNameField = el)}
                           placeholder="Day 1: Arriving from the airport"
                           maxLength={100}
                           required={true}
@@ -124,19 +159,28 @@ class CreateItinerary extends React.Component<any, IState> {
                         />
                       </div>
                       <div className="create-itinerary-page-builder-field">
-                        <label>Description</label>
+                        <label htmlFor="create-itinerary-page-builder-description">
+                          Description
+                        </label>
                         <input
                           type="text"
+                          name="create-itinerary-page-builder-description"
+                          id="create-itinerary-page-builder-description"
                           value={this.state.pageBuilderDescription}
                           placeholder="Checking into the hostel"
                           maxLength={100}
                           required={true}
                           onChange={this.handlePageDescriptionChange}
+                          onKeyUp={this.handlePageEnter}
                         />
                       </div>
                     </div>
                     <div className="create-itinerary-page-section">
-                      <input type="button" value="Add" />
+                      <input
+                        type="button"
+                        value="Add"
+                        onClick={this.handlePageSubmit}
+                      />
                     </div>
                   </div>
                   <div>Here are the pages you have added so far.</div>
