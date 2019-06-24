@@ -1,5 +1,5 @@
-import React from 'react';
-import './sidebar.scss';
+import React from "react";
+import "./sidebar.scss";
 
 class Sidebar extends React.Component {
   constructor(props) {
@@ -10,10 +10,19 @@ class Sidebar extends React.Component {
     return (
       <div className="sidebar">
         <header className="sidebar-header">
-          <div className="sidebar-header-logo" />
-          <div className="sidebar-header-controls" />
+          <input
+            type="text"
+            className="sidebar-header-search"
+            placeholder="Search here..."
+          />
         </header>
-        <div className="sidebar-content">{this.props.children}</div>
+        <div className="sidebar-content">
+          <nav className="sidebar-content-nav">
+            <div className="sidebar-content-nav-item sidebar-content-nav-item--active">Trending</div>
+            <div className="sidebar-content-nav-item">Most Recent</div>
+            <div className="sidebar-content-nav-item">Most Viewed</div>
+          </nav>
+        </div>
         <footer className="sidebar-footer" />
       </div>
     );
