@@ -45,6 +45,9 @@
     background-color: #e6e8ea;
     cursor: pointer;
   }
+  &:active {
+    background-color: #e0e3e5;
+  }
 }
 
 .sidebar-content-nav-item--active {
