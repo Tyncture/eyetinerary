@@ -19,8 +19,8 @@ class Sidebar extends React.Component {
         <div className="sidebar-content">
           <nav className="sidebar-content-nav">
             <div className="sidebar-content-nav-item sidebar-content-nav-item--active">Trending</div>
+            <div className="sidebar-content-nav-item">Most Popular</div>
             <div className="sidebar-content-nav-item">Most Recent</div>
-            <div className="sidebar-content-nav-item">Most Viewed</div>
           </nav>
         </div>
         <footer className="sidebar-footer" />
