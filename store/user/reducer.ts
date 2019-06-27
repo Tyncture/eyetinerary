@@ -3,7 +3,8 @@ import {
   SET_USERNAME,
   SET_USER_ID,
   SET_USER_TOKEN,
-  UserActionTypes
+  UserActionTypes,
+  CLEAR_USER
 } from "./types";
 
 const initialState: IContextUser = {
@@ -24,6 +25,8 @@ export function user(
       return { ...prevState, username: action.username };
     case SET_USER_TOKEN:
       return { ...prevState, token: action.token };
+    case CLEAR_USER:
+      return initialState;
     default:
       return prevState;
   }
