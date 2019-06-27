@@ -1,8 +1,8 @@
 import React from "react";
-import BaseContainer from "../components/base/baseContainer";
-import Sidebar from "../components/base/sidebar";
-import Main from "../components/base/main";
-import "./createItinerary.scss";
+import BaseContainer from "../../components/base/baseContainer";
+import Sidebar from "../../components/base/sidebar";
+import Main from "../../components/base/main";
+import "./index.scss";
 
 interface IPageBuilder {
   name: string;

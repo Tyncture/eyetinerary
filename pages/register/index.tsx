@@ -1,13 +1,13 @@
 import React from "react";
-import BaseContainer from "../components/base/baseContainer";
-import Sidebar from "../components/base/sidebar";
-import Main from "../components/base/main";
+import BaseContainer from "../../components/base/baseContainer";
+import Sidebar from "../../components/base/sidebar";
+import Main from "../../components/base/main";
 import validator from "validator";
-import "./register.scss";
+import "./index.scss";
 import Router from "next/router";
 import { connect } from "react-redux";
-import { postLogin, apiPost} from "../common/requests";
-import { setUserId, setUsername, setUserToken } from "../store/user/actions";
+import { postLogin, apiPost} from "../../common/requests";
+import { setUserId, setUsername, setUserToken } from "../../store/user/actions";
 
 interface IProps {
   setUserId(id: number): void;

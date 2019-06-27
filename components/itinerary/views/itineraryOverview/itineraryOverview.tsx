@@ -5,7 +5,7 @@ import ItineraryAbout from "../../base/itineraryAbout";
 import "../../base/itineraryCommon.scss";
 import ItineraryListItem from "../../base/itineraryListItem";
 import { getItinerary } from "../../../../common/requests";
-import { IItinerary, IPage } from "../../utilities/types";
+import { IItinerary, IPage } from "../../common/types";
 
 interface IProps {
   id: number;

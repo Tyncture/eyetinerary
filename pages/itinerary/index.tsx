@@ -1,13 +1,13 @@
 import React from "react";
-import BaseContainer from "../components/base/baseContainer";
-import Sidebar from "../components/base/sidebar";
-import Main from "../components/base/main";
-import ItineraryOverview from "../components/itinerary/pages/itineraryOverview/itineraryOverview";
-import ItineraryPage from "../components/itinerary/pages/itineraryPage/itineraryPage";
-import { IItinerary } from "../components/itinerary/utilities/types";
-import { getItinerary } from "../common/requests";
+import BaseContainer from "../../components/base/baseContainer";
+import Sidebar from "../../components/base/sidebar";
+import Main from "../../components/base/main";
+import ItineraryOverview from "../../components/itinerary/views/itineraryOverview/itineraryOverview";
+import ItineraryPage from "../../components/itinerary/views/itineraryPage/itineraryPage";
+import { IItinerary } from "../../components/itinerary/common/types";
+import { getItinerary } from "../../common/requests";
 import validator from "validator";
-import ItineraryHeader from "../components/itinerary/base/itineraryHeader";
+import ItineraryHeader from "../../components/itinerary/base/itineraryHeader";
 
 interface IProps {
   query: {
