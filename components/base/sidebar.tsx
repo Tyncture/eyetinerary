@@ -14,6 +14,7 @@ class Sidebar extends React.Component {
             type="text"
             className="sidebar-header-search"
             placeholder="Search here..."
+            spellCheck={false}
           />
         </header>
         <div className="sidebar-content">

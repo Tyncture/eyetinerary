@@ -2,7 +2,7 @@ import React from 'react';
 import './baseContainer.scss';
 import Head from 'next/head';
 
-class BaseContainer extends React.Component {
+class BaseContainer extends React.Component<{}, {}> {
   constructor(props) {
     super(props);
   }
