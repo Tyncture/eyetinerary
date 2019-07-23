@@ -14,8 +14,8 @@ function workaroundNextPluginsIssue392(config) {
     "WARN: USING WORKAROUND FOR zeit/next-plugins/issues/392 (next.config.js)",
   );
   config.module.rules.forEach(rule => {
-    // Credit to github.com/KorenYA
-    // Source: https://github.com/KorenYa/react-course/pull/4
+    // Credit to github.com/marcusstenbeck
+    // Source: https://github.com/zeit/next-plugins/issues/392#issuecomment-475845330
     if (Array.isArray(rule.use)) {
       rule.use.forEach(use => {
         if (use.loader === "css-loader" && use.options) {
