@@ -1,10 +1,10 @@
-.create-itinerary {
+.create-itinerary-step-1 {
   display: grid;
   grid-auto-flow: row;
   grid-gap: 30px;
 }
 
-.create-itinerary-main-form {
+.create-itinerary-step-1-form {
   display: grid;
   grid-auto-flow: row;
   grid-gap: 20px;
@@ -14,7 +14,7 @@
   }
 }
 
-.create-itinerary-main-form-item {
+.create-itinerary-step-1-form-item {
   display: grid;
   grid-auto-flow: row;
   grid-gap: 16px;
@@ -34,13 +34,13 @@
   }
 }
 
-.create-itinerary-main-form-item-check-group {
+.create-itinerary-step-1-form-item-check-group {
   display: grid;
   grid-auto-flow: row;
   grid-gap: 10px;
 }
 
-.create-itinerary-main-form-item-check-group-item {
+.create-itinerary-step-1-form-item-check-group-item {
   display: grid;
   grid-auto-flow: column;
   grid-template-columns: minmax(max-content, max-content);
