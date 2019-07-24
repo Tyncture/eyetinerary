@@ -67,6 +67,7 @@ function CreateStep1(props: ICreateStepProps) {
             id="form-name-input"
             name="name"
             type="text"
+            maxLength={50}
             placeholder="Winter holiday in Southeast Asia"
             value={name}
             onChange={handleNameChange}
@@ -80,6 +81,7 @@ function CreateStep1(props: ICreateStepProps) {
             id="form-description-input"
             name="description"
             type="text"
+            maxLength={100}
             placeholder="Two weeks in Thailand and Laos"
             value={description}
             onChange={handleDescriptionChange}
