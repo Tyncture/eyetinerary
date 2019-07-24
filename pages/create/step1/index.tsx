@@ -1,7 +1,4 @@
-import React, { useState, useCallback, Dispatch, SetStateAction } from "react";
-import BaseContainer from "../../../components/base/baseContainer";
-import Sidebar from "../../../components/base/sidebar";
-import Main from "../../../components/base/main";
+import React, { useState, useCallback } from "react";
 import "./index.scss";
 import Router from "next/router";
 import { apiPost } from "../../../common/requests";
