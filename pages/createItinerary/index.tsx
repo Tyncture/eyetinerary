@@ -4,6 +4,7 @@ import Sidebar from "../../components/base/sidebar";
 import Main from "../../components/base/main";
 import "./index.scss";
 import Router from "next/router";
+import { apiPost } from "../../common/requests";
 
 interface IState {
   name: string;
@@ -12,6 +13,7 @@ interface IState {
   anonymous: boolean;
   pageBuilderName: string;
   pageBuilderDescription: string;
+  validationErrors: string[];
 }
 
 const initialState: IState = {
@@ -21,6 +23,7 @@ const initialState: IState = {
   anonymous: false,
   pageBuilderName: "",
   pageBuilderDescription: "",
+  validationErrors: [],
 };
 
 class CreateItinerary extends React.Component<any, IState> {
@@ -28,6 +31,7 @@ class CreateItinerary extends React.Component<any, IState> {
     super(props);
     this.state = initialState;
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleNext = this.handleNext.bind(this);
   }
 
   handleInputChange(event) {
@@ -40,6 +44,20 @@ class CreateItinerary extends React.Component<any, IState> {
 
   handleCancel() {
     Router.back();
+  }
+
+  async handleNext() {
+    const formValid = this.validateForm();
+    if (formValid) {
+      const response = await apiPost("/itinerary", {
+        title: this.state.name,
+        description: this.state.description,
+      });
+    }
+  }
+
+  validateForm(): boolean {
+    return false;
   }
 
   render() {
@@ -103,15 +121,23 @@ class CreateItinerary extends React.Component<any, IState> {
                         checked={this.state.anonymous}
                         onChange={this.handleInputChange}
                       />
-                      <label htmlFor="form-anonymous">
-                        Create anonymously
-                      </label>
+                      <label htmlFor="form-anonymous">Create anonymously</label>
                     </div>
                   </div>
                 </div>
                 <div className="create-itinerary-main-form-bottom-buttons">
-                  <input type="button" value="Cancel" onClick={this.handleCancel}/>
-                  <input type="button" value="Next" />
+                  <input
+                    name="cancel"
+                    type="button"
+                    value="Cancel"
+                    onClick={this.handleCancel}
+                  />
+                  <input
+                    name="next"
+                    type="button"
+                    value="Next"
+                    onClick={this.handleNext}
+                  />
                 </div>
               </form>
             </main>
