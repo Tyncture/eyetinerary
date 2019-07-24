@@ -3,6 +3,7 @@ import "./index.scss";
 import Router from "next/router";
 import { apiPost } from "../../../common/requests";
 import { ICreateStepProps } from "../types";
+import *  as validator from "./validator";
 
 function CreateStep1(props: ICreateStepProps) {
   const [name, setName] = useState("");
@@ -13,7 +14,16 @@ function CreateStep1(props: ICreateStepProps) {
   const [waitingForResponse, setWaitingForResponse] = useState(false);
 
   const validateForm = (): boolean => {
-    return true;
+    const messages = [];
+
+    const validateName = validator.validateName(name);
+    validateName.messages.forEach(message => messages.push(message));
+    const validateDescription = validator.validateDescription(description);
+    validateDescription.messages.forEach(message => messages.push(message));
+    
+    // Track errors in function scope array as useState is asynchronous
+    setValidationErrors(messages);
+    return messages.length === 0;
   };
 
   const submit = async () => {
