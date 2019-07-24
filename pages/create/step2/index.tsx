@@ -124,10 +124,10 @@ function CreateStep2(props: ICreateStepProps) {
               />
             </div>
             <div className="create-itinerary-step-2-page-form__item">
-              <label htmlFor="form-page-name-input">Page Description</label>
+              <label htmlFor="form-page-description-input">Page Description</label>
               <input
-                id="form-page-name-input"
-                name="page-name"
+                id="form-page-description-input"
+                name="page-description"
                 type="text"
                 placeholder="Checking in from the airport"
                 value={description}
