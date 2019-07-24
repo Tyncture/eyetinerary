@@ -6,7 +6,10 @@ import { ICreateStepProps } from "./types";
 
 function Create() {
   const [step, setStep] = useState(1);
-  const [iitineraryId, setItineraryId] = useState(null);
+  const [iitineraryId, setItineraryId] = useState(null) as [
+    number,
+    React.Dispatch<SetStateAction<number>>
+  ];
 
   const childProps: ICreateStepProps = {
     step,
