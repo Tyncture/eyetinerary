@@ -4,16 +4,9 @@ import Sidebar from "../../components/base/sidebar";
 import Main from "../../components/base/main";
 import "./index.scss";
 
-interface IPageBuilder {
-  name: string;
-  description: string;
-  rankInItinerary: number;
-}
-
 interface IState {
   name: string;
   description: string;
-  pages: IPageBuilder[];
   private: boolean;
   anonymous: boolean;
   pageBuilderName: string;
@@ -23,7 +16,6 @@ interface IState {
 const initialState: IState = {
   name: "",
   description: "",
-  pages: [],
   private: false,
   anonymous: false,
   pageBuilderName: "",
@@ -111,6 +103,10 @@ class CreateItinerary extends React.Component<any, IState> {
                       </label>
                     </div>
                   </div>
+                </div>
+                <div className="create-itinerary-main-form-bottom-buttons">
+                  <input type="button" value="Cancel" />
+                  <input type="button" value="Next" />
                 </div>
               </form>
             </main>
