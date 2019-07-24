@@ -14,6 +14,7 @@ interface IState {
   pageBuilderName: string;
   pageBuilderDescription: string;
   validationErrors: string[];
+  waitingForResponse: boolean;
 }
 
 const initialState: IState = {
@@ -24,6 +25,7 @@ const initialState: IState = {
   pageBuilderName: "",
   pageBuilderDescription: "",
   validationErrors: [],
+  waitingForResponse: false
 };
 
 class CreateItinerary extends React.Component<any, IState> {
