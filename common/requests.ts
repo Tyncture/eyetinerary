@@ -26,7 +26,7 @@ export async function apiGet(
       statusCode: status
     };
   } catch (e) {
-    console.log(e.message);
+    console.error(e.message);
     return {
       success: false,
       statusCode: -1
@@ -59,7 +59,7 @@ export async function apiPost(
       statusCode: status
     };
   } catch (e) {
-    console.log(e.message);
+    console.error(e.message);
     return {
       success: false,
       statusCode: -1
