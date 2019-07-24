@@ -1,23 +1,24 @@
-import React from "react";
+import React, { SetStateAction } from "react";
 import { useState } from "react";
 import CreateStep1 from "./step1";
+import { number } from "prop-types";
+import { ICreateStepProps } from "./types";
 
 function Create() {
   const [step, setStep] = useState(1);
-  const StepContext = React.createContext(step);
+  const [iitineraryId, setItineraryId] = useState(null);
 
-  const StepView = () => {
-    switch (step) {
-      case 1:
-        return <CreateStep1 setStep={setStep} />;
-    }
+  const childProps: ICreateStepProps = {
+    step,
+    setStep,
+    iitineraryId,
+    setItineraryId,
   };
 
-  return (
-    <StepContext.Provider value={step}>
-      <StepView />
-    </StepContext.Provider>
-  );
+  switch (step) {
+    case 1:
+      return <CreateStep1 {...childProps} />;
+  }
 }
 
 export default Create;
