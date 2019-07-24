@@ -3,6 +3,7 @@ import BaseContainer from "../../components/base/baseContainer";
 import Sidebar from "../../components/base/sidebar";
 import Main from "../../components/base/main";
 import "./index.scss";
+import Router from "next/router";
 
 interface IState {
   name: string;
@@ -35,6 +36,10 @@ class CreateItinerary extends React.Component<any, IState> {
     const value = target.type === "checkbox" ? target.checked : target.value;
     const name: keyof IState = target.name;
     this.setState({ [name]: value } as IState);
+  }
+
+  handleCancel() {
+    Router.back();
   }
 
   render() {
@@ -105,7 +110,7 @@ class CreateItinerary extends React.Component<any, IState> {
                   </div>
                 </div>
                 <div className="create-itinerary-main-form-bottom-buttons">
-                  <input type="button" value="Cancel" />
+                  <input type="button" value="Cancel" onClick={this.handleCancel}/>
                   <input type="button" value="Next" />
                 </div>
               </form>
