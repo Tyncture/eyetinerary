@@ -31,8 +31,6 @@ const initialState: IState = {
 };
 
 class CreateItinerary extends React.Component<any, IState> {
-  private pageBuilderNameField: HTMLInputElement;
-
   constructor(props) {
     super(props);
     this.state = initialState;
