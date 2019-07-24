@@ -28,7 +28,7 @@ const initialState: IState = {
   waitingForResponse: false
 };
 
-class CreateItinerary extends React.Component<any, IState> {
+class Create extends React.Component<any, IState> {
   constructor(props) {
     super(props);
     this.state = initialState;
@@ -150,4 +150,4 @@ class CreateItinerary extends React.Component<any, IState> {
   }
 }
 
-export default CreateItinerary;
+export default Create;
