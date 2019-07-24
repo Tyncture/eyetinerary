@@ -1,95 +1,56 @@
 .create-itinerary {
   display: grid;
   grid-auto-flow: row;
-  grid-gap: 10px;
+  grid-gap: 30px;
 }
 
-.create-itinerary-field {
-  display: flex;
-  flex-direction: column;
+.create-itinerary-main-form {
+  display: grid;
+  grid-auto-flow: row;
+  grid-gap: 20px;
   label {
-    margin-bottom: 12.5px;
+    user-select: none;
+  }
+}
+
+.create-itinerary-main-form-item {
+  display: grid;
+  grid-auto-flow: row;
+  grid-gap: 16px;
+  font-size: 16px;
+  label {
+    font-weight: 500;
+    color: #29323D;
   }
   input[type="text"] {
-    &:focus {
-      box-shadow: inset 0px -2.5px 1px -1px rgb(223, 223, 223);
-    }
-  }
-}
-
-.create-itinerary-main {
-  display: grid;
-  grid-auto-flow: row;
-  grid-gap: 25px;
-}
-
-.create-itinerary-section-header {
-  margin-bottom: 10px;
-}
-
-.create-itinerary-section-main {
-  display: grid;
-  grid-auto-flow: row;
-  grid-gap: 12.5px;
-  input {
-    padding: 7.5px;
+    width: 400px;
     outline: none;
-    border: 1px solid #E8E8E8;
-    border-radius: 4px;
+    border: 0.5px solid #D7D9DB;
+    border-radius: 3px;
+    line-height: 24px;
+    padding: 8px;
   }
 }
 
-.create-itinerary-page-builder {
-  display: grid;
-  grid-auto-flow: column;
-  grid-template-columns: 1fr min-content;
-  grid-gap: 15px;
-  padding: 25px;
-  border-radius: 4px;
-  background-color: white;
-}
-
-.create-itinerary-page-section {
+.create-itinerary-main-form-item-check-group {
   display: grid;
   grid-auto-flow: row;
   grid-gap: 10px;
 }
 
-.create-itinerary-page-builder-field {
+.create-itinerary-main-form-item-check-group-item {
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: 1fr 5fr;
+  grid-template-columns: minmax(max-content, max-content);
+  grid-gap: 10px;
   align-items: center;
   label {
-    color: rgb(115, 115, 115);
-    text-align: right;
-    padding-right: 10px;
-  }
-  input {
-    border-radius: 3px;
-    &:focus {
-      background-color: #FCFCFC;
-    }
+    text-align: left;
+    font-size: 13px;
+    color: #61656B;
   }
 }
 
 @media only screen and (max-width: 900px) {
-  .create-itinerary-page-builder {
-    grid-auto-flow: row;
-    grid-template-columns: 1fr;
-    grid-gap: 22.5px;
-  }
 
-  .create-itinerary-page-section {
-    grid-gap: 20px;
-  }
-
-  .create-itinerary-page-builder-field {
-    grid-auto-flow: row;
-    grid-template-columns: 1fr;
-    label {
-      text-align: left;
-      padding-bottom: 12.5px;
-    }
-  }
 }
