@@ -1,14 +1,15 @@
-import React from "react";
-import { ICreateStepProps } from "../types";
-import { useState, useCallback, SetStateAction } from "react";
 import Router from "next/router";
-import * as validator from "./validator";
-import { apiPost } from "../../../common/requests";
-import { ApiError } from "../../../common/apiError";
-import { addItineraryEditToken } from "../../../store/itineraryEditTokens/actions";
+import React, { useCallback, useState } from "react";
 import { connect } from "react-redux";
+import { ApiError } from "../../../common/apiError";
+import { apiDelete, apiPost } from "../../../common/requests";
+import { addItineraryEditToken } from "../../../store/itineraryEditTokens/actions";
+import { IUser } from "../../../store/user/types";
+import { ICreateStepProps } from "../types";
+import * as validator from "./validator";
 
 interface IProps extends ICreateStepProps {
+  user: IUser;
   addItineraryEditToken: (id: number, token: string) => {};
 }
 
@@ -17,13 +18,18 @@ interface IPagePrototype {
   description: string;
 }
 
+interface IItineraryResponse {
+  id: number;
+  editToken: string;
+}
+
 function CreateStep2(props: IProps) {
-  const [pageName, setPageName] = useState("");
+  const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [validationErrors, setValidationErrors] = useState([]);
-  const [apiError, setApiError] = useState<string>(null);
-  const [waitingForResponse, setWaitingForResponse] = useState(false);
   const [pages, setPages] = useState<IPagePrototype[]>([]);
+  const [validationErrors, setValidationErrors] = useState([]);
+  const [apiError, setApiError] = useState<string>();
+  const [waitingForResponse, setWaitingForResponse] = useState(false);
 
   // Page Form: References
   const nameRef = React.createRef() as React.RefObject<HTMLInputElement>;
@@ -33,8 +39,8 @@ function CreateStep2(props: IProps) {
   const validateForm = (): boolean => {
     const messages = [];
 
-    const validatePageName = validator.validatePageName(pageName);
-    validatePageName.messages.forEach(message => messages.push(message));
+    const validateName = validator.validateName(name);
+    validateName.messages.forEach(message => messages.push(message));
     const validateDescription = validator.validateDescription(description);
     validateDescription.messages.forEach(message => messages.push(message));
 
@@ -46,53 +52,83 @@ function CreateStep2(props: IProps) {
   const addPage = () => {
     const formValid = validateForm();
     if (formValid) {
-      setPageName("");
+      setName("");
       setDescription("");
-      setPages([...pages, { name: pageName, description }]);
+      setPages([...pages, { name, description }]);
       nameRef.current.focus();
     }
   };
 
-  const submitItinerary = async (): Promise<number> => {
-    const response = await apiPost("/itinerary", {
-      title: props.itinerary.name,
-      description: props.itinerary.description,
-    });
+  const submitItinerary = async (): Promise<IItineraryResponse> => {
+    const response = await apiPost(
+      "/itinerary",
+      {
+        title: props.itinerary.name,
+        description: props.itinerary.description,
+      },
+      props.user.token ? props.user.token : null,
+    );
     if (response.success) {
       props.addItineraryEditToken(response.body.id, response.body.editToken);
-      return response.body.id;
+      return {
+        id: response.body.id,
+        editToken: response.body.editToken,
+      };
     } else {
       throw new ApiError(response.statusCode);
     }
   };
 
-  const submitPages = async (itineraryId: number) => {
-    const requests = pages.map((page, index) => async () => {
-      const response = await apiPost("/page", {
-        name: page.name,
-        description: page.description,
-        // TODO: Use a different way of keeping rank once API has been updated
-        itinerary: itineraryId,
-        rankInItinerary: index,
-      });
-      if (!response.success) {
-        throw new ApiError(response.statusCode);
-      }
-    });
+  const retractItinerary = async (itineraryId: number, editToken: string) => {
+    const response = await apiDelete(
+      `/itinerary/${itineraryId}`,
+      { editToken },
+      props.user.token ? props.user.token : null,
+    );
+    if (response.success) {
+      console.log(`Itinerary ${itineraryId} deleted due to failed creation.`);
+    } else {
+      throw new ApiError(response.statusCode);
+    }
+  };
+
+  const submitPages = async (itineraryId: number, editToken: string) => {
+    const requests = pages.map(
+      (page, index) =>
+        new Promise((resolve, reject) => {
+          apiPost(
+            "/page",
+            {
+              // TODO: Use a different way of keeping rank once API has been updated
+              title: page.name,
+              description: page.description,
+              itinerary: itineraryId,
+              rankInItinerary: index + 1,
+              editToken,
+            },
+            props.user.token ? props.user.token : null,
+          ).then(response =>
+            response.success
+              ? resolve()
+              : reject(new ApiError(response.statusCode)),
+          );
+        }),
+    );
     await Promise.all(requests);
   };
 
   const submit = async () => {
     try {
-      const itineraryId = await submitItinerary();
-      Router.prefetch(`/itinerary/${itineraryId}`);
+      const itineraryResponse = await submitItinerary();
       try {
-        // TODO: Implement submit page logic
-        // await submitPages(itineraryId);
-        Router.push(`/itinerary/${itineraryId}`);
+        await submitPages(itineraryResponse.id, itineraryResponse.editToken);
+        Router.push("/itinerary/[id]", `/itinerary/${itineraryResponse.id}`);
       } catch (e) {
         // Attempt to delete itinerary as partial creation is not useful
-        // Rethrow error for rest of the error handling
+        await retractItinerary(
+          itineraryResponse.id,
+          itineraryResponse.editToken,
+        );
         throw e;
       }
     } catch (e) {
@@ -103,12 +139,12 @@ function CreateStep2(props: IProps) {
 
   // Page Form: Name
   const handlePageNameChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => setPageName(e.target.value),
-    [setPageName],
+    (e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value),
+    [setName],
   );
   const handlePageNameEnter = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (e.keyCode === 13 && pageName.length > 0) {
+      if (e.keyCode === 13 && name.length > 0) {
         descriptionRef.current.focus();
       }
     },
@@ -168,7 +204,7 @@ function CreateStep2(props: IProps) {
                 name="page-name"
                 type="text"
                 placeholder="Day 1: Settling in"
-                value={pageName}
+                value={name}
                 onChange={handlePageNameChange}
                 onKeyUp={handlePageNameEnter}
                 ref={nameRef}
@@ -239,12 +275,16 @@ function CreateStep2(props: IProps) {
   );
 }
 
+const mapStateToProps = state => ({
+  user: state.user,
+});
+
 const mapDispatchToProps = dispatch => ({
   addItineraryEditToken: (id: number, token: string) =>
     dispatch(addItineraryEditToken(id, token)),
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(CreateStep2);

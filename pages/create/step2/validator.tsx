@@ -1,7 +1,7 @@
 import * as validator from "validator";
 import { IFieldValidatorResult } from "../../../common/abstract/fieldValidatorResult";
 
-export function validatePageName(input): IFieldValidatorResult {
+export function validateName(input): IFieldValidatorResult {
   const messages: string[] = [];
 
   if (typeof input !== "string") {
