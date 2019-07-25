@@ -1,5 +1,5 @@
 import {
-  IContextUser,
+  IUser,
   SET_USERNAME,
   SET_USER_ID,
   SET_USER_TOKEN,
@@ -7,16 +7,16 @@ import {
   CLEAR_USER
 } from "./types";
 
-const initialState: IContextUser = {
+const initialState: IUser = {
   id: null,
   username: null,
   token: null
 };
 
 export function user(
-  state: IContextUser,
+  state: IUser,
   action: UserActionTypes
-): IContextUser {
+): IUser {
   const prevState = state ? state : initialState;
   switch (action.type) {
     case SET_USER_ID:

@@ -3,6 +3,12 @@ export const SET_USERNAME = "SET_USERNAME";
 export const SET_USER_TOKEN = "SET_USER_TOKEN";
 export const CLEAR_USER = "CLEAR_USER";
 
+export interface IUser {
+  id: number;
+  username: string;
+  token: string;
+}
+
 interface ISetUserIdAction {
   type: typeof SET_USER_ID;
   id: number;
@@ -27,9 +33,3 @@ export type UserActionTypes =
   | ISetUsernameAction
   | ISetUserTokenAction
   | IClearUserAction;
-
-export interface IContextUser {
-  id: number;
-  username: string;
-  token: string;
-}
