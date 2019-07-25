@@ -12,15 +12,15 @@ export const REMOVE_ITINERARY_EDIT_TOKEN = "REMOVE_ITINERARY_EDIT_TOKEN";
 export const CLEAR_ITINERARY_EDIT_TOKENS = "CLEAR_ITINERARY_EDIT_TOKENS";
 
 interface IAddItineraryEditTokenAction extends Action<string> {
-  token: IItineraryEditTokensElement;
+  payload: IItineraryEditTokensElement;
 }
 
 interface IRemoveItineraryEditTokenAction extends Action<string> {
-  token: IItineraryEditTokensElement;
+  payload: IItineraryEditTokensElement;
 }
 
 interface IClearItineraryEditTokens extends Action<string> {
-  token?: undefined;
+  payload?: undefined;
 }
 
 export type ItineraryEditTokensAction =

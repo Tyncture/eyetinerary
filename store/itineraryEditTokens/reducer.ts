@@ -15,12 +15,12 @@ export function itineraryEditTokens(
   const prevState = state ? state : initialState;
   switch (action.type) {
     case ADD_ITINERARY_EDIT_TOKEN:
-      return [...prevState, action.token];
+      return [...prevState, action.payload];
     case REMOVE_ITINERARY_EDIT_TOKEN:
       return prevState.filter(
         token =>
-          token.id !== action.token.id &&
-          token.token !== action.token.token,
+          token.id !== action.payload.id &&
+          token.token !== action.payload.token,
       );
     case CLEAR_ITINERARY_EDIT_TOKENS:
       return initialState;
