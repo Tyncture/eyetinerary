@@ -23,11 +23,21 @@ export async function apiRequest(
         body: body ? JSON.stringify(body) : undefined,
       },
     );
-    const status = response.status;
+    const statusCode = response.status;
+    const success = statusCode === 200 || statusCode === 201 ? true : false;
+    const responseBody = await response.json();
+    if (!success) {
+      console.error(
+        `Server responded with status code ${statusCode} at ${method} ${
+          process.env.EYET_API
+        }${pathWithSlashPrefix}`,
+      );
+      console.log(responseBody);
+    }
     return {
-      body: await response.json(),
-      success: status === 200 || status === 201 ? true : false,
-      statusCode: status,
+      body: responseBody,
+      success,
+      statusCode,
     };
   } catch (e) {
     console.error(e.message);
@@ -55,9 +65,10 @@ export async function apiPost(
 
 export async function apiDelete(
   pathWithSlashPrefix: string,
+  body?: {},
   token?: string,
 ): Promise<IResponse> {
-  return await apiRequest(pathWithSlashPrefix, "DELETE", null, token);
+  return await apiRequest(pathWithSlashPrefix, "DELETE", body, token);
 }
 
 export async function getItinerary(id: number): Promise<IResponse> {
