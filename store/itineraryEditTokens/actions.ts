@@ -1,4 +1,3 @@
-import { Action } from "redux";
 import {
   ADD_ITINERARY_EDIT_TOKEN,
   ItineraryEditTokensAction,
