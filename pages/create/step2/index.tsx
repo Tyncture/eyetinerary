@@ -7,7 +7,7 @@ import { addItineraryEditToken } from "../../../store/itineraryEditTokens/action
 import { IUser } from "../../../store/user/types";
 import { ICreateStepProps } from "../types";
 import PageForm from "./pageForm";
-import { PageList } from "./pageList";
+import PageList from "./pageList";
 import { IPagePrototype } from "./types";
 
 interface IProps extends ICreateStepProps {

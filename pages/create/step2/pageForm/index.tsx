@@ -8,7 +8,7 @@ interface IProps {
   submit: () => {};
 }
 
-export function PageForm(props: IProps) {
+function PageForm(props: IProps) {
   // State
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
