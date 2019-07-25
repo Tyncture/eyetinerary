@@ -1,4 +1,3 @@
-import { IUser, UserActionTypes } from "./user/types";
 import { user } from "./user/reducer";
 import { createStore, Store, combineReducers } from "redux";
 import {
