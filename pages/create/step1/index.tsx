@@ -11,7 +11,6 @@ function CreateStep1(props: ICreateStepProps) {
   const [makePrivate, setMakePrivate] = useState(false);
   const [postAnonymously, setPostAnonymously] = useState(false);
   const [validationErrors, setValidationErrors] = useState([]);
-  const [waitingForResponse, setWaitingForResponse] = useState(false);
 
   const validateForm = (): boolean => {
     const messages = [];
@@ -24,17 +23,6 @@ function CreateStep1(props: ICreateStepProps) {
     // Track errors in function scope array as useState is asynchronous
     setValidationErrors(messages);
     return messages.length === 0;
-  };
-
-  const submit = async () => {
-    const response = await apiPost("/itinerary", {
-      title: name,
-      description,
-    });
-    if (response.success) {
-      props.setItineraryId(response.body.id);
-      props.setStep(2);
-    }
   };
 
   const handleNameChange = useCallback(
@@ -58,7 +46,8 @@ function CreateStep1(props: ICreateStepProps) {
   const handleNext = useCallback(async () => {
     const formValid = validateForm();
     if (formValid) {
-      submit();
+      props.setItinerary({ name, description });
+      props.setStep(2);
     }
   }, [validateForm]);
 
