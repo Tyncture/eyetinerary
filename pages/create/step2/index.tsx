@@ -23,7 +23,7 @@ function CreateStep2(props: IProps) {
   const [validationErrors, setValidationErrors] = useState([]);
   const [apiError, setApiError] = useState<string>(null);
   const [waitingForResponse, setWaitingForResponse] = useState(false);
-  const [pageList, setPageList] = useState<IPagePrototype[]>([]);
+  const [pages, setPages] = useState<IPagePrototype[]>([]);
 
   // Page Form: References
   const nameRef = React.createRef() as React.RefObject<HTMLInputElement>;
@@ -48,7 +48,7 @@ function CreateStep2(props: IProps) {
     if (formValid) {
       setPageName("");
       setDescription("");
-      setPageList([...pageList, { name: pageName, description }]);
+      setPages([...pages, { name: pageName, description }]);
       nameRef.current.focus();
     }
   };
@@ -67,7 +67,7 @@ function CreateStep2(props: IProps) {
   };
 
   const submitPages = async (itineraryId: number) => {
-    const requests = pageList.map((page, index) => async () => {
+    const requests = pages.map((page, index) => async () => {
       const response = await apiPost("/page", {
         name: page.name,
         description: page.description,
@@ -139,8 +139,8 @@ function CreateStep2(props: IProps) {
     className?: string;
   }) => {
     const handleRemovePage = useCallback(() => {
-      setPageList(pageList.filter((x, index) => index !== childProps.index));
-    }, [pageList, setPageList]);
+      setPages(pages.filter((x, index) => index !== childProps.index));
+    }, [pages, setPages]);
     return (
       <input
         type="button"
@@ -210,7 +210,7 @@ function CreateStep2(props: IProps) {
             <h2 className="title-2">Page List</h2>
           </header>
           <ul className="create-itinerary-step-2-page-list">
-            {pageList.map((page, index) => (
+            {pages.map((page, index) => (
               <li
                 className="create-itinerary-step-2-page-list__item"
                 key={index}
