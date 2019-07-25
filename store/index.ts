@@ -1,6 +1,6 @@
-import { IContextUser, UserActionTypes } from "./user/types";
+import { IUser, UserActionTypes } from "./user/types";
 import { user } from "./user/reducer";
-import { createStore, Store, StoreEnhancer } from "redux";
+import { createStore, Store, combineReducers } from "redux";
 import {
   persistStore,
   persistReducer,
@@ -9,36 +9,18 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { composeWithDevTools } from "redux-devtools-extension";
+import { itineraryEditTokens } from "./itineraryEditTokens/reducer";
 
 // Root reducer
-interface IStore {
-  user: IContextUser;
-}
-
-const initialState: IStore = {
-  user: {
-    id: null,
-    username: null,
-    token: null
-  }
-};
-
-type StoreActions = UserActionTypes;
-
-export function rootReducer(
-  state: IStore = initialState,
-  action: StoreActions
-) {
-  return {
-    user: user(state.user, action)
-  };
-}
+export const rootReducer = combineReducers({
+  user, itineraryEditTokens
+});
 
 // redux-persist persistent store
 const config: PersistConfig = {
   key: "persistentState",
   storage,
-  whitelist: ["user"]
+  whitelist: ["user", "itineraryEditTokens"]
 };
 
 const persistedReducer = persistReducer(config, rootReducer);
