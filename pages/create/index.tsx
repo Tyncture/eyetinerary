@@ -6,6 +6,7 @@ import BaseContainer from "../../components/base/baseContainer";
 import Sidebar from "../../components/base/sidebar";
 import Main from "../../components/base/main";
 import CreateStep2 from "./step2";
+import Head from "next/head";
 
 function Create() {
   const [step, setStep] = useState(1);
@@ -28,6 +29,9 @@ function Create() {
 
   return (
     <BaseContainer>
+    <Head>
+      <title>Create Itinerary - Eyetinerary</title>
+    </Head>
       <Sidebar />
       <Main>
         <StepComponent />
