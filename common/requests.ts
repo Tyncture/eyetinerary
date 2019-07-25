@@ -4,67 +4,60 @@ interface IResponse {
   statusCode: number;
 }
 
-export async function apiGet(
+export async function apiRequest(
   pathWithSlashPrefix: string,
-  token?: string
-): Promise<IResponse> {
+  method: string = "GET",
+  body?: {},
+  token?: string,
+) {
   try {
     const response = await fetch(
       `${process.env.EYET_API}${pathWithSlashPrefix}`,
       {
+        method,
         mode: "cors",
         headers: {
           "Content-Type": "application/json",
-          Authorization: token ? `Bearer ${token}` : null
-        }
-      }
-    );
-    const status = response.status;
-    return {
-      body: await response.json(),
-      success: status === 200 ? true : false,
-      statusCode: status
-    };
-  } catch (e) {
-    console.error(e.message);
-    return {
-      success: false,
-      statusCode: -1
-    };
-  }
-}
-
-export async function apiPost(
-  pathWithSlashPrefix: string,
-  body: {},
-  token?: string
-): Promise<IResponse> {
-  try {
-    const response = await fetch(
-      `${process.env.EYET_API}${pathWithSlashPrefix}`,
-      {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token ? `Bearer ${token}` : null
+          Authorization: token ? `Bearer ${token}` : undefined,
         },
-        body: JSON.stringify(body)
-      }
+        body: body ? JSON.stringify(body) : undefined,
+      },
     );
     const status = response.status;
     return {
       body: await response.json(),
       success: status === 200 || status === 201 ? true : false,
-      statusCode: status
+      statusCode: status,
     };
   } catch (e) {
     console.error(e.message);
     return {
       success: false,
-      statusCode: -1
+      statusCode: -1,
     };
   }
+}
+
+export async function apiGet(
+  pathWithSlashPrefix: string,
+  token?: string,
+): Promise<IResponse> {
+  return await apiRequest(pathWithSlashPrefix, "GET", token);
+}
+
+export async function apiPost(
+  pathWithSlashPrefix: string,
+  body: {},
+  token?: string,
+): Promise<IResponse> {
+  return await apiRequest(pathWithSlashPrefix, "POST", body, token);
+}
+
+export async function apiDelete(
+  pathWithSlashPrefix: string,
+  token?: string,
+): Promise<IResponse> {
+  return await apiRequest(pathWithSlashPrefix, "DELETE", null, token);
 }
 
 export async function getItinerary(id: number): Promise<IResponse> {
