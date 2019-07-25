@@ -6,60 +6,25 @@ import { apiDelete, apiPost } from "../../../common/requests";
 import { addItineraryEditToken } from "../../../store/itineraryEditTokens/actions";
 import { IUser } from "../../../store/user/types";
 import { ICreateStepProps } from "../types";
-import * as validator from "./validator";
+import { IPagePrototype } from "./types";
+import PageForm from "./pageForm";
 
 interface IProps extends ICreateStepProps {
   user: IUser;
   addItineraryEditToken: (id: number, token: string) => {};
 }
 
-interface IPagePrototype {
-  name: string;
-  description: string;
-}
-
-interface IItineraryResponse {
-  id: number;
-  editToken: string;
-}
-
 function CreateStep2(props: IProps) {
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
+  // State
   const [pages, setPages] = useState<IPagePrototype[]>([]);
-  const [validationErrors, setValidationErrors] = useState([]);
   const [apiError, setApiError] = useState<string>();
   const [waitingForResponse, setWaitingForResponse] = useState(false);
 
-  // Page Form: References
-  const nameRef = React.createRef() as React.RefObject<HTMLInputElement>;
-  const descriptionRef = React.createRef() as React.RefObject<HTMLInputElement>;
-
-  // Page Form: Submission
-  const validateForm = (): boolean => {
-    const messages = [];
-
-    const validateName = validator.validateName(name);
-    validateName.messages.forEach(message => messages.push(message));
-    const validateDescription = validator.validateDescription(description);
-    validateDescription.messages.forEach(message => messages.push(message));
-
-    // Track errors in function scope array as useState is asynchronous
-    setValidationErrors(messages);
-    return messages.length === 0;
-  };
-
-  const addPage = () => {
-    const formValid = validateForm();
-    if (formValid) {
-      setName("");
-      setDescription("");
-      setPages([...pages, { name, description }]);
-      nameRef.current.focus();
-    }
-  };
-
-  const submitItinerary = async (): Promise<IItineraryResponse> => {
+  // Submission
+  const submitItinerary = async (): Promise<{
+    id: number;
+    editToken: string;
+  }> => {
     const response = await apiPost(
       "/itinerary",
       {
@@ -137,38 +102,6 @@ function CreateStep2(props: IProps) {
     }
   };
 
-  // Page Form: Name
-  const handlePageNameChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value),
-    [setName],
-  );
-  const handlePageNameEnter = useCallback(
-    (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (e.keyCode === 13 && name.length > 0) {
-        descriptionRef.current.focus();
-      }
-    },
-    [descriptionRef],
-  );
-
-  // Page Form: Description
-  const handleDescriptionChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => setDescription(e.target.value),
-    [setDescription],
-  );
-  const handleDescriptionEnter = useCallback(
-    (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (e.keyCode === 13 && description.length > 0) {
-        addPage();
-      }
-    },
-    [addPage],
-  );
-
-  // Page Form: Add Page
-  const handleAddPage = useCallback(() => addPage(), [addPage]);
-  const handleFinish = useCallback(() => submit(), [submit]);
-
   // Page List: Remove
   const RemovePageButton = (childProps: {
     index: number;
@@ -188,6 +121,7 @@ function CreateStep2(props: IProps) {
     );
   };
 
+  // TODO: Move sections into separate components
   return (
     <div className="create-itinerary-step-2">
       <header className="create-itinerary-step-2-header">
@@ -195,52 +129,8 @@ function CreateStep2(props: IProps) {
         <div className="sub-title">Now let’s add some pages.</div>
       </header>
       <div className="create-itinerary-step-2-main">
-        <section>
-          <form className="create-itinerary-step-2-page-form">
-            <div className="create-itinerary-step-2-page-form__item">
-              <label htmlFor="form-page-name-input">Page Name</label>
-              <input
-                id="form-page-name-input"
-                name="page-name"
-                type="text"
-                placeholder="Day 1: Settling in"
-                value={name}
-                onChange={handlePageNameChange}
-                onKeyUp={handlePageNameEnter}
-                ref={nameRef}
-              />
-            </div>
-            <div className="create-itinerary-step-2-page-form__item">
-              <label htmlFor="form-page-description-input">
-                Page Description
-              </label>
-              <input
-                id="form-page-description-input"
-                name="page-description"
-                type="text"
-                placeholder="Checking in from the airport"
-                value={description}
-                onChange={handleDescriptionChange}
-                onKeyUp={handleDescriptionEnter}
-                ref={descriptionRef}
-              />
-            </div>
-            <div>
-              <input
-                name="finish"
-                type="button"
-                value="Finish"
-                onClick={handleFinish}
-              />
-              <input
-                name="add-page"
-                type="button"
-                value="Add Page"
-                onClick={handleAddPage}
-              />
-            </div>
-          </form>
-        </section>
+        <section />
+        <PageForm pages={pages} setPages={setPages} submit={submit} />
         <section>
           <header>
             <h2 className="title-2">Page List</h2>
