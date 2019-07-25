@@ -5,7 +5,9 @@ export interface IItineraryEditTokensElement {
   token: string;
 }
 
-export type ItineraryEditTokens = IItineraryEditTokensElement[];
+export interface IItineraryEditTokens {
+  [key: number]: IItineraryEditTokensElement;
+}
 
 export const ADD_ITINERARY_EDIT_TOKEN = "ADD_ITINERARY_EDIT_TOKEN";
 export const REMOVE_ITINERARY_EDIT_TOKEN = "REMOVE_ITINERARY_EDIT_TOKEN";
