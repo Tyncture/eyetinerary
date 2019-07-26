@@ -1,4 +1,4 @@
-import React, { useCallback, useState, SetStateAction } from "react";
+import React, { useCallback, useState, SetStateAction, createRef } from "react";
 import { IPagePrototype } from "../types";
 import * as validator from "./validator";
 
@@ -15,8 +15,8 @@ function CreateStep2PageForm(props: IProps) {
   const [validationErrors, setValidationErrors] = useState([]);
 
   // References
-  const nameRef = React.createRef() as React.RefObject<HTMLInputElement>;
-  const descriptionRef = React.createRef() as React.RefObject<HTMLInputElement>;
+  const nameRef = createRef<HTMLInputElement>();
+  const descriptionRef = createRef<HTMLInputElement>();
 
   // Validation and page addition
   const validateForm = (): boolean => {
