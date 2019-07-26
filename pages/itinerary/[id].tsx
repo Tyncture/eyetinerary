@@ -7,6 +7,7 @@ import Head from "next/head";
 import { connect } from "react-redux";
 import { IUser } from "../../store/user/types";
 import { ApiError } from "../../common/errors/apiError";
+import { usePrevious } from "../../common/utils/usePrevious";
 
 interface IItinerary {
   title: string;
@@ -36,18 +37,20 @@ function Itinerary(props: IProps) {
     }
   };
 
+  const previousId = usePrevious(props.query.id);
   useEffect(() => {
-    if (!itinerary) {
+    if (!itinerary || props.query.id !== previousId) {
       retrieveData();
     }
-  });
+  }, [itinerary, props, previousId]);
 
-  const pageTitle = `${itinerary ? `${itinerary.title} - ` : ""}Eyetinerary`;
+  const pageTitle = () =>
+    `${itinerary ? `${itinerary.title} - ` : ""}Eyetinerary`;
 
   return (
     <BaseContainer>
       <Head>
-        <title>{pageTitle}</title>
+        <title>{pageTitle()}</title>
       </Head>
       <Sidebar />
       <Main>{JSON.stringify(itinerary)}</Main>
