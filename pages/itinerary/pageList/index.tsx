@@ -15,7 +15,7 @@ interface IProps {
 function ItineraryPageList(props: IProps) {
   const userToken = props.user.token ? props.user.token : null;
   const editToken = props.editTokens[props.itinerary.id]
-    ? props.editTokens[props.itinerary.id]
+    ? props.editTokens[props.itinerary.id].token
     : null;
 
   const removePage = async (id: number) => {
