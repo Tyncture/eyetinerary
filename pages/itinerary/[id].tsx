@@ -7,12 +7,7 @@ import Head from "next/head";
 import { connect } from "react-redux";
 import { IUser } from "../../store/user/types";
 import { ApiError } from "../../common/errors/apiError";
-
-interface IItinerary {
-  id: number;
-  title: string;
-  description: string;
-}
+import { IItinerary } from "../../components/itinerary/common/types";
 
 interface IProps {
   query: {
@@ -54,7 +49,15 @@ function Itinerary(props: IProps) {
         <title>{pageTitle()}</title>
       </Head>
       <Sidebar />
-      <Main>{JSON.stringify(itinerary)}</Main>
+      <Main>
+        <header>
+          <h1 className="title">{itinerary.title}</h1>
+          <div className="sub-title">{itinerary.description}</div>
+        </header>
+        <div>
+          <h2 className="title-2">Pages</h2>
+        </div>
+      </Main>
     </BaseContainer>
   );
 }
