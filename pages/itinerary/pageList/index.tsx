@@ -40,9 +40,10 @@ function ItineraryPageList(props: IProps) {
     );
   };
 
+  const sortedPages = props.itinerary.pages.sort((a, b) => a.rankInItinerary -  b.rankInItinerary);
   return (
     <ul className="itinerary-page-list">
-      {props.itinerary.pages.map(page => (
+      {sortedPages.map(page => (
         <li className="itinerary-page-list-elem" key={page.id}>
           <div className="itinerary-page-list_elem__icon">[icon]</div>
           <div>

@@ -6,6 +6,6 @@ export interface IItinerary {
     id: number;
     title: string;
     description: string;
-    position: number;
+    rankInItinerary: number;
   }>;
 }
