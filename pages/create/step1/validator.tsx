@@ -16,7 +16,7 @@ export function validateName(input): IFieldValidatorResult {
     messages.push("Name should be 50 characters or less");
   }
 
-  return { error: messages.length === 0, messages };
+  return { error: messages.length !== 0, messages };
 }
 
 export function validateDescription(input): IFieldValidatorResult {
@@ -30,5 +30,5 @@ export function validateDescription(input): IFieldValidatorResult {
     messages.push("Description should be 100 characters or less");
   }
 
-  return { error: messages.length === 0, messages };
+  return { error: messages.length !== 0, messages };
 }
