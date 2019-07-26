@@ -9,6 +9,7 @@ import { ICreateStepProps } from "../types";
 import CreateStep2PageForm from "./pageForm";
 import CreateStep2PageList from "./pageList";
 import { IPagePrototype } from "./types";
+import "../common.scss";
 
 interface IProps extends ICreateStepProps {
   user: IUser;
@@ -33,7 +34,7 @@ function CreateStep2(props: IProps) {
         title: props.itinerary.name,
         description: props.itinerary.description,
       },
-      userToken
+      userToken,
     );
     if (response.success) {
       props.addItineraryEditToken(response.body.id, response.body.editToken);
@@ -107,14 +108,18 @@ function CreateStep2(props: IProps) {
 
   // TODO: Step 3 for items and move submit to separate component
   return (
-    <div className="create-itinerary-step-2">
-      <header className="create-itinerary-step-2-header">
+    <div className="create-itinerary-step">
+      <header>
         <h1 className="title">Create Itinerary</h1>
         <div className="sub-title">Now let’s add some pages.</div>
       </header>
-      <div className="create-itinerary-step-2-main">
+      <div className="create-itinerary-step__main">
         <section>
-          <CreateStep2PageForm pages={pages} setPages={setPages} submit={submit} />
+          <CreateStep2PageForm
+            pages={pages}
+            setPages={setPages}
+            submit={submit}
+          />
         </section>
         <section>
           <CreateStep2PageList pages={pages} setPages={setPages} />

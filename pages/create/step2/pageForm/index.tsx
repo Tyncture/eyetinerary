@@ -1,6 +1,7 @@
 import React, { useCallback, useState, SetStateAction, createRef } from "react";
 import { IPagePrototype } from "../types";
 import * as validator from "./validator";
+import "../../common.scss";
 
 interface IProps {
   pages: IPagePrototype[];
@@ -82,8 +83,8 @@ function CreateStep2PageForm(props: IProps) {
   const handleFinish = useCallback(() => props.submit(), [props.submit]);
 
   return (
-    <form className="create-itinerary-step-2-page-form">
-      <div className="create-itinerary-step-2-page-form__item">
+    <form className="create-itinerary-form">
+      <div className="create-itinerary-form__elem">
         <label htmlFor="form-page-name-input">Page Name</label>
         <input
           id="form-page-name-input"
@@ -96,7 +97,7 @@ function CreateStep2PageForm(props: IProps) {
           ref={nameRef}
         />
       </div>
-      <div className="create-itinerary-step-2-page-form__item">
+      <div className="create-itinerary-form__elem">
         <label htmlFor="form-page-description-input">Page Description</label>
         <input
           id="form-page-description-input"
@@ -109,14 +110,16 @@ function CreateStep2PageForm(props: IProps) {
           ref={descriptionRef}
         />
       </div>
-      <div>
+      <div className="create-itinerary-form__button_row">
         <input
+          className="button-wide"
           name="finish"
           type="button"
           value="Finish"
           onClick={handleFinish}
         />
         <input
+          className="button-wide"
           name="add-page"
           type="button"
           value="Add Page"

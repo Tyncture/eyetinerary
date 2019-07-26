@@ -4,6 +4,13 @@
   grid-gap: 30px;
 }
 
+.create-itinerary-step__main {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 40px;
+}
+
 .create-itinerary-form {
   width: 400px;
   display: grid;
