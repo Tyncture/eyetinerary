@@ -6,7 +6,7 @@ interface IProps {
   setPages: React.Dispatch<SetStateAction<IPagePrototype[]>>;
 }
 
-function PageList(props: IProps) {
+function CreateStep2PageList(props: IProps) {
   // Remove button
   const RemovePageButton = (childProps: {
     index: number;
@@ -56,5 +56,5 @@ function PageList(props: IProps) {
   );
 }
 
-export default PageList;
+export default CreateStep2PageList;
 

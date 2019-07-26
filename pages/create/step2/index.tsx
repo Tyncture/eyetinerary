@@ -6,8 +6,8 @@ import { apiDelete, apiPost } from "../../../common/utils/requests";
 import { addItineraryEditToken } from "../../../store/itineraryEditTokens/actions";
 import { IUser } from "../../../store/user/types";
 import { ICreateStepProps } from "../types";
-import PageForm from "./pageForm";
-import PageList from "./pageList";
+import CreateStep2PageForm from "./pageForm";
+import CreateStep2PageList from "./pageList";
 import { IPagePrototype } from "./types";
 
 interface IProps extends ICreateStepProps {
@@ -114,10 +114,10 @@ function CreateStep2(props: IProps) {
       </header>
       <div className="create-itinerary-step-2-main">
         <section>
-          <PageForm pages={pages} setPages={setPages} submit={submit} />
+          <CreateStep2PageForm pages={pages} setPages={setPages} submit={submit} />
         </section>
         <section>
-          <PageList pages={pages} setPages={setPages} />
+          <CreateStep2PageList pages={pages} setPages={setPages} />
         </section>
       </div>
     </div>

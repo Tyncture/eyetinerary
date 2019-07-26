@@ -8,7 +8,7 @@ interface IProps {
   submit: () => {};
 }
 
-function PageForm(props: IProps) {
+function CreateStep2PageForm(props: IProps) {
   // State
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -127,4 +127,4 @@ function PageForm(props: IProps) {
   );
 }
 
-export default PageForm;
+export default CreateStep2PageForm;
