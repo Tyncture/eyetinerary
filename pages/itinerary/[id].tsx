@@ -7,7 +7,8 @@ import Head from "next/head";
 import { connect } from "react-redux";
 import { IUser } from "../../store/user/types";
 import { ApiError } from "../../common/errors/apiError";
-import { IItinerary } from "../../components/itinerary/common/types";
+import { IItinerary } from "./types";
+import ItineraryPageList from "./pageList";
 
 interface IProps {
   query: {
@@ -56,6 +57,10 @@ function Itinerary(props: IProps) {
         </header>
         <div>
           <h2 className="title-2">Pages</h2>
+          <ItineraryPageList
+            itinerary={itinerary}
+            setItinerary={setItinerary}
+          />
         </div>
       </Main>
     </BaseContainer>
