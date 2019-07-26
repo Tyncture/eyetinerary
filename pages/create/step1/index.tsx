@@ -52,14 +52,14 @@ function CreateStep1(props: ICreateStepProps) {
 
   return (
     <div className="create-itinerary-step-1">
-      <header className="create-itinerary-step-1-header">
+      <header className="create-itinerary-step-1__header">
         <h1 className="title">Create Itinerary</h1>
         <div className="sub-title">
           First, let’s get the basics out of the way.
         </div>
       </header>
       <form className="create-itinerary-step-1-form">
-        <div className="create-itinerary-step-1-form-item">
+        <div className="create-itinerary-step-1-form__elem">
           <label htmlFor="form-name-input">Itinerary Name</label>
           <input
             id="form-name-input"
@@ -71,7 +71,7 @@ function CreateStep1(props: ICreateStepProps) {
             onChange={handleNameChange}
           />
         </div>
-        <div className="create-itinerary-step-1-form-item">
+        <div className="create-itinerary-step-1-form__elem">
           <label htmlFor="form-description-input">
             Itinerary Description
           </label>
@@ -85,10 +85,10 @@ function CreateStep1(props: ICreateStepProps) {
             onChange={handleDescriptionChange}
           />
         </div>
-        <div className="create-itinerary-step-1-form-item">
+        <div className="create-itinerary-step-1-form__elem">
           <label>Privacy Options</label>
-          <div className="create-itinerary-step-1-form-item-check-group">
-            <div className="create-itinerary-step-1-form-item-check-group-item">
+          <div className="create-itinerary-step-1-form__checkgroup">
+            <div className="create-itinerary-step-1-form__checkgroup__elem">
               <input
                 id="form-make-private"
                 name="make-private"
@@ -100,7 +100,7 @@ function CreateStep1(props: ICreateStepProps) {
                 Make this itinerary private
               </label>
             </div>
-            <div className="create-itinerary-step-1-form-item-check-group-item">
+            <div className="create-itinerary-step-1-form-item__checkgroup_elem">
               <input
                 id="form-anonymous"
                 name="anonymous"
@@ -112,8 +112,9 @@ function CreateStep1(props: ICreateStepProps) {
             </div>
           </div>
         </div>
-        <div className="create-itinerary-step-1-form-bottom-buttons">
+        <div className="create-itinerary-step-1-form__button_row">
           <input
+
             name="cancel"
             type="button"
             value="Cancel"

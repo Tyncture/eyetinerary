@@ -14,7 +14,7 @@
   }
 }
 
-.create-itinerary-step-1-form-item {
+.create-itinerary-step-1-form__elem {
   display: grid;
   grid-auto-flow: row;
   grid-gap: 16px;
@@ -34,13 +34,13 @@
   }
 }
 
-.create-itinerary-step-1-form-item-check-group {
+.create-itinerary-step-1-form__checkgroup {
   display: grid;
   grid-auto-flow: row;
   grid-gap: 10px;
 }
 
-.create-itinerary-step-1-form-item-check-group-item {
+.create-itinerary-step-1-form__checkgroup_elem {
   display: grid;
   grid-auto-flow: column;
   grid-template-columns: minmax(max-content, max-content);
