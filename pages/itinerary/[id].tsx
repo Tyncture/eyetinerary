@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import BaseContainer from "../../components/base/baseContainer";
 import Sidebar from "../../components/base/sidebar";
 import Main from "../../components/base/main";
@@ -41,27 +41,33 @@ function Itinerary(props: IProps) {
     }
   }, [itinerary, props]);
 
-  const pageTitle = () =>
-    `${itinerary ? `${itinerary.title} - ` : ""}Eyetinerary`;
+  const pageTitle = useMemo(
+    () => `${itinerary ? `${itinerary.title} - ` : ""}Eyetinerary`,
+    [itinerary],
+  );
 
   return (
     <BaseContainer>
       <Head>
-        <title>{pageTitle()}</title>
+        <title>{pageTitle}</title>
       </Head>
       <Sidebar />
       <Main>
-        <header>
-          <h1 className="title">{itinerary.title}</h1>
-          <div className="sub-title">{itinerary.description}</div>
-        </header>
-        <div>
-          <h2 className="title-2">Pages</h2>
-          <ItineraryPageList
-            itinerary={itinerary}
-            setItinerary={setItinerary}
-          />
-        </div>
+        {itinerary && (
+          <div>
+            <header>
+              <h1 className="title">{itinerary.title}</h1>
+              <div className="sub-title">{itinerary.description}</div>
+            </header>
+            <div>
+              <h2 className="title-2">Pages</h2>
+              <ItineraryPageList
+                itinerary={itinerary}
+                setItinerary={setItinerary}
+              />
+            </div>
+          </div>
+        )}
       </Main>
     </BaseContainer>
   );
