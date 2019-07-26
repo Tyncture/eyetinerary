@@ -1,5 +1,4 @@
 import React, { useState, useCallback, createRef } from "react";
-import "./index.scss";
 import Router from "next/router";
 import { ICreateStepProps } from "../types";
 import *  as validator from "./validator";
@@ -58,8 +57,8 @@ function CreateStep1(props: ICreateStepProps) {
   }, [validateForm]);
 
   return (
-    <div className="create-itinerary-step-1">
-      <header className="create-itinerary-step-1__header">
+    <div className="create-itinerary-step">
+      <header>
         <h1 className="title">Create Itinerary</h1>
         <div className="sub-title">
           First, let’s get the basics out of the way.

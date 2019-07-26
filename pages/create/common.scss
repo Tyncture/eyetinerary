@@ -1,3 +1,9 @@
+.create-itinerary-step {
+  display: grid;
+  grid-auto-flow: row;
+  grid-gap: 30px;
+}
+
 .create-itinerary-form {
   width: 400px;
   display: grid;
