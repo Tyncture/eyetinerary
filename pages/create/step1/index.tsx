@@ -88,7 +88,7 @@ function CreateStep1(props: ICreateStepProps) {
         <div className="create-itinerary-step-1-form__elem">
           <label>Privacy Options</label>
           <div className="create-itinerary-step-1-form__checkgroup">
-            <div className="create-itinerary-step-1-form__checkgroup__elem">
+            <div className="create-itinerary-step-1-form__checkgroup_elem">
               <input
                 id="form-make-private"
                 name="make-private"
@@ -100,7 +100,7 @@ function CreateStep1(props: ICreateStepProps) {
                 Make this itinerary private
               </label>
             </div>
-            <div className="create-itinerary-step-1-form-item__checkgroup_elem">
+            <div className="create-itinerary-step-1-form__checkgroup_elem">
               <input
                 id="form-anonymous"
                 name="anonymous"
