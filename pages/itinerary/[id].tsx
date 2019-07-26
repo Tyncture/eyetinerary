@@ -7,9 +7,9 @@ import Head from "next/head";
 import { connect } from "react-redux";
 import { IUser } from "../../store/user/types";
 import { ApiError } from "../../common/errors/apiError";
-import { usePrevious } from "../../common/utils/usePrevious";
 
 interface IItinerary {
+  id: number;
   title: string;
   description: string;
 }
@@ -37,12 +37,13 @@ function Itinerary(props: IProps) {
     }
   };
 
-  const previousId = usePrevious(props.query.id);
   useEffect(() => {
-    if (!itinerary || props.query.id !== previousId) {
+    // Retrieve itinerary if not already done so successfully by
+    // server-side renderer or router query id changes
+    if (!itinerary || itinerary.id !== Number(props.query.id)) {
       retrieveData();
     }
-  }, [itinerary, props, previousId]);
+  }, [itinerary, props]);
 
   const pageTitle = () =>
     `${itinerary ? `${itinerary.title} - ` : ""}Eyetinerary`;
