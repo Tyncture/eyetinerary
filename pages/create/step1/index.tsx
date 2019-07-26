@@ -65,8 +65,8 @@ function CreateStep1(props: ICreateStepProps) {
           First, let’s get the basics out of the way.
         </div>
       </header>
-      <form className="create-itinerary-step-1-form">
-        <div className="create-itinerary-step-1-form__elem">
+      <form className="create-itinerary-form">
+        <div className="create-itinerary-form__elem">
           <label htmlFor="form-name-input">Itinerary Name</label>
           <input
             id="form-name-input"
@@ -79,7 +79,7 @@ function CreateStep1(props: ICreateStepProps) {
             ref={nameFieldRef}
           />
         </div>
-        <div className="create-itinerary-step-1-form__elem">
+        <div className="create-itinerary-form__elem">
           <label htmlFor="form-description-input">
             Itinerary Description
           </label>
@@ -93,10 +93,10 @@ function CreateStep1(props: ICreateStepProps) {
             onChange={handleDescriptionChange}
           />
         </div>
-        <div className="create-itinerary-step-1-form__elem">
+        <div className="create-itinerary-form__elem">
           <label>Privacy Options</label>
-          <div className="create-itinerary-step-1-form__checkgroup">
-            <div className="create-itinerary-step-1-form__checkgroup_elem">
+          <div className="create-itinerary-form__checkgroup">
+            <div className="create-itinerary-form__checkgroup_elem">
               <input
                 id="form-make-private"
                 name="make-private"
@@ -108,7 +108,7 @@ function CreateStep1(props: ICreateStepProps) {
                 Make this itinerary private
               </label>
             </div>
-            <div className="create-itinerary-step-1-form__checkgroup_elem">
+            <div className="create-itinerary-form__checkgroup_elem">
               <input
                 id="form-anonymous"
                 name="anonymous"
@@ -120,7 +120,7 @@ function CreateStep1(props: ICreateStepProps) {
             </div>
           </div>
         </div>
-        <div className="create-itinerary-step-1-form__button_row button-wide-row">
+        <div className="create-itinerary-form__button_row button-wide-row">
           <input
             className="button-wide"
             name="cancel"

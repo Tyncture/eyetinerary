@@ -4,63 +4,6 @@
   grid-gap: 30px;
 }
 
-.create-itinerary-step-1-form {
-  width: 400px;
-  display: grid;
-  grid-auto-flow: row;
-  grid-gap: 20px;
-  label {
-    user-select: none;
-    font-weight: 500;
-  }
-}
-
-.create-itinerary-step-1-form__elem {
-  display: grid;
-  grid-auto-flow: row;
-  grid-gap: 16px;
-  font-size: 16px;
-  label {
-    color: #29323D;
-  }
-  input[type="text"] {
-    outline: none;
-    border: 0.5px solid #e4e6e7;
-    border-radius: 3px;
-    line-height: 24px;
-    padding: 6px 8px;
-    background-color: white;
-    box-shadow: 0 0 1px 0px #D9D9D9;
-  }
-}
-
-.create-itinerary-step-1-form__checkgroup {
-  display: grid;
-  grid-auto-flow: row;
-  grid-gap: 10px;
-}
-
-.create-itinerary-step-1-form__checkgroup_elem {
-  display: grid;
-  grid-auto-flow: column;
-  grid-template-columns: minmax(max-content, max-content);
-  grid-gap: 10px;
-  align-items: center;
-  label {
-    text-align: left;
-    font-size: 13px;
-    color: #61656B;
-  }
-}
-
-.create-itinerary-step-1-form__button_row {
-  margin-top: 4px;
-  display: grid;
-  grid-auto-flow: column;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 16px;
-}
-
 @media only screen and (max-width: 900px) {
 
 }
