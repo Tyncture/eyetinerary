@@ -1,3 +1,8 @@
+// Support Server-Side Rendering
+const nodeFetch = import("node-fetch");
+const useBrowserFetch =
+  typeof window !== "undefined" && typeof window.fetch !== "undefined";
+
 interface IResponse {
   body?: any;
   success: boolean;
@@ -11,6 +16,7 @@ export async function apiRequest(
   token?: string,
 ) {
   try {
+    const fetch = useBrowserFetch ? window.fetch : (await nodeFetch).default;
     const response = await fetch(
       `${process.env.EYET_API}${pathWithSlashPrefix}`,
       {
