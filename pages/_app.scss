@@ -28,3 +28,23 @@ h1 {
   font-size: 18px;
   font-weight: 400;
 }
+
+.button-wide {
+  height: 44px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #454C54;
+  background-color: #F3F5F6;
+  border-radius: 4px;
+  border: none;
+  outline: none !important;
+  &:hover, &:active {
+    cursor: pointer;
+  }
+  &:hover, &:focus {
+    background-color: #EEF0F2;
+  }
+  &:active {
+    background-color: #E4EDF6;
+  }
+}
