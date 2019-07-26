@@ -64,3 +64,9 @@
   width: 100%;
   background: #202D3C;
 }
+
+@media screen and (max-width: 900px) {
+  .sidebar {
+    display: none;
+  }
+}

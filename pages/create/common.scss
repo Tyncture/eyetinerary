@@ -7,7 +7,7 @@
 .create-itinerary-step__main {
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: 1fr 1fr;
+  grid-template: 1fr 1fr;
   grid-gap: 40px;
 }
 
@@ -27,7 +27,6 @@
   display: grid;
   grid-auto-flow: row;
   grid-gap: 16px;
-  font-size: 16px;
 
   label {
     color: #29323d;
@@ -68,6 +67,20 @@
   margin-top: 4px;
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: 1fr 1fr;
+  grid-template: 1fr 1fr;
   grid-gap: 16px;
+}
+
+@media screen and (max-width: 900px) {
+  .create-itinerary-step__main {
+    grid-auto-flow: row;
+  }
+
+  .create-itinerary-form {
+    width: 100%;
+  }
+
+  .create-itinerary-form__button_row  {
+    grid-auto-flow: row;
+  }
 }

@@ -1,8 +1,15 @@
 .main {
-  display: flex;
+  --padding-v: 80px;
+  --padding-h: 120px;
+  display: block;
   width: 100%;
-  overflow: scroll;
-  padding: 50px;
+  overflow: auto;
+  padding: var(--padding-v) var(--padding-h);
+  &:after {
+    content: "";
+    height: var(--padding-v);
+    display: block;
+}
 }
 
 .main-inner {
@@ -12,7 +19,8 @@
 }
 
 @media only screen and (max-width: 900px) {
-  .main-inner {
-    width: 100%;
+  .main {
+    --padding-v: 40px;
+  --padding-h: 40px;
   }
 }

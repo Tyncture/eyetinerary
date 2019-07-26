@@ -48,3 +48,13 @@ h1 {
     background-color: #E4EDF6;
   }
 }
+
+@media only screen and (max-width: 900px) {
+  h1 {
+    font-size: 36px;
+  }
+
+  .sub-title {
+    font-size: 16px;
+  }
+}
