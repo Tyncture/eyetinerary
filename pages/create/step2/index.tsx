@@ -26,13 +26,14 @@ function CreateStep2(props: IProps) {
     id: number;
     editToken: string;
   }> => {
+    const userToken = props.user.token ? props.user.token : null;
     const response = await apiPost(
       "/itinerary",
       {
         title: props.itinerary.name,
         description: props.itinerary.description,
       },
-      props.user.token ? props.user.token : null,
+      userToken
     );
     if (response.success) {
       props.addItineraryEditToken(response.body.id, response.body.editToken);
@@ -46,10 +47,11 @@ function CreateStep2(props: IProps) {
   };
 
   const retractItinerary = async (itineraryId: number, editToken: string) => {
+    const userToken = props.user.token ? props.user.token : null;
     const response = await apiDelete(
       `/itinerary/${itineraryId}`,
       { editToken },
-      props.user.token ? props.user.token : null,
+      userToken,
     );
     if (response.success) {
       console.log(`Itinerary ${itineraryId} deleted due to failed creation.`);
@@ -62,6 +64,7 @@ function CreateStep2(props: IProps) {
     const requests = pages.map(
       (page, index) =>
         new Promise((resolve, reject) => {
+          const userToken = props.user.token ? props.user.token : null;
           apiPost(
             "/page",
             {
@@ -72,7 +75,7 @@ function CreateStep2(props: IProps) {
               rankInItinerary: index + 1,
               editToken,
             },
-            props.user.token ? props.user.token : null,
+            userToken,
           ).then(response =>
             response.success
               ? resolve()
@@ -103,6 +106,7 @@ function CreateStep2(props: IProps) {
     }
   };
 
+  // TODO: Step 3 for items and move submi
   return (
     <div className="create-itinerary-step-2">
       <header className="create-itinerary-step-2-header">
