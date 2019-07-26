@@ -6,7 +6,7 @@ import Main from "../../components/base/main";
 import { setUserId, setUsername, setUserToken } from "../../store/user/actions";
 import "./index.scss";
 import { connect } from "react-redux";
-import { postLogin } from "../../common/requests";
+import { postLogin } from "../../common/utils/requests";
 
 interface IProps {
   setUserId(id: number): void;

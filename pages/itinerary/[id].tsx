@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import BaseContainer from "../../components/base/baseContainer";
 import Sidebar from "../../components/base/sidebar";
 import Main from "../../components/base/main";
-import { apiGet } from "../../common/requests";
+import { apiGet } from "../../common/utils/requests";
 import Head from "next/head";
 import { connect } from "react-redux";
 import { IUser } from "../../store/user/types";
-import { ApiError } from "../../common/apiError";
+import { ApiError } from "../../common/errors/apiError";
 
 interface IItinerary {
   title: string;

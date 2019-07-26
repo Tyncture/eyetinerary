@@ -1,7 +1,6 @@
 import React, { useState, useCallback } from "react";
 import "./index.scss";
 import Router from "next/router";
-import { apiPost } from "../../../common/requests";
 import { ICreateStepProps } from "../types";
 import *  as validator from "./validator";
 

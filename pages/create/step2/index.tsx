@@ -1,8 +1,8 @@
 import Router from "next/router";
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { ApiError } from "../../../common/apiError";
-import { apiDelete, apiPost } from "../../../common/requests";
+import { ApiError } from "../../../common/errors/apiError";
+import { apiDelete, apiPost } from "../../../common/utils/requests";
 import { addItineraryEditToken } from "../../../store/itineraryEditTokens/actions";
 import { IUser } from "../../../store/user/types";
 import { ICreateStepProps } from "../types";

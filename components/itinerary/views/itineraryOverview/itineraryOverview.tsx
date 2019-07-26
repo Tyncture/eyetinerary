@@ -4,7 +4,7 @@ import React from "react";
 import ItineraryAbout from "../../base/itineraryAbout";
 import "../../base/itineraryCommon.scss";
 import ItineraryListItem from "../../base/itineraryListItem";
-import { getItinerary } from "../../../../common/requests";
+import { getItinerary } from "../../../../common/utils/requests";
 import { IItinerary, IPage } from "../../common/types";
 
 interface IProps {

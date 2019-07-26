@@ -6,7 +6,7 @@ import validator from "validator";
 import "./index.scss";
 import Router from "next/router";
 import { connect } from "react-redux";
-import { postLogin, apiPost} from "../../common/requests";
+import { postLogin, apiPost} from "../../common/utils/requests";
 import { setUserId, setUsername, setUserToken } from "../../store/user/actions";
 
 interface IProps {
