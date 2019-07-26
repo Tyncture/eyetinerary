@@ -113,17 +113,17 @@ function CreateStep2PageForm(props: IProps) {
       <div className="create-itinerary-form__button_row">
         <input
           className="button-wide"
-          name="finish"
-          type="button"
-          value="Finish"
-          onClick={handleFinish}
-        />
-        <input
-          className="button-wide"
           name="add-page"
           type="button"
           value="Add Page"
           onClick={handleAddPage}
+        />
+        <input
+          className="button-wide"
+          name="finish"
+          type="button"
+          value="Finish"
+          onClick={handleFinish}
         />
       </div>
     </form>
