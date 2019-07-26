@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, createRef } from "react";
 import "./index.scss";
 import Router from "next/router";
 import { ICreateStepProps } from "../types";
@@ -11,11 +11,18 @@ function CreateStep1(props: ICreateStepProps) {
   const [postAnonymously, setPostAnonymously] = useState(false);
   const [validationErrors, setValidationErrors] = useState([]);
 
+  // Input Field References
+  const nameFieldRef = createRef<HTMLInputElement>();
+
   const validateForm = (): boolean => {
     const messages = [];
 
     const validateName = validator.validateName(name);
     validateName.messages.forEach(message => messages.push(message));
+    if (validateName.error) {
+      nameFieldRef.current.focus();
+    }
+
     const validateDescription = validator.validateDescription(description);
     validateDescription.messages.forEach(message => messages.push(message));
     
@@ -69,6 +76,7 @@ function CreateStep1(props: ICreateStepProps) {
             placeholder="Winter holiday in Southeast Asia"
             value={name}
             onChange={handleNameChange}
+            ref={nameFieldRef}
           />
         </div>
         <div className="create-itinerary-step-1-form__elem">
@@ -112,15 +120,16 @@ function CreateStep1(props: ICreateStepProps) {
             </div>
           </div>
         </div>
-        <div className="create-itinerary-step-1-form__button_row">
+        <div className="create-itinerary-step-1-form__button_row button-wide-row">
           <input
-
+            className="button-wide"
             name="cancel"
             type="button"
             value="Cancel"
             onClick={Router.back}
           />
           <input
+            className="button-wide"
             name="next"
             type="button"
             value="Next"
