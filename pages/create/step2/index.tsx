@@ -68,7 +68,6 @@ function CreateStep2(props: IProps) {
           apiPost(
             "/page",
             {
-              // TODO: Use a different way of keeping rank once API has been updated
               title: page.name,
               description: page.description,
               itinerary: itineraryId,
@@ -106,7 +105,7 @@ function CreateStep2(props: IProps) {
     }
   };
 
-  // TODO: Step 3 for items and move submi
+  // TODO: Step 3 for items and move submit to separate component
   return (
     <div className="create-itinerary-step-2">
       <header className="create-itinerary-step-2-header">
