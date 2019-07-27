@@ -1,9 +1,13 @@
-import React, { useCallback, SetStateAction } from "react";
-import { IPagePrototype } from "../../types";
+import React, { useCallback } from "react";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
+import { removeCreateItineraryPage } from "../../../../store/createItinerary/actions";
+import { IPagePrototype } from "../../../../store/createItinerary/types";
+import { IStoreState } from "../../../../store/types";
 
 interface IProps {
   pages: IPagePrototype[];
-  setPages: React.Dispatch<SetStateAction<IPagePrototype[]>>;
+  removePage: (index: number) => void;
 }
 
 function CreateStep2PageList(props: IProps) {
@@ -13,8 +17,8 @@ function CreateStep2PageList(props: IProps) {
     className?: string;
   }) => {
     const handleRemovePage = useCallback(() => {
-      props.setPages(props.pages.filter((x, index) => index !== childProps.index));
-    }, [props.pages, props.setPages]);
+      props.removePage(childProps.index);
+    }, [props.removePage, childProps.index]);
     return (
       <input
         type="button"
@@ -56,5 +60,19 @@ function CreateStep2PageList(props: IProps) {
   );
 }
 
-export default CreateStep2PageList;
+/* 
+  Share state between steps using Redux to avoid tree rerenders
+  resetting form component state when passing state up
+*/
+const mapStateToProps = (state: IStoreState) => ({
+  pages: state.createItinerary.pages,
+});
 
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  removePage: (index: number) => dispatch(removeCreateItineraryPage(index)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(CreateStep2PageList);

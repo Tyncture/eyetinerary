@@ -1,18 +1,23 @@
 import Router from "next/router";
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { Dispatch } from "redux";
 import { ApiError } from "../../../common/errors/apiError";
 import { apiDelete, apiPost } from "../../../common/utils/requests";
+import { ICreateItinerary } from "../../../store/createItinerary/types";
 import { addItineraryEditToken } from "../../../store/itineraryEditTokens/actions";
+import { IStoreState } from "../../../store/types";
 import { IUser } from "../../../store/user/types";
+import "../common.scss";
 import { ICreateStepProps } from "../types";
 import CreateStep2PageForm from "./pageForm";
 import CreateStep2PageList from "./pageList";
-import "../common.scss";
+import { clearCreateItinerary } from "../../../store/createItinerary/actions";
 
-interface IProps extends ICreateStepProps {
+interface IProps extends ICreateStepProps, ICreateItinerary {
   user: IUser;
   addItineraryEditToken: (id: number, token: string) => {};
+  clearCreateItinerary: () => void;
 }
 
 function CreateStep2(props: IProps) {
@@ -29,8 +34,8 @@ function CreateStep2(props: IProps) {
     const response = await apiPost(
       "/itinerary",
       {
-        title: props.itinerary.name,
-        description: props.itinerary.description,
+        title: props.name,
+        description: props.description,
       },
       userToken,
     );
@@ -90,6 +95,7 @@ function CreateStep2(props: IProps) {
       try {
         await submitPages(itineraryResponse.id, itineraryResponse.editToken);
         Router.push("/itinerary/[id]", `/itinerary/${itineraryResponse.id}`);
+        props.clearCreateItinerary();
       } catch (e) {
         // Attempt to delete itinerary as partial creation is not useful
         await retractItinerary(
@@ -113,28 +119,29 @@ function CreateStep2(props: IProps) {
       </header>
       <div className="create-itinerary-step__main">
         <section>
-          <CreateStep2PageForm
-            pages={props.pages}
-            setPages={props.setPages}
-            setStep={props.setStep}
-            submit={submit}
-          />
+          <CreateStep2PageForm setStep={props.setStep} submit={submit} />
         </section>
         <section>
-          <CreateStep2PageList pages={props.pages} setPages={props.setPages} />
+          <CreateStep2PageList />
         </section>
       </div>
     </div>
   );
 }
 
-const mapStateToProps = state => ({
+/* 
+  Share state between steps using Redux to avoid tree rerenders
+  resetting form component state when passing state up
+*/
+const mapStateToProps = (state: IStoreState) => ({
+  ...state.createItinerary,
   user: state.user,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch: Dispatch) => ({
   addItineraryEditToken: (id: number, token: string) =>
     dispatch(addItineraryEditToken(id, token)),
+  clearCreateItinerary: () => dispatch(clearCreateItinerary()),
 });
 
 export default connect(

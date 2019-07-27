@@ -1,12 +1,14 @@
-import React, { useCallback, useState, SetStateAction, createRef } from "react";
-import * as validator from "./validator";
+import React, { createRef, SetStateAction, useCallback, useState } from "react";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
+import { addCreateItineraryPage } from "../../../../store/createItinerary/actions";
+import { IPagePrototype } from "../../../../store/createItinerary/types";
 import "../../common.scss";
 import "./index.scss";
-import { IPagePrototype } from "../../types";
+import * as validator from "./validator";
 
 interface IProps {
-  pages: IPagePrototype[];
-  setPages: React.Dispatch<SetStateAction<IPagePrototype[]>>;
+  addPage: (page: IPagePrototype) => void;
   setStep: React.Dispatch<SetStateAction<number>>;
   submit: () => {};
 }
@@ -40,13 +42,10 @@ function CreateStep2PageForm(props: IProps) {
     if (formValid) {
       setName("");
       setDescription("");
-      props.setPages([
-        ...props.pages,
-        {
-          name,
-          description,
-        },
-      ]);
+      props.addPage({
+        name,
+        description,
+      });
       nameRef.current.focus();
     }
   };
@@ -144,4 +143,15 @@ function CreateStep2PageForm(props: IProps) {
   );
 }
 
-export default CreateStep2PageForm;
+/* 
+  Share state between steps using Redux to avoid tree rerenders
+  resetting form component state when passing state up
+*/
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  addPage: (page: IPagePrototype) => dispatch(addCreateItineraryPage(page)),
+});
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(CreateStep2PageForm);

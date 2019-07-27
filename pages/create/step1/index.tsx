@@ -1,12 +1,22 @@
-import React, { useState, useCallback, createRef } from "react";
 import Router from "next/router";
+import React, { createRef, useCallback, useState } from "react";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
+import { setCreateItineraryDescription, setCreateItineraryName } from "../../../store/createItinerary/actions";
+import { IStoreState } from "../../../store/types";
 import { ICreateStepProps } from "../types";
 import * as validator from "./validator";
 
-function CreateStep1(props: ICreateStepProps) {
-  const initialName = props.itinerary ? props.itinerary.name : "";
-  const [name, setName] = useState(initialName);
-  const [description, setDescription] = useState("");
+interface IProps extends ICreateStepProps {
+  name: string;
+  description: string;
+  setName: (name: string) => void;
+  setDescription: (description: string) => void;
+}
+
+function CreateStep1(props: IProps) {
+  const [name, setName] = useState(props.name);
+  const [description, setDescription] = useState(props.description);
   const [makePrivate, setMakePrivate] = useState(false);
   const [postAnonymously, setPostAnonymously] = useState(false);
   const [validationErrors, setValidationErrors] = useState([]);
@@ -52,7 +62,8 @@ function CreateStep1(props: ICreateStepProps) {
   const handleNext = useCallback(async () => {
     const formValid = validateForm();
     if (formValid) {
-      props.setItinerary({ name, description });
+      props.setName(name);
+      props.setDescription(description);
       props.setStep(2);
     }
   }, [validateForm]);
@@ -143,4 +154,21 @@ function CreateStep1(props: ICreateStepProps) {
   );
 }
 
-export default CreateStep1;
+/* 
+  Share state between steps using Redux to avoid tree rerenders
+  resetting form component state when passing state up
+*/
+const mapStateToProps = (state: IStoreState) => ({
+  name: state.createItinerary.name,
+  description: state.createItinerary.description
+});
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  setName: (name: string) => dispatch(setCreateItineraryName(name)),
+  setDescription: (description: string) =>
+    dispatch(setCreateItineraryDescription(description)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(CreateStep1);

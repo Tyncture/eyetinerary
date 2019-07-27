@@ -9,11 +9,13 @@ import {
 import storage from "redux-persist/lib/storage";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { itineraryEditTokens } from "./itineraryEditTokens/reducer";
+import { createItinerary } from "./createItinerary/reducer";
+import { IStoreState } from "./types";
 
 // Root reducer
 export const rootReducer = combineReducers({
-  user, itineraryEditTokens
-});
+  user, itineraryEditTokens, createItinerary
+}) as (state: IStoreState, action: {}) => IStoreState;
 
 // redux-persist persistent store
 const config: PersistConfig = {
