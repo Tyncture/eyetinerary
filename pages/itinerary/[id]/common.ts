@@ -12,7 +12,7 @@ export function useItinerary(
   const [itinerary, setItinerary] = useState<IItinerary>(initialVal);
 
   async function retrieveData() {
-    console.log("retrieve");
+    console.log(`useItinerary hook retreiving itinerary id ${id}`);
     const response = await await apiGet(`/itinerary/${id}`, bearerToken);
     if (response.success) {
       setItinerary(response.body);
