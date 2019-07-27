@@ -40,11 +40,13 @@ function ItineraryPage(props: IProps) {
     <BaseContainer>
       <Sidebar />
       <Main>
-        {page && (
-          <header>
-            <h1 className="title">{page.title}</h1>
-          </header>
-        )}
+        <div>
+          {page && (
+            <header>
+              <h1 className="title">{page.title}</h1>
+            </header>
+          )}
+        </div>
       </Main>
     </BaseContainer>
   );
