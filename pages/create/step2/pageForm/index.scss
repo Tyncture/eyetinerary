@@ -1,0 +1,21 @@
+.create-itinerary-step-2-form__button_row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: 
+    "a a"
+    "b c";
+  grid-gap: 16px;
+}
+
+.grid-area-a {
+  grid-area: a;
+}
+
+.grid-area-b {
+  grid-area: b;
+}
+
+.grid-area-c {
+  grid-area: c;
+}

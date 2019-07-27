@@ -2,10 +2,12 @@ import React, { useCallback, useState, SetStateAction, createRef } from "react";
 import { IPagePrototype } from "../types";
 import * as validator from "./validator";
 import "../../common.scss";
+import "./index.scss";
 
 interface IProps {
   pages: IPagePrototype[];
   setPages: React.Dispatch<SetStateAction<IPagePrototype[]>>;
+  setStep: React.Dispatch<SetStateAction<number>>;
   submit: () => {};
 }
 
@@ -80,6 +82,7 @@ function CreateStep2PageForm(props: IProps) {
 
   // Buttons
   const handleAddPage = useCallback(() => addPage(), [addPage]);
+  const handleBack = useCallback(() => props.setStep(1), [addPage]);
   const handleFinish = useCallback(() => props.submit(), [props.submit]);
 
   return (
@@ -110,16 +113,24 @@ function CreateStep2PageForm(props: IProps) {
           ref={descriptionRef}
         />
       </div>
-      <div className="create-itinerary-form__button_row">
+      <div className="create-itinerary-step-2-form__button_row">
         <input
-          className="button-wide"
+          className="button-wide grid-area-a"
           name="add-page"
           type="button"
           value="Add Page"
           onClick={handleAddPage}
         />
+        {/* TODO: Add divider here */}
         <input
-          className="button-wide"
+          className="button-wide grid-area-b"
+          name="back"
+          type="button"
+          value="Back"
+          onClick={handleBack}
+        />
+        <input
+          className=" button-wide grid-area-c"
           name="finish"
           type="button"
           value="Finish"

@@ -118,6 +118,7 @@ function CreateStep2(props: IProps) {
           <CreateStep2PageForm
             pages={pages}
             setPages={setPages}
+            setStep={props.setStep}
             submit={submit}
           />
         </section>
