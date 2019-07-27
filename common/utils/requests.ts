@@ -1,3 +1,5 @@
+import { debugSSR } from "./debug";
+
 // Support Server-Side Rendering
 const nodeFetch = import("node-fetch");
 const useBrowserFetch =
@@ -16,6 +18,7 @@ export async function apiRequest(
   token?: string,
 ) {
   try {
+    debugSSR(`${method} ${process.env.EYET_API}/${pathWithSlashPrefix}`);
     const fetch = useBrowserFetch ? window.fetch : (await nodeFetch).default;
     const response = await fetch(
       `${process.env.EYET_API}${pathWithSlashPrefix}`,
