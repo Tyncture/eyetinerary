@@ -12,6 +12,7 @@ export function useItinerary(
   const [itinerary, setItinerary] = useState<IItinerary>(initialVal);
 
   async function retrieveData() {
+    console.log("retrieve");
     const response = await await apiGet(`/itinerary/${id}`, bearerToken);
     if (response.success) {
       setItinerary(response.body);
@@ -24,7 +25,9 @@ export function useItinerary(
   }
 
   useEffect(() => {
-    retrieveData();
+    if (!initialVal) {
+      retrieveData();
+    }
   }, [id]);
 
   return itinerary;
