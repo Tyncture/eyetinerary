@@ -2,6 +2,7 @@ import React, { SetStateAction, useEffect, useState } from "react";
 import { ApiError } from "../../../common/errors/apiError";
 import { apiGet } from "../../../common/utils/requests";
 import { IItinerary, IPage } from "../types";
+import { debug } from "../../../common/utils/debug";
 
 export function useItinerary(
   id: number,
@@ -12,7 +13,7 @@ export function useItinerary(
   const [itinerary, setItinerary] = useState<IItinerary>(initialVal);
 
   async function retrieveData() {
-    console.log(`useItinerary hook retreiving itinerary id ${id}`);
+    debug(`useItinerary hook retreiving itinerary id ${id}`);
     const response = await await apiGet(`/itinerary/${id}`, bearerToken);
     if (response.success) {
       setItinerary(response.body);
@@ -25,7 +26,7 @@ export function useItinerary(
   }
 
   useEffect(() => {
-    if (!initialVal) {
+    if (!initialVal || itinerary.id !== id) {
       retrieveData();
     }
   }, [id]);
