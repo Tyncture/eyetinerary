@@ -30,8 +30,8 @@ function ItineraryPage(props: IProps) {
 
   // Computed values
   const page = useMemo<IPage>(() => {
-    const sortedPages = sortPages(itinerary.pages);
     if (itinerary) {
+      const sortedPages = sortPages(itinerary.pages);
       return sortedPages[Number(props.query.page) - 1];
     }
   }, [itinerary]);
@@ -40,7 +40,7 @@ function ItineraryPage(props: IProps) {
     <BaseContainer>
       <Sidebar />
       <Main>
-        {itinerary && page && (
+        {page && (
           <header>
             <h1 className="title">{page.title}</h1>
           </header>
