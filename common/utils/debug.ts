@@ -1,12 +1,12 @@
 export function debug(message: any) {
    if (process.env.NODE_ENV !== "production") {
-     console.log(message);
+     console.log("DEBUG:", message);
    }
 }
 
 export function debugSSR(message: any) {
-  const isSeverSideRenderer = typeof process.browser === "undefined";
+  const isSeverSideRenderer = typeof window === "undefined";
   if (isSeverSideRenderer) {
-    debug(message);
+    console.log("SSR:", message);
   }
 }
