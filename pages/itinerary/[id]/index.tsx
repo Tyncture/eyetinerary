@@ -21,7 +21,6 @@ interface IProps {
 }
 
 function Itinerary(props: IProps) {
-  console.log(props);
   const [itinerary, setItinerary] = useState<IItinerary>(props.itinerary);
   const [apiError, setApiError] = useState<string>();
 
