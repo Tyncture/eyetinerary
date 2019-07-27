@@ -26,10 +26,10 @@ function CreateStep2(props: IProps) {
   const [waitingForResponse, setWaitingForResponse] = useState(false);
 
   // Submission
-  const submitItinerary = async (): Promise<{
+  async function submitItinerary(): Promise<{
     id: number;
     editToken: string;
-  }> => {
+  }> {
     const userToken = props.user.token ? props.user.token : null;
     const response = await apiPost(
       "/itinerary",
@@ -48,9 +48,9 @@ function CreateStep2(props: IProps) {
     } else {
       throw new ApiError(response.statusCode);
     }
-  };
+  }
 
-  const retractItinerary = async (itineraryId: number, editToken: string) => {
+  async function retractItinerary(itineraryId: number, editToken: string) {
     const userToken = props.user.token ? props.user.token : null;
     const response = await apiDelete(
       `/itinerary/${itineraryId}`,
@@ -62,9 +62,9 @@ function CreateStep2(props: IProps) {
     } else {
       throw new ApiError(response.statusCode);
     }
-  };
+  }
 
-  const submitPages = async (itineraryId: number, editToken: string) => {
+  async function submitPages(itineraryId: number, editToken: string) {
     const requests = props.pages.map(
       (page, index) =>
         new Promise((resolve, reject) => {
@@ -87,9 +87,9 @@ function CreateStep2(props: IProps) {
         }),
     );
     await Promise.all(requests);
-  };
+  }
 
-  const submit = async () => {
+  async function submit() {
     try {
       const itineraryResponse = await submitItinerary();
       try {
@@ -108,7 +108,7 @@ function CreateStep2(props: IProps) {
       console.error(e.message);
       setApiError(e.message);
     }
-  };
+  }
 
   // TODO: Step 3 for items and move submit to separate component
   return (

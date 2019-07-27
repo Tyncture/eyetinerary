@@ -3,7 +3,7 @@ import { IItineraryEditTokens } from "../../../store/itineraryEditTokens/types";
 import { apiDelete } from "../../../common/utils/requests";
 import { IItinerary } from "../types";
 import { IUser } from "../../../store/user/types";
-import React, { useCallback, SetStateAction } from "react";
+import React, { useCallback, SetStateAction, useMemo } from "react";
 
 interface IProps {
   itinerary: IItinerary;
@@ -18,14 +18,16 @@ function ItineraryPageList(props: IProps) {
     ? props.editTokens[props.itinerary.id].token
     : null;
 
-  const removePage = async (id: number) => {
+  async function removePage(id: number) {
     const response = await apiDelete(`/page/${id}`, { editToken }, userToken);
     if (response.success) {
-      const pagesRemaining = props.itinerary.pages.filter(page => page.id !== id);
-      const itinerary = {...props.itinerary, pages: pagesRemaining };
+      const pagesRemaining = props.itinerary.pages.filter(
+        page => page.id !== id,
+      );
+      const itinerary = { ...props.itinerary, pages: pagesRemaining };
       props.setItinerary(itinerary);
     }
-  };
+  }
 
   const RemoveButton = (childProps: { pageId: number; className?: string }) => {
     // TODO: Display confirmation modal
@@ -41,7 +43,13 @@ function ItineraryPageList(props: IProps) {
     );
   };
 
-  const sortedPages = props.itinerary.pages.sort((a, b) => a.rankInItinerary -  b.rankInItinerary);
+  // Computed values
+  const sortedPages = useMemo(() => {
+    return props.itinerary.pages.sort(
+      (a, b) => a.rankInItinerary - b.rankInItinerary,
+    );
+  }, [props.itinerary.pages]);
+
   return (
     <ul className="itinerary-page-list">
       {sortedPages.map(page => (

@@ -24,7 +24,7 @@ function CreateStep2PageForm(props: IProps) {
   const descriptionRef = createRef<HTMLInputElement>();
 
   // Validation and page addition
-  const validateForm = (): boolean => {
+  function validateForm(): boolean {
     const messages = [];
 
     const validateName = validator.validateName(name);
@@ -35,9 +35,9 @@ function CreateStep2PageForm(props: IProps) {
     // Track errors in function scope array as useState is asynchronous
     setValidationErrors(messages);
     return messages.length === 0;
-  };
+  }
 
-  const addPage = () => {
+  function addPage() {
     const formValid = validateForm();
     if (formValid) {
       setName("");
@@ -48,7 +48,7 @@ function CreateStep2PageForm(props: IProps) {
       });
       nameRef.current.focus();
     }
-  };
+  }
 
   // Name
   const handlePageNameChange = useCallback(

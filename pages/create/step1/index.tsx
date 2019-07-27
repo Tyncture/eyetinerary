@@ -2,7 +2,10 @@ import Router from "next/router";
 import React, { createRef, useCallback, useState } from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { setCreateItineraryDescription, setCreateItineraryName } from "../../../store/createItinerary/actions";
+import {
+  setCreateItineraryDescription,
+  setCreateItineraryName,
+} from "../../../store/createItinerary/actions";
 import { IStoreState } from "../../../store/types";
 import { ICreateStepProps } from "../types";
 import * as validator from "./validator";
@@ -24,7 +27,7 @@ function CreateStep1(props: IProps) {
   // Input Field References
   const nameFieldRef = createRef<HTMLInputElement>();
 
-  const validateForm = (): boolean => {
+  function validateForm(): boolean {
     const messages = [];
 
     const validateName = validator.validateName(name);
@@ -39,7 +42,7 @@ function CreateStep1(props: IProps) {
     // Track errors in function scope array as useState is asynchronous
     setValidationErrors(messages);
     return messages.length === 0;
-  };
+  }
 
   const handleNameChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value),
@@ -160,7 +163,7 @@ function CreateStep1(props: IProps) {
 */
 const mapStateToProps = (state: IStoreState) => ({
   name: state.createItinerary.name,
-  description: state.createItinerary.description
+  description: state.createItinerary.description,
 });
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   setName: (name: string) => dispatch(setCreateItineraryName(name)),
