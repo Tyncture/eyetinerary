@@ -10,6 +10,7 @@ import { ApiError } from "../../../common/errors/apiError";
 import { IItinerary } from "../types";
 import ItineraryPageList from "./pageList";
 import { IStoreState } from "../../../store/types";
+import { useItinerary } from "./common";
 
 interface IProps {
   query: {
@@ -21,27 +22,14 @@ interface IProps {
 }
 
 function Itinerary(props: IProps) {
-  const [itinerary, setItinerary] = useState<IItinerary>(props.itinerary);
   const [apiError, setApiError] = useState<string>();
-
-  async function retrieveData() {
-    const bearerToken = props.user.token ? props.user.token : null;
-    const response = await apiGet(`/itinerary/${props.query.id}`, bearerToken);
-    if (response.success) {
-      setItinerary(response.body);
-    } else {
-      const error = new ApiError(response.statusCode);
-      setApiError(error.message);
-    }
-  }
-
-  useEffect(() => {
-    // Retrieve itinerary if not already done so successfully by
-    // server-side renderer or router query id changes
-    if (!itinerary || itinerary.id !== Number(props.query.id)) {
-      retrieveData();
-    }
-  }, [itinerary, props]);
+  const userToken = props.user.token ? props.user.token : null;
+  const itinerary = useItinerary(
+    Number(props.query.id),
+    props.itinerary,
+    userToken,
+    setApiError,
+  );
 
   // Computed values
   const pageTitle = useMemo(
@@ -64,10 +52,7 @@ function Itinerary(props: IProps) {
             </header>
             <div>
               <h2 className="title-2">Pages</h2>
-              <ItineraryPageList
-                itinerary={itinerary}
-                setItinerary={setItinerary}
-              />
+              <ItineraryPageList itinerary={itinerary} />
             </div>
           </div>
         )}

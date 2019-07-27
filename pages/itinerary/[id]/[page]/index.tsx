@@ -19,8 +19,14 @@ interface IProps {
 }
 
 function ItineraryPage(props: IProps) {
-  const itinerary = useItinerary(Number(props.query.id), props.itinerary);
   const [apiError, setApiError] = useState<string>();
+  const userToken = props.user.token ? props.user.token : null;
+  const itinerary = useItinerary(
+    Number(props.query.id),
+    props.itinerary,
+    userToken,
+    setApiError,
+  );
 
   // Computed values
   const page = useMemo<IPage>(() => {

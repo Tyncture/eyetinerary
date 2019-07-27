@@ -1,19 +1,21 @@
 import { connect } from "react-redux";
 import { IItineraryEditTokens } from "../../../../store/itineraryEditTokens/types";
 import { apiDelete } from "../../../../common/utils/requests";
-import { IItinerary } from "../../types";
+import { IItinerary, IPage } from "../../types";
 import { IUser } from "../../../../store/user/types";
-import React, { useCallback, SetStateAction, useMemo } from "react";
+import React, { useCallback, useMemo, useState, useEffect } from "react";
 import { sortPages } from "../common";
 
 interface IProps {
   itinerary: IItinerary;
-  setItinerary: React.Dispatch<SetStateAction<IItinerary>>;
   editTokens: IItineraryEditTokens;
   user: IUser;
 }
 
 function ItineraryPageList(props: IProps) {
+  const [pages, setPages] = useState<IPage[]>();
+  useEffect(() => setPages(props.itinerary.pages), [props.itinerary]);
+
   const userToken = props.user.token ? props.user.token : null;
   const editToken = props.editTokens[props.itinerary.id]
     ? props.editTokens[props.itinerary.id].token
@@ -22,11 +24,8 @@ function ItineraryPageList(props: IProps) {
   async function removePage(id: number) {
     const response = await apiDelete(`/page/${id}`, { editToken }, userToken);
     if (response.success) {
-      const pagesRemaining = props.itinerary.pages.filter(
-        page => page.id !== id,
-      );
-      const itinerary = { ...props.itinerary, pages: pagesRemaining };
-      props.setItinerary(itinerary);
+      const pagesLeft = props.itinerary.pages.filter(page => page.id !== id);
+      setPages(pagesLeft);
     }
   }
 
@@ -46,8 +45,8 @@ function ItineraryPageList(props: IProps) {
 
   // Computed values
   const sortedPages = useMemo(() => {
-    return sortPages(props.itinerary.pages);
-  }, [props.itinerary]);
+    return pages ? sortPages(pages) : [];
+  }, [pages]);
 
   return (
     <ul className="itinerary-page-list">
