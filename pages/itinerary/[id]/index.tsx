@@ -1,25 +1,27 @@
 import React, { useState, useEffect, useMemo } from "react";
-import BaseContainer from "../../components/base/baseContainer";
-import Sidebar from "../../components/base/sidebar";
-import Main from "../../components/base/main";
-import { apiGet } from "../../common/utils/requests";
+import BaseContainer from "../../../components/base/baseContainer";
+import Sidebar from "../../../components/base/sidebar";
+import Main from "../../../components/base/main";
+import { apiGet } from "../../../common/utils/requests";
 import Head from "next/head";
 import { connect } from "react-redux";
-import { IUser } from "../../store/user/types";
-import { ApiError } from "../../common/errors/apiError";
-import { IItinerary } from "./types";
+import { IUser } from "../../../store/user/types";
+import { ApiError } from "../../../common/errors/apiError";
+import { IItinerary } from "../types";
 import ItineraryPageList from "./pageList";
-import { IStoreState } from "../../store/types";
+import { IStoreState } from "../../../store/types";
 
 interface IProps {
   query: {
     id: string;
+    page?: string;
   };
   itinerary?: IItinerary;
   user: IUser;
 }
 
 function Itinerary(props: IProps) {
+  console.log(props);
   const [itinerary, setItinerary] = useState<IItinerary>(props.itinerary);
   const [apiError, setApiError] = useState<string>();
 

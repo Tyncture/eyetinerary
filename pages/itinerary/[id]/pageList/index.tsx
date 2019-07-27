@@ -1,8 +1,8 @@
 import { connect } from "react-redux";
-import { IItineraryEditTokens } from "../../../store/itineraryEditTokens/types";
-import { apiDelete } from "../../../common/utils/requests";
-import { IItinerary } from "../types";
-import { IUser } from "../../../store/user/types";
+import { IItineraryEditTokens } from "../../../../store/itineraryEditTokens/types";
+import { apiDelete } from "../../../../common/utils/requests";
+import { IItinerary } from "../../types";
+import { IUser } from "../../../../store/user/types";
 import React, { useCallback, SetStateAction, useMemo } from "react";
 
 interface IProps {
