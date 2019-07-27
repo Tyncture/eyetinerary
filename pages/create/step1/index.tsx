@@ -4,7 +4,8 @@ import { ICreateStepProps } from "../types";
 import *  as validator from "./validator";
 
 function CreateStep1(props: ICreateStepProps) {
-  const [name, setName] = useState("");
+  const initialName = props.itinerary ? props.itinerary.name : "";
+  const [name, setName] = useState(initialName);
   const [description, setDescription] = useState("");
   const [makePrivate, setMakePrivate] = useState(false);
   const [postAnonymously, setPostAnonymously] = useState(false);

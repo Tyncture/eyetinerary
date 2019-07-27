@@ -8,7 +8,6 @@ import { IUser } from "../../../store/user/types";
 import { ICreateStepProps } from "../types";
 import CreateStep2PageForm from "./pageForm";
 import CreateStep2PageList from "./pageList";
-import { IPagePrototype } from "./types";
 import "../common.scss";
 
 interface IProps extends ICreateStepProps {
@@ -18,7 +17,6 @@ interface IProps extends ICreateStepProps {
 
 function CreateStep2(props: IProps) {
   // State
-  const [pages, setPages] = useState<IPagePrototype[]>([]);
   const [apiError, setApiError] = useState<string>();
   const [waitingForResponse, setWaitingForResponse] = useState(false);
 
@@ -62,7 +60,7 @@ function CreateStep2(props: IProps) {
   };
 
   const submitPages = async (itineraryId: number, editToken: string) => {
-    const requests = pages.map(
+    const requests = props.pages.map(
       (page, index) =>
         new Promise((resolve, reject) => {
           const userToken = props.user.token ? props.user.token : null;
@@ -116,14 +114,14 @@ function CreateStep2(props: IProps) {
       <div className="create-itinerary-step__main">
         <section>
           <CreateStep2PageForm
-            pages={pages}
-            setPages={setPages}
+            pages={props.pages}
+            setPages={props.setPages}
             setStep={props.setStep}
             submit={submit}
           />
         </section>
         <section>
-          <CreateStep2PageList pages={pages} setPages={setPages} />
+          <CreateStep2PageList pages={props.pages} setPages={props.setPages} />
         </section>
       </div>
     </div>

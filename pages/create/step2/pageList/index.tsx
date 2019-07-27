@@ -1,5 +1,5 @@
 import React, { useCallback, SetStateAction } from "react";
-import { IPagePrototype } from "../types";
+import { IPagePrototype } from "../../types";
 
 interface IProps {
   pages: IPagePrototype[];

@@ -1,7 +1,7 @@
 import React, { SetStateAction } from "react";
 import { useState } from "react";
 import CreateStep1 from "./step1";
-import { ICreateStepProps, IItineraryPrototype } from "./types";
+import { ICreateStepProps, IItineraryPrototype, IPagePrototype } from "./types";
 import BaseContainer from "../../components/base/baseContainer";
 import Sidebar from "../../components/base/sidebar";
 import Main from "../../components/base/main";
@@ -11,6 +11,7 @@ import Head from "next/head";
 function Create() {
   const [step, setStep] = useState(1);
   const [itinerary, setItinerary] = useState<IItineraryPrototype>(null);
+  const [pages, setPages] = useState<IPagePrototype[]>([]);
 
   const StepComponent = () => {
     const childProps: ICreateStepProps = {
@@ -18,6 +19,8 @@ function Create() {
       setStep,
       itinerary,
       setItinerary,
+      pages,
+      setPages
     };
     switch (step) {
       case 1:

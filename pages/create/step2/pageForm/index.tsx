@@ -1,8 +1,8 @@
 import React, { useCallback, useState, SetStateAction, createRef } from "react";
-import { IPagePrototype } from "../types";
 import * as validator from "./validator";
 import "../../common.scss";
 import "./index.scss";
+import { IPagePrototype } from "../../types";
 
 interface IProps {
   pages: IPagePrototype[];
