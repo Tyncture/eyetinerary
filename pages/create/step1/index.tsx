@@ -1,7 +1,7 @@
 import React, { useState, useCallback, createRef } from "react";
 import Router from "next/router";
 import { ICreateStepProps } from "../types";
-import *  as validator from "./validator";
+import * as validator from "./validator";
 
 function CreateStep1(props: ICreateStepProps) {
   const initialName = props.itinerary ? props.itinerary.name : "";
@@ -25,7 +25,7 @@ function CreateStep1(props: ICreateStepProps) {
 
     const validateDescription = validator.validateDescription(description);
     validateDescription.messages.forEach(message => messages.push(message));
-    
+
     // Track errors in function scope array as useState is asynchronous
     setValidationErrors(messages);
     return messages.length === 0;
@@ -67,7 +67,9 @@ function CreateStep1(props: ICreateStepProps) {
       </header>
       <form className="create-itinerary-form">
         <div className="create-itinerary-form__elem">
-          <label htmlFor="form-name-input">Itinerary Name</label>
+          <label className="title-2" htmlFor="form-name-input">
+            Itinerary Name
+          </label>
           <input
             id="form-name-input"
             name="name"
@@ -80,7 +82,7 @@ function CreateStep1(props: ICreateStepProps) {
           />
         </div>
         <div className="create-itinerary-form__elem">
-          <label htmlFor="form-description-input">
+          <label className="title-2" htmlFor="form-description-input">
             Itinerary Description
           </label>
           <input
@@ -94,7 +96,7 @@ function CreateStep1(props: ICreateStepProps) {
           />
         </div>
         <div className="create-itinerary-form__elem">
-          <label>Privacy Options</label>
+          <label className="title-2">Privacy Options</label>
           <div className="create-itinerary-form__checkgroup">
             <div className="create-itinerary-form__checkgroup_elem">
               <input

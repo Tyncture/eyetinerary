@@ -1,3 +1,5 @@
+$form-col-width: 400px;
+
 .create-itinerary-step {
   display: grid;
   grid-auto-flow: row;
@@ -7,12 +9,12 @@
 .create-itinerary-step__main {
   display: grid;
   grid-auto-flow: column;
-  grid-template: 1fr 1fr;
-  grid-gap: 40px;
+  grid-template-columns: $form-col-width 1fr;
+  grid-gap: 50px;
 }
 
 .create-itinerary-form {
-  width: 400px;
+  width: $form-col-width;
   display: grid;
   grid-auto-flow: row;
   grid-gap: 20px;
@@ -26,11 +28,6 @@
 .create-itinerary-form__elem {
   display: grid;
   grid-auto-flow: row;
-  grid-gap: 16px;
-
-  label {
-    color: #29323d;
-  }
 
   input[type="text"] {
     outline: none;

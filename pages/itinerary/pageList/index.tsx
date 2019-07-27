@@ -28,6 +28,7 @@ function ItineraryPageList(props: IProps) {
   };
 
   const RemoveButton = (childProps: { pageId: number; className?: string }) => {
+    // TODO: Display confirmation modal
     const handleRemove = useCallback(() => removePage(childProps.pageId), []);
     return (
       <input

@@ -67,8 +67,7 @@ function CreateStep2PageForm(props: IProps) {
 
   // Description
   const handleDescriptionChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) =>
-      setDescription(e.target.value),
+    (e: React.ChangeEvent<HTMLInputElement>) => setDescription(e.target.value),
     [setDescription],
   );
   const handleDescriptionEnter = useCallback(
@@ -88,7 +87,9 @@ function CreateStep2PageForm(props: IProps) {
   return (
     <form className="create-itinerary-form">
       <div className="create-itinerary-form__elem">
-        <label htmlFor="form-page-name-input">Page Name</label>
+        <label className="title-2" htmlFor="form-page-name-input">
+          Page Name
+        </label>
         <input
           id="form-page-name-input"
           name="page-name"
@@ -101,7 +102,9 @@ function CreateStep2PageForm(props: IProps) {
         />
       </div>
       <div className="create-itinerary-form__elem">
-        <label htmlFor="form-page-description-input">Page Description</label>
+        <label className="title-2" htmlFor="form-page-description-input">
+          Page Description
+        </label>
         <input
           id="form-page-description-input"
           name="page-description"
