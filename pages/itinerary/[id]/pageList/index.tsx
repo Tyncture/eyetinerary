@@ -4,6 +4,7 @@ import { apiDelete } from "../../../../common/utils/requests";
 import { IItinerary } from "../../types";
 import { IUser } from "../../../../store/user/types";
 import React, { useCallback, SetStateAction, useMemo } from "react";
+import { sortPages } from "../common";
 
 interface IProps {
   itinerary: IItinerary;
@@ -45,10 +46,8 @@ function ItineraryPageList(props: IProps) {
 
   // Computed values
   const sortedPages = useMemo(() => {
-    return props.itinerary.pages.sort(
-      (a, b) => a.rankInItinerary - b.rankInItinerary,
-    );
-  }, [props.itinerary.pages]);
+    return sortPages(props.itinerary.pages);
+  }, [props.itinerary]);
 
   return (
     <ul className="itinerary-page-list">
