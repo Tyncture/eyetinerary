@@ -1,8 +1,8 @@
 import Head from "next/head";
 import React, { useState } from "react";
 import BaseContainer from "../../components/base/baseContainer";
-import Main from "../../components/base/main";
 import Sidebar from "../../components/base/sidebar";
+import Main from "../../components/base/main";
 import CreateStep1 from "./step1";
 import CreateStep2 from "./step2";
 import { ICreateStepProps } from "./types";
