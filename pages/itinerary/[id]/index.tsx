@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import BaseContainer from "../../../components/base/baseContainer";
 import Sidebar from "../../../components/base/sidebar";
 import Main from "../../../components/base/main";
@@ -6,7 +6,6 @@ import { apiGet } from "../../../common/utils/requests";
 import Head from "next/head";
 import { connect } from "react-redux";
 import { IUser } from "../../../store/user/types";
-import { ApiError } from "../../../common/errors/apiError";
 import { IItinerary } from "../types";
 import ItineraryPageList from "./pageList";
 import { IStoreState } from "../../../store/types";

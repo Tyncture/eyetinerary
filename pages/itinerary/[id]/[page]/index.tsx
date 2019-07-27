@@ -8,6 +8,7 @@ import { IStoreState } from "../../../../store/types";
 import { IUser } from "../../../../store/user/types";
 import { IItinerary, IPage } from "../../types";
 import { useItinerary, sortPages } from "../common";
+import Head from "next/head";
 
 interface IProps {
   query: {
@@ -35,9 +36,16 @@ function ItineraryPage(props: IProps) {
       return sortedPages[Number(props.query.page) - 1];
     }
   }, [itinerary]);
+  const pageTitle = useMemo(
+    () => `${page? `${page.title} - ` : ""}Eyetinerary`,
+    [page],
+  );
 
   return (
     <BaseContainer>
+      <Head>
+        <title>{pageTitle}</title>
+      </Head>
       <Sidebar />
       <Main>
         <div>
