@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { apiGet } from "../../../../common/utils/requests";
 import BaseContainer from "../../../../components/base/baseContainer";
@@ -6,9 +6,10 @@ import Sidebar from "../../../../components/base/sidebar";
 import Main from "../../../../components/base/main";
 import { IStoreState } from "../../../../store/types";
 import { IUser } from "../../../../store/user/types";
-import { IItinerary, IPage } from "../../types";
+import { IItinerary, IPage, IItem } from "../../types";
 import { useItinerary, sortPages } from "../common";
 import Head from "next/head";
+import PageItem from "./pageItem";
 
 interface IProps {
   query: {
@@ -20,6 +21,7 @@ interface IProps {
 }
 
 function ItineraryPage(props: IProps) {
+  const [items, setItems] = useState<IItem[]>();
   const [apiError, setApiError] = useState<string>();
   const userToken = props.user.token ? props.user.token : null;
   const itinerary = useItinerary(
@@ -32,14 +34,24 @@ function ItineraryPage(props: IProps) {
   // Computed values
   const page = useMemo<IPage>(() => {
     if (itinerary) {
+      const pageNumber = Number(props.query.page);
       const sortedPages = sortPages(itinerary.pages);
-      return sortedPages[Number(props.query.page) - 1];
+      if (sortedPages && sortedPages.length >= pageNumber) {
+        return sortedPages[pageNumber - 1];
+      }
     }
   }, [itinerary]);
   const pageTitle = useMemo(
-    () => `${page? `${page.title} - ` : ""}Eyetinerary`,
+    () => `${page ? `${page.title} - ` : ""}Eyetinerary`,
     [page],
   );
+
+  // Manage items state
+  useEffect(() => setItems(page ? page.items : []), [page]);
+  async function removeItem(id: number) {
+    const filteredItems = page.items.filter(e => e.id !== id);
+    setItems(filteredItems);
+  }
 
   return (
     <BaseContainer>
@@ -50,9 +62,24 @@ function ItineraryPage(props: IProps) {
       <Main>
         <div>
           {page && (
-            <header>
-              <h1 className="title">{page.title}</h1>
-            </header>
+            <div>
+              <header>
+                <h1 className="title">{page.title}</h1>
+              </header>
+              {items && (
+                <div>
+                  {items.map((item, index) => (
+                    <PageItem
+                      key={item.id}
+                      displayNumber={index + 1 /* TODO: Calculate position */}
+                      removeItem={removeItem /* TODO: remove from API */}
+                      owner={itinerary.owner}
+                      {...item}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
           )}
         </div>
       </Main>

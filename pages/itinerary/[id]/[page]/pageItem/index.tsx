@@ -6,7 +6,10 @@ import { useMemo, useCallback } from "react";
 
 interface IProps extends IItem {
   displayNumber: number;
-  owner: IUser;
+  owner: IUser | {
+    id: number;
+    username: string;
+  };
   removeItem: (id: number) => void;
   user: IUser;
 }

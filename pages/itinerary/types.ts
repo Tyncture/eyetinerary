@@ -17,4 +17,8 @@ export interface IItinerary {
   title: string;
   description: string;
   pages: IPage[];
+  owner: {
+    id: number;
+    username: string;
+  };
 }
