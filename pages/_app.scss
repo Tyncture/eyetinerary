@@ -70,6 +70,22 @@ h1 {
   padding: 0px 14px !important;
 }
 
+$button-red-text-color: #C63939;
+$button-red-bg: #F5F0F0;
+$button-red-bg-hover-focus: #F1EAEA;
+$button-red-bg-active: #EFE1E1;
+
+.button--red {
+  color: $button-red-text-color;
+  background: $button-red-bg !important;
+  &:hover, &:focus {
+    background: $button-red-bg-hover-focus !important;
+  }
+  &:active {
+    background: $button-red-bg-active !important;
+  }
+}
+
 @media only screen and (max-width: 900px) {
   h1 {
     font-size: 36px;
