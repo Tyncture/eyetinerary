@@ -117,7 +117,7 @@ function CreateStep2PageForm(props: IProps) {
       </div>
       <div className="create-itinerary-step-2-form__button_row">
         <input
-          className="button-wide grid-area-a"
+          className="button button--wide grid-area-a"
           name="add-page"
           type="button"
           value="Add Page"
@@ -125,14 +125,14 @@ function CreateStep2PageForm(props: IProps) {
         />
         {/* TODO: Add divider here */}
         <input
-          className="button-wide grid-area-b"
+          className="button button--wide grid-area-b"
           name="back"
           type="button"
           value="Back"
           onClick={handleBack}
         />
         <input
-          className=" button-wide grid-area-c"
+          className="button button--wide grid-area-c"
           name="finish"
           type="button"
           value="Finish"

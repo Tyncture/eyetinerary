@@ -138,14 +138,14 @@ function CreateStep1(props: IProps) {
         </div>
         <div className="create-itinerary-form__button_row button-wide-row">
           <input
-            className="button-wide"
+            className="button button--wide"
             name="cancel"
             type="button"
             value="Cancel"
             onClick={Router.back}
           />
           <input
-            className="button-wide"
+            className="button button--wide"
             name="next"
             type="button"
             value="Next"

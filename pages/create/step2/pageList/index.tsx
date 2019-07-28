@@ -49,7 +49,12 @@ function CreateStep2PageList(props: IProps) {
                 {page.description}
               </div>
               <RemovePageButton
-                className="create-itinerary-step-2-page-list__remove"
+                className={[
+                  "create-itinerary-step-2-page-list__remove",
+                  "button",
+                  "button--mini",
+                  "button--red",
+                ].join(" ")}
                 index={index}
               />
             </div>
