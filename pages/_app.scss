@@ -61,6 +61,9 @@ h1 {
   font-size: 14px !important;
   width: 100% !important;
   height: 44px !important;
+  &:active {
+    background: #E2ECF8 !important;
+  }
 }
 
 .button--mini {
