@@ -9,7 +9,7 @@ import Head from "next/head";
 
 function ErrorPage(props: { status: number; url: string }) {
   // Button handler
-  const handleHome = useCallback(() => Router.push("/"), []);
+  const handleHome = useCallback(() => Router.back(), []);
   
   // Computed values
   const headTitleInitial = useMemo(
