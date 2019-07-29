@@ -1,0 +1,62 @@
+.create-itinerary-step-2-page-list {
+  padding: 0;
+  border: 0.03125rem solid #e4e6e7;
+  border-radius: 0.3125rem;
+  > :nth-child(n + 2) {
+    border-top: 0.03125rem solid #e4e6e7;
+  }
+}
+
+.create-itinerary-step-2-page-list__item {
+  list-style-type: none;
+  padding: 1.125rem;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: auto 1fr;
+  grid-gap: 1.125rem;
+}
+
+.create-itinerary-step-2-page-list__details {
+  display: grid;
+  align-items: center;
+  grid-template-areas:
+    "a c"
+    "b c";
+}
+
+.create-itinerary-step-2-page-list__name {
+  color: #29323D;
+  font-weight: 500;
+}
+
+.create-itinerary-step-2-page-list__description {
+  color: #737E8C;
+  margin-top: 0.25rem;
+}
+
+.create-itinerary-step-2-page-list__name {
+  grid-area: a;
+}
+
+.create-itinerary-step-2-page-list__description {
+  grid-area: b;
+}
+
+.create-itinerary-step-2-page-list__remove_container {
+  grid-area: c;
+  margin-left: auto;
+}
+
+@media screen and (max-width: 900px) {
+  .create-itinerary-step-2-page-list__details {
+    grid-template-areas:
+      "a"
+      "b"
+      "c";
+  }
+
+  .create-itinerary-step-2-page-list__remove_container {
+    margin-top: 0.625rem;
+    margin-left: 0;
+  }
+}
