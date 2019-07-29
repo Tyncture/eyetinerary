@@ -5,28 +5,26 @@ import { Provider } from "react-redux";
 import { createPersistedStore } from "../store";
 import { PersistGate } from "redux-persist/integration/react";
 
-const {store, persistor} = createPersistedStore();
+const { store, persistor } = createPersistedStore();
 
 class CustomApp extends App {
-  static async getInitialProps({ Component, ctx }) {
-    let pageProps = {};
-
-    if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx);
-    }
-
-    return { pageProps };
-  }
-
   render() {
     const { Component, pageProps } = this.props;
+
+    /*
+     * PersistGate causes Server-Side Rendering to fail and silently,
+     * without any warning in the stack track. Workaround used here is
+     * to substitute it with a container if not running in a browser,
+     */
+    const PersistIfBrowser =
+      typeof window === "undefined" ? Container : PersistGate;
 
     return (
       <Container>
         <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
+          <PersistIfBrowser loading={null} persistor={persistor}>
             <Component {...pageProps} className="app-container" />
-          </PersistGate>
+          </PersistIfBrowser>
         </Provider>
       </Container>
     );
