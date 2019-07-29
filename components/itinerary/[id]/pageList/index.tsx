@@ -14,7 +14,7 @@ interface IProps {
 
 function ItineraryPageList(props: IProps) {
   const [pages, setPages] = useState<IPage[]>(props.itinerary.pages);
-
+  useEffect(() => setPages(props.itinerary.pages), [props.itinerary]);
   const userToken = props.user.token ? props.user.token : null;
   const editToken = props.editTokens[props.itinerary.id]
     ? props.editTokens[props.itinerary.id].token
