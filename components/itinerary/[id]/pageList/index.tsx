@@ -13,8 +13,7 @@ interface IProps {
 }
 
 function ItineraryPageList(props: IProps) {
-  const [pages, setPages] = useState<IPage[]>();
-  useEffect(() => setPages(props.itinerary.pages), [props.itinerary]);
+  const [pages, setPages] = useState<IPage[]>(props.itinerary.pages);
 
   const userToken = props.user.token ? props.user.token : null;
   const editToken = props.editTokens[props.itinerary.id]
@@ -24,7 +23,7 @@ function ItineraryPageList(props: IProps) {
   async function removePage(id: number) {
     const response = await apiDelete(`/page/${id}`, { editToken }, userToken);
     if (response.success) {
-      const pagesLeft = props.itinerary.pages.filter(page => page.id !== id);
+      const pagesLeft = pages.filter(page => page.id !== id);
       setPages(pagesLeft);
     }
   }
