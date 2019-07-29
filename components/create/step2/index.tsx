@@ -2,8 +2,6 @@ import Router from "next/router";
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { ApiError } from "../../../common/errors/apiError";
-import { apiDelete, apiPost } from "../../../common/utils/requests";
 import { ICreateItinerary } from "../../../store/createItinerary/types";
 import { addItineraryEditToken } from "../../../store/itineraryEditTokens/actions";
 import { IStoreState } from "../../../store/types";
@@ -13,6 +11,8 @@ import CreateStep2PageForm from "./pageForm";
 import CreateStep2PageList from "./pageList";
 import { clearCreateItinerary } from "../../../store/createItinerary/actions";
 import { ICreateStepProps } from "../../../library/create/types";
+import { apiPost, apiDelete } from "../../../library/common/utils/requests";
+import { ApiError } from "../../../library/common/errors/apiError";
 
 interface IProps extends ICreateStepProps, ICreateItinerary {
   user: IUser;

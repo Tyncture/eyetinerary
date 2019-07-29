@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { IItineraryEditTokens } from "../../../../store/itineraryEditTokens/types";
-import { apiDelete } from "../../../../common/utils/requests";
+import { apiDelete } from "../../../../library/common/utils/requests";
 import { IItinerary, IPage } from "../../../../library/itinerary/types";
 import { IUser } from "../../../../store/user/types";
 import React, { useCallback, useMemo, useState, useEffect } from "react";

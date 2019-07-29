@@ -1,8 +1,8 @@
 import React, { SetStateAction, useEffect, useState } from "react";
-import { ApiError } from "../../common/errors/apiError";
-import { apiGet } from "../../common/utils/requests";
+import { ApiError } from "../common/errors/apiError";
+import { apiGet } from "../common/utils/requests";
 import { IItinerary, IPage } from "./types";
-import { debug } from "../../common/utils/debug";
+import { debug } from "../common/utils/debug";
 
 export function useItinerary(
   id: number,

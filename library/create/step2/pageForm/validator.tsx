@@ -1,5 +1,5 @@
 import * as validator from "validator";
-import { IFieldValidatorResult } from "../../../../common/abstract/fieldValidatorResult";
+import { IFieldValidatorResult } from "../../../common/abstract/fieldValidatorResult";
 
 export function validateName(input): IFieldValidatorResult {
   const messages: string[] = [];

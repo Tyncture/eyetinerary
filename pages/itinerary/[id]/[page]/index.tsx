@@ -1,6 +1,6 @@
 import { useMemo, useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { apiGet } from "../../../../common/utils/requests";
+import { apiGet } from "../../../../library/common/utils/requests";
 import BaseContainer from "../../../../components/base/baseContainer";
 import Sidebar from "../../../../components/base/sidebar";
 import Main from "../../../../components/base/main";
