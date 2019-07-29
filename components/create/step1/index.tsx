@@ -7,8 +7,9 @@ import {
   setCreateItineraryName,
 } from "../../../store/createItinerary/actions";
 import { IStoreState } from "../../../store/types";
-import { ICreateStepProps } from "../types";
-import * as validator from "./validator";
+import * as validator from "../../../library/create/step1/validator";
+import { ICreateStepProps } from "../../../library/create/types";
+import "../common.scss";
 
 interface IProps extends ICreateStepProps {
   name: string;

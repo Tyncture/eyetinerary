@@ -6,10 +6,10 @@ import Sidebar from "../../../../components/base/sidebar";
 import Main from "../../../../components/base/main";
 import { IStoreState } from "../../../../store/types";
 import { IUser } from "../../../../store/user/types";
-import { IItinerary, IPage, IItem } from "../../types";
-import { useItinerary, sortPages } from "../common";
+import { useItinerary, sortPages } from "../../../../library/itinerary/common";
 import Head from "next/head";
-import PageItem from "./pageItem";
+import PageItem from "../../../../components/itinerary/[id]/[page]/pageItem";
+import { IItem, IItinerary, IPage } from "../../../../library/itinerary/types";
 
 interface IProps {
   query: {

@@ -1,10 +1,10 @@
 import { connect } from "react-redux";
 import { IItineraryEditTokens } from "../../../../store/itineraryEditTokens/types";
 import { apiDelete } from "../../../../common/utils/requests";
-import { IItinerary, IPage } from "../../types";
+import { IItinerary, IPage } from "../../../../library/itinerary/types";
 import { IUser } from "../../../../store/user/types";
 import React, { useCallback, useMemo, useState, useEffect } from "react";
-import { sortPages } from "../common";
+import { sortPages } from "../../../../library/itinerary/common";
 
 interface IProps {
   itinerary: IItinerary;

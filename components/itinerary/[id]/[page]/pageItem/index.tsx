@@ -1,4 +1,4 @@
-import { IItem, IItinerary } from "../../../types";
+import { IItem, IItinerary } from "../../../../../library/itinerary/types";
 import { IUser } from "../../../../../store/user/types";
 import { IStoreState } from "../../../../../store/types";
 import { connect } from "react-redux";

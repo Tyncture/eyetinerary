@@ -6,10 +6,10 @@ import { apiGet } from "../../../common/utils/requests";
 import Head from "next/head";
 import { connect } from "react-redux";
 import { IUser } from "../../../store/user/types";
-import { IItinerary } from "../types";
-import ItineraryPageList from "./pageList";
+import { IItinerary } from "../../../library/itinerary/types";
+import ItineraryPageList from "../../../components/itinerary/[id]/pageList";
 import { IStoreState } from "../../../store/types";
-import { useItinerary } from "./common";
+import { useItinerary } from "../../../library/itinerary/common";
 
 interface IProps {
   query: {

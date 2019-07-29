@@ -5,7 +5,7 @@ import { addCreateItineraryPage } from "../../../../store/createItinerary/action
 import { IPagePrototype } from "../../../../store/createItinerary/types";
 import "../../common.scss";
 import "./index.scss";
-import * as validator from "./validator";
+import * as validator from "../../../../library/create/step2/pageForm/validator";
 
 interface IProps {
   addPage: (page: IPagePrototype) => void;

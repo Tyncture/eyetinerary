@@ -9,10 +9,10 @@ import { addItineraryEditToken } from "../../../store/itineraryEditTokens/action
 import { IStoreState } from "../../../store/types";
 import { IUser } from "../../../store/user/types";
 import "../common.scss";
-import { ICreateStepProps } from "../types";
 import CreateStep2PageForm from "./pageForm";
 import CreateStep2PageList from "./pageList";
 import { clearCreateItinerary } from "../../../store/createItinerary/actions";
+import { ICreateStepProps } from "../../../library/create/types";
 
 interface IProps extends ICreateStepProps, ICreateItinerary {
   user: IUser;
