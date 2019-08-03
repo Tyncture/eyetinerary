@@ -5,6 +5,7 @@ import { removeCreateItineraryPage } from "../../../../store/createItinerary/act
 import { IPagePrototype } from "../../../../store/createItinerary/types";
 import { IStoreState } from "../../../../store/types";
 import "./index.scss";
+import SquareIcon from "../../../common/SquareIcon";
 
 interface IProps {
   pages: IPagePrototype[];
@@ -33,7 +34,7 @@ function CreateStep2PageList(props: IProps) {
 
   return (
     <div>
-      {(props.pages.length > 0 && (
+      {props.pages.length > 0 && (
         <div>
           <header>
             <h2 className="title-2">Page List</h2>
@@ -45,14 +46,16 @@ function CreateStep2PageList(props: IProps) {
                 key={index}
               >
                 <div className="create-itinerary-step-2-page-list__icon">
-                  [icon]
+                  <SquareIcon>▢</SquareIcon>
                 </div>
                 <div className="create-itinerary-step-2-page-list__details">
                   <div className="create-itinerary-step-2-page-list__name ">
                     {page.name}
                   </div>
                   <div className="create-itinerary-step-2-page-list__description">
-                    {5}
+                    { page.description && page.description.length > 0
+                      ? page.description
+                      : "No description provided"}
                   </div>
                   <div className="create-itinerary-step-2-page-list__remove_container">
                     <RemovePageButton
@@ -70,7 +73,7 @@ function CreateStep2PageList(props: IProps) {
             ))}
           </ul>
         </div>
-      ))}
+      )}
     </div>
   );
 }
