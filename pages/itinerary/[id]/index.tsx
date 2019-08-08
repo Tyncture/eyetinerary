@@ -10,7 +10,6 @@ import { IItinerary } from "../../../library/itinerary/types";
 import ItineraryPageList from "../../../components/itinerary/[id]/pageList";
 import { IStoreState } from "../../../store/types";
 import { useItinerary } from "../../../library/itinerary/common";
-import datefns, { differenceInWeeks } from "date-fns";
 
 interface IProps {
   query: {
