@@ -5,7 +5,7 @@ import { removeCreateItineraryPage } from "../../../../store/createItinerary/act
 import { IPagePrototype } from "../../../../store/createItinerary/types";
 import { IStoreState } from "../../../../store/types";
 import "./index.scss";
-import SquareIcon from "../../../common/SquareIcon";
+import SquareIcon from "../../../common/icons/base/SquareIcon";
 
 interface IProps {
   pages: IPagePrototype[];
