@@ -26,10 +26,16 @@ function workaroundNextPluginsIssue392(config) {
   });
 }
 
+//
+
 module.exports = withNextEnv(
   withSass({
     webpack: config => {
       workaroundNextPluginsIssue392(config);
+      config.module.rules.push({
+        test: /\.svg$/,
+        use: ["@svgr/webpack"],
+      });
       return config;
     },
   }),

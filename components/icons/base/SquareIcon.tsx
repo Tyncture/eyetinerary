@@ -19,7 +19,7 @@ function SquareIcon(props: IProps) {
 }
 
 SquareIcon.defaultProps = {
-  cssPadding: "0.5rem",
+  cssPadding: "1rem",
   cssColor: "#F6F7F9",
 };
 

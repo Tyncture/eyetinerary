@@ -5,7 +5,8 @@ import { removeCreateItineraryPage } from "../../../../store/createItinerary/act
 import { IPagePrototype } from "../../../../store/createItinerary/types";
 import { IStoreState } from "../../../../store/types";
 import "./index.scss";
-import SquareIcon from "../../../common/icons/base/SquareIcon";
+import SquareIcon from "../../../icons/base/SquareIcon";
+import PageIcon from "../../../icons/PageIcon";
 
 interface IProps {
   pages: IPagePrototype[];
@@ -46,14 +47,14 @@ function CreateStep2PageList(props: IProps) {
                 key={index}
               >
                 <div className="create-itinerary-step-2-page-list__icon">
-                  <SquareIcon>▢</SquareIcon>
+                  <PageIcon />
                 </div>
                 <div className="create-itinerary-step-2-page-list__details">
                   <div className="create-itinerary-step-2-page-list__name ">
                     {page.name}
                   </div>
                   <div className="create-itinerary-step-2-page-list__description">
-                    { page.description && page.description.length > 0
+                    {page.description && page.description.length > 0
                       ? page.description
                       : "No description provided"}
                   </div>
