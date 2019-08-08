@@ -10,6 +10,7 @@ import { IItinerary } from "../../../library/itinerary/types";
 import ItineraryPageList from "../../../components/itinerary/[id]/pageList";
 import { IStoreState } from "../../../store/types";
 import { useItinerary } from "../../../library/itinerary/common";
+import datefns, { differenceInWeeks } from "date-fns";
 
 interface IProps {
   query: {
@@ -36,6 +37,22 @@ function Itinerary(props: IProps) {
     [itinerary],
   );
 
+  const duration = useMemo(() => {
+    // Mock start and end times
+    const start = Date.now();
+    const end = start.valueOf() + 1000 * 60 * 60 * 24 * 15;
+    // Calculate difference
+    const difference = end - start;
+    const weeks = Math.floor(difference / (1000 * 60 * 60 * 24 * 7));
+    const days = Math.floor(difference / (1000 * 60 * 60 * 24)) - weeks * 7;
+    // Construct formatted string
+    const fmtWeeks = weeks > 0 ? `${weeks} week${weeks > 1 ? "s" : ""}` : "";
+    const fmtJoiner = weeks > 0 && days > 0 ? " and " : "";
+    const fmtDays =
+      days > 0 || weeks < 1 ? `${days} day${days > 1 ? "s" : ""}` : "";
+    return `${fmtWeeks}${fmtJoiner}${fmtDays}`;
+  }, [/* time start, time end, etc.*/]);
+
   return (
     <BaseContainer>
       <Head>
@@ -44,10 +61,20 @@ function Itinerary(props: IProps) {
       <Sidebar />
       <Main>
         {itinerary && (
-          <div>
-            <header>
+          <div className="itinerary">
+            <header className="itinerary__header">
               <h1 className="title">{itinerary.title}</h1>
-              <div className="sub-title">{itinerary.description}</div>
+              <div className="sub-title">itinerary description</div>
+              <div className="itinerary__info">
+                <div className="itinerary__info_item">
+                  <span>Destination: </span>
+                  <span>Bangkok, Thailand</span>
+                </div>
+                <div className="itinerary__info_item">
+                  <span>Duration: </span>
+                  <span>{duration}</span>
+                </div>
+              </div>
             </header>
             <div>
               <h2 className="title-2">Pages</h2>
