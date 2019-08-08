@@ -22,16 +22,22 @@
   grid-template-areas:
     "a c"
     "b c";
+  * {
+    word-wrap: break-word;
+    word-break: break-all;
+    hyphens: auto;
+  }
 }
 
 .create-itinerary-step-2-page-list__name {
   color: #29323D;
   font-weight: 500;
+  font-size: 1.05rem;
 }
 
 .create-itinerary-step-2-page-list__description {
   color: #737E8C;
-  margin-top: 0.25rem;
+  font-size: 0.875rem;
 }
 
 .create-itinerary-step-2-page-list__name {
