@@ -8,7 +8,8 @@ export function validateName(input): IFieldValidatorResult {
     messages.push("Name is not a valid string");
   }
 
-  if (!validator.isLength(input, { min: 1 })) {
+
+  if (!validator.isLength((input as string).trim(), { min: 1 })) {
     messages.push("The name field is empty");
   }
 

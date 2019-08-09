@@ -8,7 +8,7 @@ export function validateName(input): IFieldValidatorResult {
     messages.push("Page name is not a valid string");
   }
 
-  if (!validator.isLength(input, { min: 1 })) {
+  if (!validator.isLength((input as string).trim(), { min: 1 })) {
     messages.push("The page name field is empty");
   }
 
