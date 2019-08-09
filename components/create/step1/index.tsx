@@ -27,50 +27,79 @@ function CreateStep1(props: IProps) {
 
   // Input Field References
   const nameFieldRef = createRef<HTMLInputElement>();
+  const descriptionFieldRef = createRef<HTMLInputElement>();
 
-  function validateForm(): boolean {
+  // Validation logic
+  const validateForm = useCallback(() => {
     const messages = [];
 
+    // Validate name and focus on error
     const validateName = validator.validateName(name);
     validateName.messages.forEach(message => messages.push(message));
     if (validateName.error) {
       nameFieldRef.current.focus();
     }
 
+    // Validate description
     const validateDescription = validator.validateDescription(description);
     validateDescription.messages.forEach(message => messages.push(message));
 
     // Track errors in function scope array as useState is asynchronous
     setValidationErrors(messages);
     return messages.length === 0;
-  }
+  }, [name, description, nameFieldRef]);
 
+  const validateAndProceed = useCallback(() => {
+    const formValid = validateForm();
+    if (formValid) {
+      props.setName(name.trim());
+      props.setDescription(description.trim());
+      props.setStep(2);
+    }
+  }, [validateForm]);
+
+
+  // Name Field
   const handleNameChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value),
     [setName],
   );
+  const handleNameEnter = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.keyCode === 13 && name.length > 0) {
+        descriptionFieldRef.current.focus();
+      }
+    },
+    [descriptionFieldRef],
+  );
+
+  // Description Field
   const handleDescriptionChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => setDescription(e.target.value),
     [setDescription],
   );
+  const handleDescriptionEnter = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.keyCode === 13 && name.length > 0) {
+        validateAndProceed();
+      }
+    },
+    [validateAndProceed],
+  );
+
+  // Make Private Field
   const handleMakePrivateChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) =>
       setMakePrivate(e.target.checked),
     [setMakePrivate],
   );
+
+  // Post Anonymously Field
   const handlePostAnonymouslyChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) =>
       setPostAnonymously(e.target.checked),
     [setPostAnonymously],
   );
-  const handleNext = useCallback(async () => {
-    const formValid = validateForm();
-    if (formValid) {
-      props.setName(name);
-      props.setDescription(description);
-      props.setStep(2);
-    }
-  }, [validateForm]);
 
   return (
     <div className="create-itinerary-step">
@@ -93,6 +122,7 @@ function CreateStep1(props: IProps) {
             placeholder="Winter holiday in Southeast Asia"
             value={name}
             onChange={handleNameChange}
+            onKeyUp={handleNameEnter}
             ref={nameFieldRef}
           />
         </div>
@@ -108,6 +138,8 @@ function CreateStep1(props: IProps) {
             placeholder="Two weeks in Thailand and Laos"
             value={description}
             onChange={handleDescriptionChange}
+            onKeyUp={handleDescriptionEnter}
+            ref={descriptionFieldRef}
           />
         </div>
         <div className="create-itinerary-form__elem">
@@ -150,7 +182,7 @@ function CreateStep1(props: IProps) {
             name="next"
             type="button"
             value="Next"
-            onClick={handleNext}
+            onClick={validateAndProceed}
           />
         </div>
       </form>
