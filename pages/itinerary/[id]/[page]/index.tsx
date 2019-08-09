@@ -60,8 +60,7 @@ function ItineraryPage(props: IProps) {
       </Head>
       <Sidebar />
       <Main>
-        <div>
-          {page && (
+        {page && (
             <div>
               <header>
                 <h1 className="title">{page.title}</h1>
@@ -81,7 +80,6 @@ function ItineraryPage(props: IProps) {
               )}
             </div>
           )}
-        </div>
       </Main>
     </BaseContainer>
   );
