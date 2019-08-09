@@ -71,7 +71,7 @@ function CreateStep2PageForm(props: IProps) {
   );
   const handleDescriptionEnter = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (e.keyCode === 13 && description.length > 0) {
+      if (e.keyCode === 13) {
         addPage();
       }
     },
