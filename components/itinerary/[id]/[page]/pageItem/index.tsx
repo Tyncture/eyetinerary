@@ -20,6 +20,11 @@ function PageItem(props: IProps) {
     props.removeItem,
   ]);
 
+  const handleEdit = useCallback(() => {}, [
+    props.id,
+    /*props.updateItem*/,
+  ]);
+
   const userIsOwner = useMemo(() => props.user.id === props.owner.id, [
     props.user,
     props.owner,
@@ -49,7 +54,12 @@ function PageItem(props: IProps) {
           <input type="button" name="share" value="Share" />
           {userIsOwner && (
             <div>
-              <input type="button" name="edit" value="Edit" />
+              <input
+                type="button"
+                name="edit"
+                value="Edit"
+                onClick={handleEdit}
+              />
               <input
                 type="button"
                 name="remove"

@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { IItineraryEditTokens } from "../../../../store/itineraryEditTokens/types";
-import { apiDelete } from "../../../../library/common/utils/requests";
+import { apiDelete, apiPost } from "../../../../library/common/utils/requests";
 import { IItinerary, IPage } from "../../../../library/itinerary/types";
 import { IUser } from "../../../../store/user/types";
 import React, { useCallback, useMemo, useState, useEffect } from "react";
@@ -28,6 +28,38 @@ function ItineraryPageList(props: IProps) {
     }
   }
 
+  async function updatePage(id: number, name?: string, description?: string) {
+    // TODO: Implement editing view and logic
+    const pageBefore = pages.find(page => page.id === id);
+    if (pageBefore) {
+      const pageAfter = {
+        ...pageBefore,
+        title: name ? name : pageBefore.title,
+        description: description ? description : pageBefore.description,
+      };
+      // Mock response
+      const response = { success: true };
+      if (response.success) {
+        const newPages = [...pages.filter(page => page.id !== id), pageAfter];
+        setPages(newPages);
+      }
+    }
+  }
+
+  const EditButton = (childProps: { pageId: number; className?: string }) => {
+    // TODO: Implement editing view
+    const handleRemove = useCallback(() => removePage(childProps.pageId), []);
+    return (
+      <input
+        className={childProps.className}
+        type="button"
+        name="remove"
+        value="Edit"
+        onClick={handleRemove}
+      />
+    );
+  };
+
   const RemoveButton = (childProps: { pageId: number; className?: string }) => {
     // TODO: Display confirmation modal
     const handleRemove = useCallback(() => removePage(childProps.pageId), []);
@@ -54,12 +86,18 @@ function ItineraryPageList(props: IProps) {
           <div className="itinerary-page-list_elem__icon">[icon]</div>
           <div>
             <div>
-              <div className="itinerary-page-list-elem__name">{page.title}</div>
+              <div className="itinerary-page-list-elem__name">
+                {page.title}
+              </div>
               <div className="itinerary-page-list-elem__description">
                 {page.description}
               </div>
             </div>
             <div className="itinerary-page-list-elem__button_row">
+              <EditButton
+                className="itinerary-page-list-elem__button"
+                pageId={page.id}
+              />
               <RemoveButton
                 className="itinerary-page-list-elem__button"
                 pageId={page.id}
