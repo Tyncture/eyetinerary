@@ -1,8 +1,8 @@
 import { default as NextError } from "next/error";
-import BaseContainer from "../components/base/baseContainer";
-import Sidebar from "../components/base/sidebar";
-import Main from "../components/base/main";
-import "./_error.scss";
+import BaseContainer from "../../components/base/baseContainer";
+import Sidebar from "../../components/base/sidebar";
+import Main from "../../components/base/main";
+import "./index.scss";
 import Router from "next/router";
 import { useCallback, useMemo } from "react";
 import Head from "next/head";

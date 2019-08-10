@@ -1,8 +1,8 @@
 import React from "react";
 import App, { Container } from "next/app";
-import "./_app.scss";
+import "./index.scss";
 import { Provider } from "react-redux";
-import { createPersistedStore } from "../store";
+import { createPersistedStore } from "../../store";
 import { PersistGate } from "redux-persist/integration/react";
 
 const { store, persistor } = createPersistedStore();
