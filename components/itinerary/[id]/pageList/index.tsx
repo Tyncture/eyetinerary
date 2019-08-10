@@ -6,6 +6,8 @@ import { IUser } from "../../../../store/user/types";
 import React, { useCallback, useMemo, useState, useEffect } from "react";
 import { sortPages } from "../../../../library/itinerary/common";
 import Router from "next/router";
+import "./index.scss";
+import PageIcon from "../../../icons/PageIcon";
 
 interface IProps {
   itinerary: IItinerary;
@@ -103,12 +105,12 @@ function ItineraryPageList(props: IProps) {
     <ul className="itinerary-page-list">
       {sortedPages.map(page => (
         <li className="itinerary-page-list-elem" key={page.id}>
-          <div className="itinerary-page-list_elem__icon">[icon]</div>
+          <div className="itinerary-page-list_elem__icon">
+            <PageIcon />
+          </div>
           <div className="itinerary-page-list_elem__info">
             <div>
-              <div className="itinerary-page-list-elem__name">
-                {page.title}
-              </div>
+              <div className="itinerary-page-list-elem__name">{page.title}</div>
               <div className="itinerary-page-list-elem__description">
                 {page.description}
               </div>
