@@ -20,3 +20,11 @@
 .itinerary-page-list_elem__info {
   flex-grow: 1;
 }
+
+.itinerary-page-list-elem__button_row {
+  display: flex;
+  justify-items: flex-start;
+  > :nth-child(n + 2) {
+      margin-left: 0.5rem;
+    }
+}
