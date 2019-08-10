@@ -5,6 +5,7 @@ import { IItinerary, IPage } from "../../../../library/itinerary/types";
 import { IUser } from "../../../../store/user/types";
 import React, { useCallback, useMemo, useState, useEffect } from "react";
 import { sortPages } from "../../../../library/itinerary/common";
+import Router from "next/router";
 
 interface IProps {
   itinerary: IItinerary;
@@ -53,7 +54,7 @@ function ItineraryPageList(props: IProps) {
       <input
         className={childProps.className}
         type="button"
-        name="remove"
+        name="edit"
         value="Edit"
         onClick={handleRemove}
       />
@@ -74,6 +75,25 @@ function ItineraryPageList(props: IProps) {
     );
   };
 
+  const ViewButton = (childProps: { pageRank: number; className?: string }) => {
+    // TODO: Display confirmation modal
+    const handleView = useCallback(() => {
+      Router.push(
+        `/itinerary/[id]/[page]`,
+        `/itinerary/${props.itinerary.id}/${childProps.pageRank}`,
+      );
+    }, []);
+    return (
+      <input
+        className={childProps.className}
+        type="button"
+        name="view"
+        value="View"
+        onClick={handleView}
+      />
+    );
+  };
+
   // Computed values
   const sortedPages = useMemo(() => {
     return pages ? sortPages(pages) : [];
@@ -84,7 +104,7 @@ function ItineraryPageList(props: IProps) {
       {sortedPages.map(page => (
         <li className="itinerary-page-list-elem" key={page.id}>
           <div className="itinerary-page-list_elem__icon">[icon]</div>
-          <div>
+          <div className="itinerary-page-list_elem__info">
             <div>
               <div className="itinerary-page-list-elem__name">
                 {page.title}
@@ -103,6 +123,12 @@ function ItineraryPageList(props: IProps) {
                 pageId={page.id}
               />
             </div>
+          </div>
+          <div className="itinerary-page-list-elem__end">
+            <ViewButton
+              className="itinerary-page-list-elem__view_button"
+              pageRank={page.rankInItinerary}
+            />
           </div>
         </li>
       ))}
