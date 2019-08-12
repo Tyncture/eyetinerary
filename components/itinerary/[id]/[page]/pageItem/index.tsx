@@ -31,26 +31,26 @@ function PageItem(props: IProps) {
   ]);
 
   return (
-    <div className="itinerary-item">
-      <header className="itinerary-item__header">
-        <h2 className="itinerary-item__name">
+    <div className="item">
+      <header className="item__header">
+        <h2 className="item__name">
           {props.displayNumber} {props.title}
         </h2>
       </header>
-      <div className="itinerary-item__main">
-        <section className="itinerary-item__info">
-          <div className="itinerary-item__info_field">
-            <div className="itinerary-item__info_field_name">[name]</div>
-            <div className="itinerary-item__info_field_value">[value]</div>
+      <div className="item__main">
+        <section className="item__info">
+          <div className="item__info_field">
+            <div className="item__info_field_name">[name]</div>
+            <div className="item__info_field_value">[value]</div>
           </div>
         </section>
-        <section className="itinerary-item__body">
-          <header className="itinerary-item__body_header">
+        <section className="item__body">
+          <header className="item__body_header">
             <h3>Details</h3>
           </header>
-          <div className="itinerary-item-body__text">{props.body}</div>
+          <div className="item-body__text">{props.body}</div>
         </section>
-        <section className="itinerary-item__buttons">
+        <section className="item__buttons">
           <input type="button" name="share" value="Share" />
           {userIsOwner && (
             <div>
