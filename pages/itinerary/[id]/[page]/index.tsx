@@ -10,6 +10,7 @@ import { useItinerary, sortPages } from "../../../../library/itinerary/common";
 import Head from "next/head";
 import PageItem from "../../../../components/itinerary/[id]/[page]/pageItem";
 import { IItem, IItinerary, IPage } from "../../../../library/itinerary/types";
+import "./index.scss";
 
 interface IProps {
   query: {
@@ -49,7 +50,7 @@ function ItineraryPage(props: IProps) {
   // Manage items state
   useEffect(() => setItems(page ? page.items : []), [page]);
   async function removeItem(id: number) {
-    const filteredItems = page.items.filter(e => e.id !== id);
+    const filteredItems = items.filter(e => e.id !== id);
     setItems(filteredItems);
   }
 
@@ -70,6 +71,7 @@ function ItineraryPage(props: IProps) {
                 {items.map((item, index) => (
                   <PageItem
                     key={item.id}
+                    id={item.id}
                     displayNumber={index + 1 /* TODO: Calculate position */}
                     removeItem={removeItem /* TODO: remove from API */}
                     owner={itinerary.owner}
