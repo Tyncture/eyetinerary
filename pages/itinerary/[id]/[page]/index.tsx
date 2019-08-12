@@ -61,12 +61,12 @@ function ItineraryPage(props: IProps) {
       <Sidebar />
       <Main>
         {page && (
-          <div>
-            <header>
+          <div className="page">
+            <header className="page__header">
               <h1 className="title">{page.title}</h1>
             </header>
             {items && (
-              <div>
+              <div className="page__item_grid">
                 {items.map((item, index) => (
                   <PageItem
                     key={item.id}
