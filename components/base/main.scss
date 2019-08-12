@@ -1,15 +1,10 @@
 .main {
-  --padding-v: 80px;
-  --padding-h: 120px;
+  --padding-v: 5rem;
+  --padding-h: 3.75rem;
   display: block;
   width: 100%;
   overflow: auto;
   padding: var(--padding-v) var(--padding-h);
-  &:after {
-    content: "";
-    height: var(--padding-v);
-    display: block;
-}
 }
 
 .main-inner {
@@ -20,7 +15,13 @@
 
 @media only screen and (max-width: 900px) {
   .main {
-    --padding-v: 40px;
-  --padding-h: 40px;
+    --padding-v: 2.5rem;
+    --padding-h: 2.5rem;
+
+    &:after {
+      content: "";
+      height: var(--padding-v);
+      display: block;
+    }
   }
 }
