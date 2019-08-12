@@ -1,23 +1,23 @@
-$form-col-width: 400px;
+$form-col-width: 25rem;
 
 .create-itinerary-step {
   display: grid;
   grid-auto-flow: row;
-  grid-gap: 30px;
+  grid-gap: 1.875rem;
 }
 
 .create-itinerary-step__main {
   display: grid;
   grid-auto-flow: column;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 50px;
+  grid-gap: 3.125rem;
 }
 
 .create-itinerary-form {
   width: $form-col-width;
   display: grid;
   grid-auto-flow: row;
-  grid-gap: 20px;
+  grid-gap: 1.25rem;
 
   label {
     user-select: none;
@@ -30,41 +30,41 @@ $form-col-width: 400px;
 
   input[type="text"] {
     outline: none;
-    border: 0.5px solid #e4e6e7;
-    border-radius: 3px;
-    line-height: 24px;
-    padding: 6px 8px;
+    border: 0.0313rem solid #e4e6e7;
+    border-radius: 0.1875rem;
+    line-height: 1.5rem;
+    padding: 0.375rem 0.5rem;
     background-color: white;
-    box-shadow: 0 0 1px 0px #d9d9d9;
+    box-shadow: 0 0 0.0625rem 0rem #d9d9d9;
   }
 }
 
 .create-itinerary-form__checkgroup {
   display: grid;
   grid-auto-flow: row;
-  grid-gap: 10px;
+  grid-gap: 0.625rem;
 }
 
 .create-itinerary-form__checkgroup_elem {
   display: grid;
   grid-auto-flow: column;
   grid-template-columns: minmax(max-content, max-content);
-  grid-gap: 10px;
+  grid-gap: 0.625rem;
   align-items: center;
 
   label {
     text-align: left;
-    font-size: 13px;
+    font-size: 0.8125rem;
     color: #61656b;
   }
 }
 
 .create-itinerary-form__button_row {
-  margin-top: 4px;
+  margin-top: 0.25rem;
   display: grid;
   grid-auto-flow: column;
   grid-template: 1fr 1fr;
-  grid-gap: 16px;
+  grid-gap: 1rem;
 }
 
 @media screen and (max-width: 900px) {

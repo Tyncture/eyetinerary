@@ -8,7 +8,6 @@
 
 body {
   font-family: Inter, Roboto, Arial, Helvetica, sans-serif;
-  font-size: 16px;
   color: #303030;
 }
 
@@ -17,33 +16,33 @@ html, body, #__next {
 }
 
 h1 {
-  font-size: 48px;
+  font-size: 3rem;
   font-weight: 500;
 }
 
 .title {
-  margin: 12px 0;
+  margin: 0.75rem 0;
   color: #264A73;
 }
 
 .sub-title {
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 400;
 }
 
 .title-2 {
   margin-top: 0;
-  margin-bottom: 16px;
-  font-size: 16px;
+  margin-bottom: 1rem;
+  font-size: 1rem;
   font-weight: 500;
   color: #29323d;
 }
 
 .button {
-  border-radius: 4px;
+  border-radius: 0.25rem;
   border: none;
   outline: none !important;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 500;
   color: #454C54;
   background-color: #F3F5F6;
@@ -59,19 +58,19 @@ h1 {
 }
 
 .button--wide {
-  font-size: 14px !important;
+  font-size: 0.875rem !important;
   width: 100% !important;
-  height: 44px !important;
+  height: 2.75rem !important;
   &:active {
     background: #E2ECF8 !important;
   }
 }
 
 .button--mini {
-  height: 30px !important;
-  font-size: 12px !important;
+  height: 1.875rem !important;
+  font-size: 0.75rem !important;
   font-weight: 500 !important;
-  padding: 0px 14px !important;
+  padding: 0rem 0.875rem !important;
 }
 
 $button-red-text-color: #C63939;
@@ -92,10 +91,10 @@ $button-red-bg-active: #EFE1E1;
 
 @media only screen and (max-width: 900px) {
   h1 {
-    font-size: 36px;
+    font-size: 2.25rem;
   }
 
   .sub-title {
-    font-size: 16px;
+    font-size: 1rem;
   }
 }
