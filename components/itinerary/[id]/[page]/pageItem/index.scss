@@ -17,6 +17,8 @@
       font-weight: 500;
       color: #29323d;
       margin: 0;
+      word-wrap: break-word;
+      word-break: break-all;
     }
   }
 
@@ -37,6 +39,8 @@
 
       .item__info_field_name {
         font-weight: 500;
+        word-wrap: break-word;
+        word-break: break-all;
       }
     }
 
@@ -45,6 +49,12 @@
         font-weight: 500;
         font-size: 0.875rem;
         margin: 0 0 0.5rem 0;
+      }
+
+      .item-body__text {
+        font-size: 13px;
+        word-wrap: break-word;
+        word-break: break-all;
       }
     }
 
