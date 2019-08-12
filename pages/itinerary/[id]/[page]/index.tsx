@@ -93,7 +93,7 @@ function ItineraryPage(props: IProps) {
             </header>
             {items && (
               <Masonry
-                breakpointCols={2}
+                breakpointCols={{default: 2}}
                 className="page__mansonry"
                 columnClassName="page__mansonry_column"
               >
