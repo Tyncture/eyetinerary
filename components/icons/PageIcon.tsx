@@ -24,7 +24,7 @@ function PageIcon(props: IProps) {
   return (
     <SquareIcon cssColor={props.cssIconBackground}>
       <SVGStyler>
-        <FaFileAltSolid style={{ display: "none;" }} />
+        <FaFileAltSolid />
       </SVGStyler>
     </SquareIcon>
   );
