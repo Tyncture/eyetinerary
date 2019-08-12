@@ -61,25 +61,25 @@ function ItineraryPage(props: IProps) {
       <Sidebar />
       <Main>
         {page && (
-            <div>
-              <header>
-                <h1 className="title">{page.title}</h1>
-              </header>
-              {items && (
-                <div>
-                  {items.map((item, index) => (
-                    <PageItem
-                      key={item.id}
-                      displayNumber={index + 1 /* TODO: Calculate position */}
-                      removeItem={removeItem /* TODO: remove from API */}
-                      owner={itinerary.owner}
-                      {...item}
-                    />
-                  ))}
-                </div>
-              )}
-            </div>
-          )}
+          <div>
+            <header>
+              <h1 className="title">{page.title}</h1>
+            </header>
+            {items && (
+              <div>
+                {items.map((item, index) => (
+                  <PageItem
+                    key={item.id}
+                    displayNumber={index + 1 /* TODO: Calculate position */}
+                    removeItem={removeItem /* TODO: remove from API */}
+                    owner={itinerary.owner}
+                    {...item}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+        )}
       </Main>
     </BaseContainer>
   );
