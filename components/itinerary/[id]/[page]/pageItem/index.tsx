@@ -38,7 +38,7 @@ function PageItem(props: IProps) {
     <div className="item">
       <header className="item__header">
         <h2 className="item__name">
-          {props.displayNumber} {props.title}
+          {props.displayNumber}. {props.title}
         </h2>
       </header>
       <div className="item__main">
