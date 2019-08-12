@@ -6,15 +6,18 @@ import { useMemo, useCallback } from "react";
 
 interface IProps extends IItem {
   displayNumber: number;
-  owner: IUser | {
-    id: number;
-    username: string;
-  };
+  owner:
+    | IUser
+    | {
+        id: number;
+        username: string;
+      };
   removeItem: (id: number) => void;
   user: IUser;
 }
 
 function PageItem(props: IProps) {
+  console.log(props);
   const handleRemove = useCallback(() => props.removeItem(props.id), [
     props.id,
     props.removeItem,
@@ -22,13 +25,14 @@ function PageItem(props: IProps) {
 
   const handleEdit = useCallback(() => {}, [
     props.id,
-    /*props.updateItem*/,
+    /*props.updateItem*/
+    ,
   ]);
 
-  const userIsOwner = useMemo(() => props.user.id === props.owner.id, [
-    props.user,
-    props.owner,
-  ]);
+  const userIsOwner = useMemo(
+    () => props.owner && props.user.id === props.owner.id,
+    [props.user, props.owner],
+  );
 
   return (
     <div className="item">
