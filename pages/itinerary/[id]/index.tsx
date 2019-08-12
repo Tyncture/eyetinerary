@@ -10,6 +10,7 @@ import { IItinerary } from "../../../library/itinerary/types";
 import ItineraryPageList from "../../../components/itinerary/[id]/pageList";
 import { IStoreState } from "../../../store/types";
 import { useItinerary } from "../../../library/itinerary/common";
+import "./index.scss";
 
 interface IProps {
   query: {
@@ -75,8 +76,11 @@ function Itinerary(props: IProps) {
                 </div>
               </div>
             </header>
-            <div>
-              <h2 className="title-2">Pages</h2>
+            <div className="itinerary__main">
+              <div className="itinerary__main_heading">
+                <h2 className="title-2">Pages</h2>
+                <input type="button" name="add-page" value="Add Page" />
+              </div>
               <ItineraryPageList itinerary={itinerary} />
             </div>
           </div>
