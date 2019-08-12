@@ -10,6 +10,11 @@ import { useItinerary, sortPages } from "../../../../library/itinerary/common";
 import Head from "next/head";
 import PageItem from "../../../../components/itinerary/[id]/[page]/pageItem";
 import { IItem, IItinerary, IPage } from "../../../../library/itinerary/types";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
+import { config } from "@fortawesome/fontawesome-svg-core";
+config.autoAddCss = false;
 import "./index.scss";
 
 interface IProps {
@@ -64,7 +69,24 @@ function ItineraryPage(props: IProps) {
         {page && (
           <div className="page">
             <header className="page__header">
-              <h1 className="title">{page.title}</h1>
+              <div className="page__breadcrumb">
+                <Link
+                  href="/itinerary/[id]"
+                  as={`/itinerary/${props.itinerary.id}`}
+                >
+                  <a className="page__breadcrumb_segment">
+                    <span>
+                      <FontAwesomeIcon icon={faArrowLeft} />
+                    </span>
+                    <span>{props.itinerary.title}</span>
+                  </a>
+                </Link>
+                <div className="page__breadcrumb_segment">
+                  <span>|</span>
+                  <span className="page__breadcrumb_status">Viewing Page</span>
+                </div>
+              </div>
+              <h1 className="page__title title">{page.title}</h1>
             </header>
             {items && (
               <div className="page__item_grid">
