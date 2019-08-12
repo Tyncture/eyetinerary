@@ -30,7 +30,7 @@ function PageItem(props: IProps) {
   ]);
 
   const userIsOwner = useMemo(
-    () => props.owner && props.user.id === props.owner.id,
+    () => /*props.owner && props.user.id === props.owner.id,*/ true,
     [props.user, props.owner],
   );
 
