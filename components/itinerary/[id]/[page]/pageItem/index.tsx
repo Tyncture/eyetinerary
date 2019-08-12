@@ -44,18 +44,12 @@ function PageItem(props: IProps) {
       </header>
       <div className="item__main">
         <section className="item__info">
-          <div className="item__info_field">
-            <div className="item__info_field_name">[name]</div>
-            <div className="item__info_field_value">[value]</div>
-          </div>
-          <div className="item__info_field">
-            <div className="item__info_field_name">[name]</div>
-            <div className="item__info_field_value">[value]</div>
-          </div>
-          <div className="item__info_field">
-            <div className="item__info_field_name">[name]</div>
-            <div className="item__info_field_value">[value]</div>
-          </div>
+          <div className="item__info_field_name">Time Start</div>
+          <div className="item__info_field_value">lorem ipsum dolor sit amet</div>
+          <div className="item__info_field_name">Time End</div>
+          <div className="item__info_field_value">lorem ipsum dolor sit amet</div>
+          <div className="item__info_field_name">Place</div>
+          <div className="item__info_field_value">lorem ipsum dolor sit amet</div>
         </section>
         <section className="item__body">
           <header className="item__body_header">
