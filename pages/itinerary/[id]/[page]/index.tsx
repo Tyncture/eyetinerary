@@ -14,6 +14,7 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { config } from "@fortawesome/fontawesome-svg-core";
+import Masonry from "react-masonry-css";
 config.autoAddCss = false;
 import "./index.scss";
 
@@ -83,13 +84,19 @@ function ItineraryPage(props: IProps) {
                 </Link>
                 <div className="page__breadcrumb_segment">
                   <span>|</span>
-                  <span className="page__breadcrumb_status">Viewing Page</span>
+                  <span className="page__breadcrumb_status">
+                    Viewing Page
+                  </span>
                 </div>
               </div>
               <h1 className="page__title title">{page.title}</h1>
             </header>
             {items && (
-              <div className="page__item_grid">
+              <Masonry
+                breakpointCols={2}
+                className="page__mansonry"
+                columnClassName="page__mansonry_column"
+              >
                 {items.map((item, index) => (
                   <PageItem
                     key={item.id}
@@ -100,7 +107,7 @@ function ItineraryPage(props: IProps) {
                     {...item}
                   />
                 ))}
-              </div>
+              </Masonry>
             )}
           </div>
         )}

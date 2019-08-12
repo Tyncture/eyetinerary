@@ -44,10 +44,16 @@
   }
 }
 
-.page__item_grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 2.25rem;
+.page__mansonry {
+  display: flex;
+  margin-left: -2.25rem;
+}
+
+.page__mansonry_column {
+  padding-left: 2.25rem;
+  > div {
+    margin-bottom: 2.25rem;
+  }
 }
 
 @media screen and (max-width: 1250px) {
