@@ -25,7 +25,7 @@
     grid-auto-flow: row;
     grid-gap: 1.25rem;
     padding: 1.25rem;
-    color: #737E8C;
+    color: #737e8c;
     font-size: 0.875rem;
 
     .item__info {
@@ -34,9 +34,9 @@
       justify-items: flex-start;
       grid-row-gap: 0.5rem;
       grid-column-gap: 1.5rem;
-      
+
       .item__info_field_name {
-          font-weight: 500;
+        font-weight: 500;
       }
     }
 
@@ -55,7 +55,7 @@
       grid-gap: 12px;
 
       input[type="button"] {
-        color: #8F98A3;
+        color: #8f98a3;
         font-size: 12px;
         font-weight: 500;
         border: none;
@@ -67,13 +67,13 @@
           cursor: pointer;
         }
 
+        &:focus {
+          background: hsl(212, 15, 97);
+        }
+
         &:active {
           background: hsl(212, 15, 95);
           outline: none;
-        }
-
-        &:focus {
-          background: hsl(212, 15, 97);
         }
       }
     }
