@@ -45,11 +45,17 @@ function PageItem(props: IProps) {
       <div className="item__main">
         <section className="item__info">
           <div className="item__info_field_name">Time Start</div>
-          <div className="item__info_field_value">lorem ipsum dolor sit amet</div>
+          <div className="item__info_field_value">
+            lorem ipsum dolor sit amet
+          </div>
           <div className="item__info_field_name">Time End</div>
-          <div className="item__info_field_value">lorem ipsum dolor sit amet</div>
+          <div className="item__info_field_value">
+            lorem ipsum dolor sit amet
+          </div>
           <div className="item__info_field_name">Place</div>
-          <div className="item__info_field_value">lorem ipsum dolor sit amet</div>
+          <div className="item__info_field_value">
+            lorem ipsum dolor sit amet
+          </div>
         </section>
         <section className="item__body">
           <header className="item__body_header">
@@ -60,20 +66,20 @@ function PageItem(props: IProps) {
         <section className="item__buttons">
           <input type="button" name="share" value="Share" />
           {userIsOwner && (
-            <div>
-              <input
-                type="button"
-                name="edit"
-                value="Edit"
-                onClick={handleEdit}
-              />
-              <input
-                type="button"
-                name="remove"
-                value="Remove"
-                onClick={handleRemove}
-              />
-            </div>
+            <input
+              type="button"
+              name="edit"
+              value="Edit"
+              onClick={handleEdit}
+            />
+          )}
+          {userIsOwner && (
+            <input
+              type="button"
+              name="remove"
+              value="Remove"
+              onClick={handleRemove}
+            />
           )}
         </section>
       </div>

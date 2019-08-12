@@ -47,5 +47,35 @@
         margin: 0 0 0.5rem 0;
       }
     }
+
+    .item__buttons {
+      display: grid;
+      grid-auto-flow: column;
+      justify-content: flex-start;
+      grid-gap: 12px;
+
+      input[type="button"] {
+        color: #8F98A3;
+        font-size: 12px;
+        font-weight: 500;
+        border: none;
+        border-radius: 6px;
+        padding: 12px;
+
+        &:hover {
+          background: hsl(212, 15, 97);
+          cursor: pointer;
+        }
+
+        &:active {
+          background: hsl(212, 15, 95);
+          outline: none;
+        }
+
+        &:focus {
+          background: hsl(212, 15, 97);
+        }
+      }
+    }
   }
 }
