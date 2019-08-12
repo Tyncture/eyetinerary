@@ -1,9 +1,17 @@
-import { IItem, IItinerary } from "../../../../../library/itinerary/types";
-import { IUser } from "../../../../../store/user/types";
-import { IStoreState } from "../../../../../store/types";
+import { config } from "@fortawesome/fontawesome-svg-core";
+import { useCallback, useMemo } from "react";
 import { connect } from "react-redux";
-import { useMemo, useCallback } from "react";
+import { IItem } from "../../../../../library/itinerary/types";
+import { IStoreState } from "../../../../../store/types";
+import { IUser } from "../../../../../store/user/types";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faShareSquare,
+  faEdit,
+  faTrashAlt,
+} from "@fortawesome/free-regular-svg-icons";
 import "./index.scss";
+config.autoAddCss = false;
 
 interface IProps extends IItem {
   id: number;
@@ -29,6 +37,10 @@ function PageItem(props: IProps) {
     /*props.updateItem*/
     ,
   ]);
+
+  const preventFocus = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+  }, []);
 
   const userIsOwner = useMemo(
     () => /*props.owner && props.user.id === props.owner.id,*/ true,
@@ -64,22 +76,25 @@ function PageItem(props: IProps) {
           <div className="item-body__text">{props.body}</div>
         </section>
         <section className="item__buttons">
-          <input type="button" name="share" value="Share" />
+          <button name="share" onMouseDown={preventFocus}>
+            <FontAwesomeIcon icon={faShareSquare} />
+            &nbsp;Share
+          </button>
           {userIsOwner && (
-            <input
-              type="button"
-              name="edit"
-              value="Edit"
-              onClick={handleEdit}
-            />
+            <button name="edit" onClick={handleEdit} onMouseDown={preventFocus}>
+              <FontAwesomeIcon icon={faEdit} />
+              &nbsp;Edit
+            </button>
           )}
           {userIsOwner && (
-            <input
-              type="button"
-              name="remove"
-              value="Remove"
+            <button
+              name="share"
               onClick={handleRemove}
-            />
+              onMouseDown={preventFocus}
+            >
+              <FontAwesomeIcon icon={faTrashAlt} />
+              &nbsp;Remove
+            </button>
           )}
         </section>
       </div>

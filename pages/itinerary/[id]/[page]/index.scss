@@ -1,6 +1,12 @@
 .page__item_grid {
+  margin-top: 1.625rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 2.375rem;
+  grid-gap: 2.5rem;
+}
 
+@media screen and (max-width: 1250px) {
+  .page__item_grid {
+    grid-template-columns: 1fr;
+  }
 }
