@@ -3,8 +3,10 @@ import { IUser } from "../../../../../store/user/types";
 import { IStoreState } from "../../../../../store/types";
 import { connect } from "react-redux";
 import { useMemo, useCallback } from "react";
+import "./index.scss";
 
 interface IProps extends IItem {
+  id: number;
   displayNumber: number;
   owner:
     | IUser
@@ -17,7 +19,6 @@ interface IProps extends IItem {
 }
 
 function PageItem(props: IProps) {
-  console.log(props);
   const handleRemove = useCallback(() => props.removeItem(props.id), [
     props.id,
     props.removeItem,
