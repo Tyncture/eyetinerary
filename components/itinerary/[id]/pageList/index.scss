@@ -1,6 +1,7 @@
 .itinerary-page-list {
   list-style: none;
   padding: 0;
+  margin-top: 0.75rem;
   border: 0.0313rem solid #eaebec;
   border-radius: 0.375rem;
 
@@ -25,11 +26,10 @@
     .itinerary-page-list-elem__description {
       color: #737e8c;
       font-size: 0.875rem;
-      margin-top: 0.125rem;
     }
 
     .itinerary-page-list-elem__button_row {
-      margin-top: 0.375rem;
+      margin-top: 0.5rem;
     }
   }
 }
