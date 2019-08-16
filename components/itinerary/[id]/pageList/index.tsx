@@ -112,7 +112,7 @@ function ItineraryPageList(props: IProps) {
             <div>
               <div className="itinerary-page-list-elem__name">{page.title}</div>
               <div className="itinerary-page-list-elem__description">
-                {page.description}
+                page description
               </div>
             </div>
             <div className="itinerary-page-list-elem__button_row">
