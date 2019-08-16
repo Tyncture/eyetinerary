@@ -83,7 +83,12 @@ function Itinerary(props: IProps) {
             <div className="itinerary__main">
               <div className="itinerary__main_heading">
                 <h2 className="title-2">Pages</h2>
-                <input type="button" name="add-page" value="Add Page" />
+                <input
+                  className="button button--micro"
+                  type="button"
+                  name="add-page"
+                  value="Add Page"
+                />
               </div>
               <ItineraryPageList itinerary={itinerary} />
             </div>

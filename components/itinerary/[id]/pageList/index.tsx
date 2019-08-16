@@ -117,18 +117,19 @@ function ItineraryPageList(props: IProps) {
             </div>
             <div className="itinerary-page-list-elem__button_row">
               <EditButton
-                className="itinerary-page-list-elem__button"
+                className="itinerary-page-list-elem__button button button--micro"
                 pageId={page.id}
               />
               <RemoveButton
-                className="itinerary-page-list-elem__button"
+                className="itinerary-page-list-elem__button button button--micro"
                 pageId={page.id}
               />
             </div>
           </div>
           <div className="itinerary-page-list-elem__end">
             <ViewButton
-              className="itinerary-page-list-elem__view_button"
+              className="itinerary-page-list-elem__view_button 
+                button button--mini button--blue"
               pageRank={page.rankInItinerary}
             />
           </div>
