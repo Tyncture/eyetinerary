@@ -1,14 +1,38 @@
-.itinerary__main_heading {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
+.itinerary__header {
+  .itinerary__info {
+    .itinerary__info_item {
+      font-size: 0.875rem;
+      color: #737e8c;
 
-  > h2 {
-    margin: 0;
+      > :nth-child(1) {
+        font-weight: 500;
+      }
+    }
+
+    > :nth-child(n + 2) {
+      margin-top: 0.25rem;
+    }
   }
 
-  :nth-child(n + 2) {
-    margin-left: 0.5rem;
+  > :nth-child(n + 2) {
+    margin-top: 0.625rem;
+  }
+}
+
+.itinerary__main {
+  margin-top: 1rem;
+  .itinerary__main_heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    > h2 {
+      margin: 0;
+    }
+
+    :nth-child(n + 2) {
+      margin-left: 0.5rem;
+    }
   }
 }

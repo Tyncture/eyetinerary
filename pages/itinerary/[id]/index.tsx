@@ -51,7 +51,9 @@ function Itinerary(props: IProps) {
     const fmtDays =
       days > 0 || weeks < 1 ? `${days} day${days > 1 ? "s" : ""}` : "";
     return `${fmtWeeks}${fmtJoiner}${fmtDays}`;
-  }, [/* time start, time end, etc.*/]);
+  }, [
+    /* time start, time end, etc.*/
+  ]);
 
   return (
     <BaseContainer>
@@ -64,7 +66,9 @@ function Itinerary(props: IProps) {
           <div className="itinerary">
             <header className="itinerary__header">
               <h1 className="title">{itinerary.title}</h1>
-              <div className="sub-title">itinerary description</div>
+              {itinerary.description && (
+                <div className="sub-title">itinerary description</div>
+              )}
               <div className="itinerary__info">
                 <div className="itinerary__info_item">
                   <span>Destination: </span>
