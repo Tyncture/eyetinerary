@@ -90,7 +90,9 @@ function Itinerary(props: IProps) {
                   value="Add Page"
                 />
               </div>
-              <ItineraryPageList itinerary={itinerary} />
+              {itinerary.pages && itinerary.pages.length > 0 && (
+                <ItineraryPageList itinerary={itinerary} />
+              )}
             </div>
           </div>
         )}
