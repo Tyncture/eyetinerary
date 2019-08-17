@@ -50,24 +50,101 @@ function ItineraryPageList(props: IProps) {
     }
   }
 
-  const EditButton = (childProps: { pageId: number; className?: string }) => {
-    // TODO: Implement editing view
-    const handleRemove = useCallback(() => removePage(childProps.pageId), []);
+  const EditButton = (childProps: { page: IPage; className?: string }) => {
+    const [name, setName] = useState(childProps.page.title);
+    const [description, setDescription] = useState(
+      childProps.page.description || "",
+    );
+    const [showModal, setShowModal] = useState(false);
+
+    // Fields
+    const handleNameChange = useCallback(
+      (e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value),
+      [setName],
+    );
+    const handleDescriptionChange = useCallback(
+      (e: React.ChangeEvent<HTMLInputElement>) =>
+        setDescription(e.target.value),
+      [setDescription],
+    );
+
+    // Buttons
+    const handleSave = useCallback(
+      () => updatePage(childProps.page.id, name, description),
+      [updatePage, name, description],
+    );
+    const handleToggle = useCallback(() => setShowModal(!showModal), [
+      showModal,
+    ]);
+
     return (
-      <input
-        className={childProps.className}
-        type="button"
-        name="edit"
-        value="Edit"
-        onClick={handleRemove}
-      />
+      <div>
+        <input
+          className={childProps.className}
+          type="button"
+          name="edit"
+          value="Edit"
+          onClick={handleToggle}
+        />
+        <Modal show={showModal} title="Edit Page">
+          <div>
+            <div className="create-itinerary-form__elem">
+              <label className="title-2" htmlFor="form-page-name-input">
+                Page Name
+              </label>
+              <input
+                id="form-page-name-input"
+                name="page-name"
+                type="text"
+                placeholder="Day 1: Settling in"
+                value={name}
+                onChange={handleNameChange}
+              />
+            </div>
+            <div className="create-itinerary-form__elem">
+              <label className="title-2" htmlFor="form-page-description-input">
+                Page Description
+              </label>
+              <input
+                id="form-page-description-input"
+                name="page-description"
+                type="text"
+                placeholder="Checking in from the airport"
+                value={description}
+                onChange={handleDescriptionChange}
+              />
+            </div>
+          </div>
+          <div className="modal__buttons">
+            <input
+              className="button button--wide modal__button"
+              name="cancel"
+              type="button"
+              value="Cancel"
+              onClick={handleToggle}
+            />
+            <input
+              className="button button--wide modal__button"
+              name="save"
+              type="button"
+              value="Save"
+              onClick={handleSave}
+            />
+          </div>
+        </Modal>
+      </div>
     );
   };
 
   const RemoveButton = (childProps: { pageId: number; className?: string }) => {
     const [showModal, setShowModal] = useState(false);
-    const handleClick = useCallback(() => setShowModal(!showModal), [showModal]);
-    const handleRemove = useCallback(() => removePage(childProps.pageId), []);
+    const handleToggle = useCallback(() => removePage(childProps.pageId), [
+      removePage,
+    ]);
+    const handleClick = useCallback(() => setShowModal(!showModal), [
+      showModal,
+      setShowModal,
+    ]);
     return (
       <div>
         <input
@@ -92,7 +169,7 @@ function ItineraryPageList(props: IProps) {
               name="confirm"
               type="button"
               value="Confirm"
-              onClick={handleRemove}
+              onClick={handleToggle}
             />
           </div>
         </Modal>
@@ -101,7 +178,6 @@ function ItineraryPageList(props: IProps) {
   };
 
   const ViewButton = (childProps: { pageRank: number; className?: string }) => {
-    // TODO: Display confirmation modal
     const handleView = useCallback(() => {
       Router.push(
         `/itinerary/[id]/[page]`,
@@ -135,13 +211,13 @@ function ItineraryPageList(props: IProps) {
             <div>
               <div className="itinerary-page-list-elem__name">{page.title}</div>
               <div className="itinerary-page-list-elem__description">
-                page description
+                {page.description || `No description added yet.`}
               </div>
             </div>
             <div className="itinerary-page-list-elem__button_row">
               <EditButton
                 className="itinerary-page-list-elem__button button button--micro"
-                pageId={page.id}
+                page={page}
               />
               <RemoveButton
                 className="itinerary-page-list-elem__button button button--micro"
