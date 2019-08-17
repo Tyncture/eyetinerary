@@ -33,5 +33,18 @@
         color: #264A73;
       }
     }
+
+    .modal__buttons {
+      margin-top: 1.125rem;
+      display: grid;
+      grid-auto-flow: column;
+      grid-gap: 1rem;
+      .modal__button {
+        font-size: 0.75rem !important;
+        font-weight: 400;
+        border-radius: 0.375rem !important;
+        height: 2.375rem !important;
+      }
+    }
   }
 }

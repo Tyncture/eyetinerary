@@ -8,6 +8,7 @@ import { sortPages } from "../../../../library/itinerary/common";
 import Router from "next/router";
 import "./index.scss";
 import PageIcon from "../../../icons/PageIcon";
+import Modal from "../../../modal";
 
 interface IProps {
   itinerary: IItinerary;
@@ -64,16 +65,38 @@ function ItineraryPageList(props: IProps) {
   };
 
   const RemoveButton = (childProps: { pageId: number; className?: string }) => {
-    // TODO: Display confirmation modal
+    const [showModal, setShowModal] = useState(false);
+    const handleClick = useCallback(() => setShowModal(!showModal), [showModal]);
     const handleRemove = useCallback(() => removePage(childProps.pageId), []);
     return (
-      <input
-        className={childProps.className}
-        type="button"
-        name="remove"
-        value="Remove"
-        onClick={handleRemove}
-      />
+      <div>
+        <input
+          className={childProps.className}
+          type="button"
+          name="remove"
+          value="Remove"
+          onClick={handleClick}
+        />
+        <Modal show={showModal} title="Delete Page">
+          <div>Are you sure you want to delete this page?</div>
+          <div className="modal__buttons">
+            <input
+              className="button button--wide modal__button"
+              name="cancel"
+              type="button"
+              value="Cancel"
+              onClick={handleClick}
+            />
+            <input
+              className="button button--wide modal__button"
+              name="confirm"
+              type="button"
+              value="Confirm"
+              onClick={handleRemove}
+            />
+          </div>
+        </Modal>
+      </div>
     );
   };
 
