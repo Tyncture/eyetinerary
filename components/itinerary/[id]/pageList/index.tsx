@@ -87,13 +87,13 @@ function ItineraryPageList(props: IProps) {
           onClick={handleToggle}
         />
         <Modal show={showModal} title="Edit Page">
-          <div>
-            <div className="create-itinerary-form__elem">
-              <label className="title-2" htmlFor="form-page-name-input">
+          <form className="modal__form">
+            <div className="modal__form_elem">
+              <label className="title-2" htmlFor="page-name-input">
                 Page Name
               </label>
               <input
-                id="form-page-name-input"
+                id="page-name-input"
                 name="page-name"
                 type="text"
                 placeholder="Day 1: Settling in"
@@ -101,12 +101,12 @@ function ItineraryPageList(props: IProps) {
                 onChange={handleNameChange}
               />
             </div>
-            <div className="create-itinerary-form__elem">
-              <label className="title-2" htmlFor="form-page-description-input">
+            <div className="modal__form_elem">
+              <label className="title-2" htmlFor="page-description-input">
                 Page Description
               </label>
               <input
-                id="form-page-description-input"
+                id="page-description-input"
                 name="page-description"
                 type="text"
                 placeholder="Checking in from the airport"
@@ -114,7 +114,7 @@ function ItineraryPageList(props: IProps) {
                 onChange={handleDescriptionChange}
               />
             </div>
-          </div>
+          </form>
           <div className="modal__buttons">
             <input
               className="button button--wide modal__button"
