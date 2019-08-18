@@ -31,7 +31,7 @@
       margin: 0;
     }
 
-    :nth-child(n + 2) {
+    > :nth-child(n + 2) {
       margin-left: 0.5rem;
     }
   }

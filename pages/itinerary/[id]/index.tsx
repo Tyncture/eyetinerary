@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import BaseContainer from "../../../components/base/baseContainer";
 import Sidebar from "../../../components/base/sidebar";
 import Main from "../../../components/base/main";
@@ -11,6 +11,7 @@ import ItineraryPageList from "../../../components/itinerary/[id]/pageList";
 import { IStoreState } from "../../../store/types";
 import { useItinerary } from "../../../library/itinerary/common";
 import "./index.scss";
+import Modal from "../../../components/modal";
 
 interface IProps {
   query: {
@@ -36,6 +37,87 @@ function Itinerary(props: IProps) {
     () => `${itinerary ? `${itinerary.title} - ` : ""}Eyetinerary`,
     [itinerary],
   );
+
+  const AddPage = useMemo(() => () => {
+    const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
+    const [showModal, setShowModal] = useState(false);
+
+    // Fields
+    const handleNameChange = useCallback(
+      (e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value),
+      [setName],
+    );
+    const handleDescriptionChange = useCallback(
+      (e: React.ChangeEvent<HTMLInputElement>) =>
+        setDescription(e.target.value),
+      [setDescription],
+    );
+
+    // Buttons
+    const handleSave = useCallback(() => {}, [name, description]);
+    const handleToggle = useCallback(() => setShowModal(!showModal), [
+      showModal,
+    ]);
+
+    return (
+      <div>
+        <input
+          className="button button--micro"
+          type="button"
+          name="add-page"
+          value="Add Page"
+          onClick={handleToggle}
+        />
+        <Modal show={showModal} title="Add Page">
+          <form className="modal__form">
+            <div className="modal__form_elem">
+              <label className="title-2" htmlFor="page-name-input">
+                Page Name
+              </label>
+              <input
+                id="page-name-input"
+                name="page-name"
+                type="text"
+                placeholder="Day 1: Settling in"
+                value={name}
+                onChange={handleNameChange}
+              />
+            </div>
+            <div className="modal__form_elem">
+              <label className="title-2" htmlFor="page-description-input">
+                Page Description
+              </label>
+              <input
+                id="page-description-input"
+                name="page-description"
+                type="text"
+                placeholder="Checking in from the airport"
+                value={description}
+                onChange={handleDescriptionChange}
+              />
+            </div>
+          </form>
+          <div className="modal__buttons">
+            <input
+              className="button button--wide modal__button"
+              name="cancel"
+              type="button"
+              value="Cancel"
+              onClick={handleToggle}
+            />
+            <input
+              className="button button--wide modal__button"
+              name="save"
+              type="button"
+              value="Save"
+              onClick={handleSave}
+            />
+          </div>
+        </Modal>
+      </div>
+    );
+  }, []);
 
   const duration = useMemo(() => {
     // Mock start and end times
@@ -83,12 +165,7 @@ function Itinerary(props: IProps) {
             <div className="itinerary__main">
               <div className="itinerary__main_heading">
                 <h2 className="title-2">Pages</h2>
-                <input
-                  className="button button--micro"
-                  type="button"
-                  name="add-page"
-                  value="Add Page"
-                />
+                <AddPage />
               </div>
               {itinerary.pages && itinerary.pages.length > 0 && (
                 <ItineraryPageList itinerary={itinerary} />
