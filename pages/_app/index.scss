@@ -1,5 +1,5 @@
 @import "~normalize.css";
-@import url('https://rsms.me/inter/inter.css');
+@import url("https://rsms.me/inter/inter.css");
 @import "~@fortawesome/fontawesome-svg-core/styles";
 
 * {
@@ -11,7 +11,9 @@ body {
   color: #303030;
 }
 
-html, body, #__next {
+html,
+body,
+#__next {
   height: 100%;
 }
 
@@ -22,7 +24,7 @@ h1 {
 
 .title {
   margin: 0.75rem 0;
-  color: #264A73;
+  color: #264a73;
 }
 
 .sub-title {
@@ -44,16 +46,18 @@ h1 {
   outline: none !important;
   font-size: 0.875rem;
   font-weight: 500;
-  color: #454C54;
-  background-color: #F3F5F6;
-  &:hover, &:active {
+  color: #454c54;
+  background-color: #f3f5f6;
+  &:hover,
+  &:active {
     cursor: pointer;
   }
-  &:hover, &:focus {
-    background-color: #EEF0F2;
+  &:hover,
+  &:focus {
+    background-color: #eef0f2;
   }
   &:active {
-    background-color: #EAEDF0;
+    background-color: #eaedf0;
   }
 }
 
@@ -62,7 +66,7 @@ h1 {
   width: 100% !important;
   height: 2.75rem !important;
   &:active {
-    background: #E2ECF8 !important;
+    background: #e2ecf8 !important;
   }
 }
 
@@ -77,18 +81,19 @@ h1 {
   font-size: 11px !important;
   font-weight: 500 !important;
   padding: 5px 10px !important;
-  color: #5C6570;
+  color: #5c6570;
 }
 
-$button-red-text-color: #C63939;
-$button-red-bg: #F5F0F0;
-$button-red-bg-hover-focus: #F1EAEA;
-$button-red-bg-active: #EFE1E1;
+$button-red-text-color: #c63939;
+$button-red-bg: #f5f0f0;
+$button-red-bg-hover-focus: #f1eaea;
+$button-red-bg-active: #efe1e1;
 
 .button--red {
   color: $button-red-text-color;
   background: $button-red-bg !important;
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background: $button-red-bg-hover-focus !important;
   }
   &:active {
@@ -96,20 +101,31 @@ $button-red-bg-active: #EFE1E1;
   }
 }
 
-$button-blue-text-color: #2E6EB8;
-$button-blue-bg: #EEF2F6;
-$button-blue-bg-hover-focus: #EAEDF1;
-$button-blue-bg-active: #E1E8EF;
+$button-blue-text-color: #2e6eb8;
+$button-blue-bg: #eef2f6;
+$button-blue-bg-hover-focus: #eaedf1;
+$button-blue-bg-active: #e1e8ef;
 
 .button--blue {
   color: $button-blue-text-color;
   background: $button-blue-bg !important;
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background: $button-blue-bg-hover-focus !important;
   }
   &:active {
     background: $button-blue-bg-active !important;
   }
+}
+
+.input-text {
+  outline: none;
+  border: 0.0313rem solid #e4e6e7;
+  border-radius: 0.1875rem;
+  line-height: 1.5rem;
+  padding: 0.375rem 0.5rem;
+  background-color: white;
+  box-shadow: 0 0 0.0625rem 0rem #d9d9d9;
 }
 
 @media only screen and (max-width: 900px) {

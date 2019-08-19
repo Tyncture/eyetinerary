@@ -1,3 +1,5 @@
+@import "../../pages/_app/index.scss";
+
 $form-col-width: 25rem;
 
 .create-itinerary-step {
@@ -29,13 +31,7 @@ $form-col-width: 25rem;
   grid-auto-flow: row;
 
   input[type="text"] {
-    outline: none;
-    border: 0.0313rem solid #e4e6e7;
-    border-radius: 0.1875rem;
-    line-height: 1.5rem;
-    padding: 0.375rem 0.5rem;
-    background-color: white;
-    box-shadow: 0 0 0.0625rem 0rem #d9d9d9;
+    @extend .input-text;
   }
 }
 

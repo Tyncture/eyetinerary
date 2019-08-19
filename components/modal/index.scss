@@ -1,3 +1,5 @@
+@import "../../pages/_app/index.scss";
+
 .modal {
   position: fixed;
   width: 100vw;
@@ -12,7 +14,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   .modal__inner {
     background: white;
     padding: 1.25rem;
@@ -20,6 +22,10 @@
     max-width: 31.25rem;
     border-radius: 0.375rem;
     box-shadow: 0rem 0.25rem 0.25rem rgba(0, 0, 0, 0.025);
+
+    display: grid;
+    grid-auto-flow: row;
+    grid-gap: 0.375rem;
 
     > :nth-child(n + 2) {
       margin-top: 0.875rem;
@@ -30,12 +36,28 @@
         margin: 0;
         font-size: 1.5rem;
         font-weight: 500;
-        color: #264A73;
+        color: #264a73;
+      }
+    }
+
+    .modal__form {
+      display: grid;
+      grid-auto-flow: row;
+      grid-gap: 0.875rem;
+
+      .modal__form_elem {
+        display: flex;
+        flex-direction: column;
+        label {
+          font-weight: 400;
+        }
+        input[type="text"] {
+          @extend .input-text;
+        }
       }
     }
 
     .modal__buttons {
-      margin-top: 1.125rem;
       display: grid;
       grid-auto-flow: column;
       grid-gap: 1rem;
