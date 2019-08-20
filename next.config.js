@@ -38,5 +38,8 @@ module.exports = withNextEnv(
       });
       return config;
     },
+    env: {
+      "EYET_API": process.env.EYET_API,
+    }
   }),
 );
