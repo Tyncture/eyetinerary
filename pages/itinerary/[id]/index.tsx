@@ -142,38 +142,35 @@ function Itinerary(props: IProps) {
       <Head>
         <title>{pageTitle}</title>
       </Head>
-      <Sidebar />
-      <Main>
-        {itinerary && (
-          <div className="itinerary">
-            <header className="itinerary__header">
-              <h1 className="title">{itinerary.title}</h1>
-              {itinerary.description && (
-                <div className="sub-title">itinerary description</div>
-              )}
-              <div className="itinerary__info">
-                <div className="itinerary__info_item">
-                  <span>Destination: </span>
-                  <span>Bangkok, Thailand</span>
-                </div>
-                <div className="itinerary__info_item">
-                  <span>Duration: </span>
-                  <span>{duration}</span>
-                </div>
+      {itinerary && (
+        <div className="itinerary">
+          <header className="itinerary__header">
+            <h1 className="title">{itinerary.title}</h1>
+            {itinerary.description && (
+              <div className="sub-title">itinerary description</div>
+            )}
+            <div className="itinerary__info">
+              <div className="itinerary__info_item">
+                <span>Destination: </span>
+                <span>Bangkok, Thailand</span>
               </div>
-            </header>
-            <div className="itinerary__main">
-              <div className="itinerary__main_heading">
-                <h2 className="title-2">Pages</h2>
-                <AddPage />
+              <div className="itinerary__info_item">
+                <span>Duration: </span>
+                <span>{duration}</span>
               </div>
-              {itinerary.pages && itinerary.pages.length > 0 && (
-                <ItineraryPageList itinerary={itinerary} />
-              )}
             </div>
+          </header>
+          <div className="itinerary__main">
+            <div className="itinerary__main_heading">
+              <h2 className="title-2">Pages</h2>
+              <AddPage />
+            </div>
+            {itinerary.pages && itinerary.pages.length > 0 && (
+              <ItineraryPageList itinerary={itinerary} />
+            )}
           </div>
-        )}
-      </Main>
+        </div>
+      )}
     </BaseContainer>
   );
 }

@@ -122,41 +122,39 @@ class Login extends React.Component<IProps, IState> {
   render() {
     return (
       <BaseContainer>
-        <Sidebar />
-        <Main>
-          <div className="login">
-            <header className="login-header">
-              <h1>Login</h1>
-            </header>
-            <main>
-              <form name="login-form" className="login-form">
-                <div className="login-form--group">
-                  <div className="login-form--subgroup">
-                    <input
-                      type="text"
-                      id="login-form-username"
-                      name="login-form-username"
-                      required={true}
-                      maxLength={50}
-                      value={this.state.username}
-                      placeholder="Username"
-                      spellCheck={false}
-                      onChange={this.handleUsernameChange}
-                      onKeyDown={this.handleUsernameKeyDown}
-                      onKeyUpCapture={this.handleEnterKey}
-                    />
-                    <input
-                      type="password"
-                      id="login-form-password"
-                      name="login-form-password"
-                      value={this.state.password}
-                      required={true}
-                      maxLength={72}
-                      placeholder="Password"
-                      onChange={this.handlePasswordChange}
-                      onKeyUp={this.handleEnterKey}
-                    />
-                    {/* <div className="login-form--checkbox-group">
+        <div className="login">
+          <header className="login-header">
+            <h1>Login</h1>
+          </header>
+          <main>
+            <form name="login-form" className="login-form">
+              <div className="login-form--group">
+                <div className="login-form--subgroup">
+                  <input
+                    type="text"
+                    id="login-form-username"
+                    name="login-form-username"
+                    required={true}
+                    maxLength={50}
+                    value={this.state.username}
+                    placeholder="Username"
+                    spellCheck={false}
+                    onChange={this.handleUsernameChange}
+                    onKeyDown={this.handleUsernameKeyDown}
+                    onKeyUpCapture={this.handleEnterKey}
+                  />
+                  <input
+                    type="password"
+                    id="login-form-password"
+                    name="login-form-password"
+                    value={this.state.password}
+                    required={true}
+                    maxLength={72}
+                    placeholder="Password"
+                    onChange={this.handlePasswordChange}
+                    onKeyUp={this.handleEnterKey}
+                  />
+                  {/* <div className="login-form--checkbox-group">
                       <input
                         type="checkbox"
                         id="login-form-rememberme"
@@ -166,37 +164,34 @@ class Login extends React.Component<IProps, IState> {
                       />
                       <label htmlFor="login-form-rememberme">Remember me</label>
                     </div> */}
-                  </div>
                 </div>
-                {!this.state.formValid && (
-                  <div className="input-form--warning">
-                    Please double check all fields.
-                  </div>
-                )}
-                {this.state.incorrectCredentials && (
-                  <div className="input-form--warning">
-                    Incorrect username or password.
-                  </div>
-                )}
-                {this.state.apiCommunicationFailed && (
-                  <div className="input-form--warning">
-                    An error has occured.
-                  </div>
-                )}
-                <div className="login-form--group">
-                  <input
-                    type="button"
-                    id="login-form-submit"
-                    name="login-form-submit"
-                    value={this.state.loginButtonText}
-                    disabled={!this.state.loginButtonEnabled}
-                    onClick={this.handleSubmit}
-                  />
+              </div>
+              {!this.state.formValid && (
+                <div className="input-form--warning">
+                  Please double check all fields.
                 </div>
-              </form>
-            </main>
-          </div>
-        </Main>
+              )}
+              {this.state.incorrectCredentials && (
+                <div className="input-form--warning">
+                  Incorrect username or password.
+                </div>
+              )}
+              {this.state.apiCommunicationFailed && (
+                <div className="input-form--warning">An error has occured.</div>
+              )}
+              <div className="login-form--group">
+                <input
+                  type="button"
+                  id="login-form-submit"
+                  name="login-form-submit"
+                  value={this.state.loginButtonText}
+                  disabled={!this.state.loginButtonEnabled}
+                  onClick={this.handleSubmit}
+                />
+              </div>
+            </form>
+          </main>
+        </div>
       </BaseContainer>
     );
   }

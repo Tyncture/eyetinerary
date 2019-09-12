@@ -62,56 +62,48 @@ function ItineraryPage(props: IProps) {
 
   return (
     <BaseContainer>
-      <Head>
-        <title>{pageTitle}</title>
-      </Head>
-      <Sidebar />
-      <Main>
-        {page && (
-          <div className="page">
-            <header className="page__header">
-              <div className="page__breadcrumb">
-                <Link
-                  href="/itinerary/[id]"
-                  as={`/itinerary/${props.itinerary.id}`}
-                >
-                  <a className="page__breadcrumb_segment">
-                    <span>
-                      <FontAwesomeIcon icon={faArrowLeft} />
-                    </span>
-                    <span>{props.itinerary.title}</span>
-                  </a>
-                </Link>
-                <div className="page__breadcrumb_segment">
-                  <span>|</span>
-                  <span className="page__breadcrumb_status">
-                    Viewing Page
-                  </span>
-                </div>
-              </div>
-              <h1 className="page__title title">{page.title}</h1>
-            </header>
-            {items && (
-              <Masonry
-                breakpointCols={{default: 2}}
-                className="page__mansonry"
-                columnClassName="page__mansonry_column"
+      {page && (
+        <div className="page">
+          <header className="page__header">
+            <div className="page__breadcrumb">
+              <Link
+                href="/itinerary/[id]"
+                as={`/itinerary/${props.itinerary.id}`}
               >
-                {items.map((item, index) => (
-                  <PageItem
-                    key={item.id}
-                    id={item.id}
-                    displayNumber={index + 1 /* TODO: Calculate position */}
-                    removeItem={removeItem /* TODO: remove from API */}
-                    owner={itinerary.owner}
-                    {...item}
-                  />
-                ))}
-              </Masonry>
-            )}
-          </div>
-        )}
-      </Main>
+                <a className="page__breadcrumb_segment">
+                  <span>
+                    <FontAwesomeIcon icon={faArrowLeft} />
+                  </span>
+                  <span>{props.itinerary.title}</span>
+                </a>
+              </Link>
+              <div className="page__breadcrumb_segment">
+                <span>|</span>
+                <span className="page__breadcrumb_status">Viewing Page</span>
+              </div>
+            </div>
+            <h1 className="page__title title">{page.title}</h1>
+          </header>
+          {items && (
+            <Masonry
+              breakpointCols={{ default: 2 }}
+              className="page__mansonry"
+              columnClassName="page__mansonry_column"
+            >
+              {items.map((item, index) => (
+                <PageItem
+                  key={item.id}
+                  id={item.id}
+                  displayNumber={index + 1 /* TODO: Calculate position */}
+                  removeItem={removeItem /* TODO: remove from API */}
+                  owner={itinerary.owner}
+                  {...item}
+                />
+              ))}
+            </Masonry>
+          )}
+        </div>
+      )}
     </BaseContainer>
   );
 }

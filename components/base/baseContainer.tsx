@@ -1,6 +1,8 @@
-import React from 'react';
-import './baseContainer.scss';
-import Head from 'next/head';
+import React from "react";
+import "./baseContainer.scss";
+import Head from "next/head";
+import Sidebar from "./sidebar";
+import Main from "./main";
 
 class BaseContainer extends React.Component<{}, {}> {
   constructor(props) {
@@ -8,12 +10,15 @@ class BaseContainer extends React.Component<{}, {}> {
   }
 
   render() {
-    return <div className="base-container">
-      <Head>
-        <title>Eyetinerary</title>
-      </Head>
-      {this.props.children}
-    </div>;
+    return (
+      <div className="base-container">
+        <Head>
+          <title>Eyetinerary</title>
+        </Head>
+        <Sidebar />
+        <Main>{this.props.children}</Main>
+      </div>
+    );
   }
 }
 

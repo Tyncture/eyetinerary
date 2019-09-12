@@ -29,10 +29,7 @@ function Create() {
       <Head>
         <title>Create Itinerary - Eyetinerary</title>
       </Head>
-      <Sidebar />
-      <Main>
-        <StepComponent />
-      </Main>
+      <StepComponent />
     </BaseContainer>
   );
 }

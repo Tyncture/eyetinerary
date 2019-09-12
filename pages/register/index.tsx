@@ -154,110 +154,105 @@ class Register extends React.Component<IProps, IState> {
   render() {
     return (
       <BaseContainer>
-        <Sidebar />
-        <Main>
-          <div className="register">
-            <header className="register-header">
-              <h1>Register</h1>
-            </header>
-            <main className="register-main">
-              <form className="register-form">
-                <div className="register-form--group">
-                  <label htmlFor="register-form-username">Username</label>
-                  <input
-                    type="text"
-                    id="register-form-username"
-                    name="register-form-username"
-                    value={this.state.username}
-                    onChange={this.handleUsernameChange}
-                    onKeyDown={this.handleUsernameKeyDown}
-                    onKeyUp={this.handleEnter}
-                    placeholder="Username"
-                    required={true}
-                    maxLength={50}
-                  />
+        <div className="register">
+          <header className="register-header">
+            <h1>Register</h1>
+          </header>
+          <main className="register-main">
+            <form className="register-form">
+              <div className="register-form--group">
+                <label htmlFor="register-form-username">Username</label>
+                <input
+                  type="text"
+                  id="register-form-username"
+                  name="register-form-username"
+                  value={this.state.username}
+                  onChange={this.handleUsernameChange}
+                  onKeyDown={this.handleUsernameKeyDown}
+                  onKeyUp={this.handleEnter}
+                  placeholder="Username"
+                  required={true}
+                  maxLength={50}
+                />
+              </div>
+              <div className="register-form--group">
+                <label htmlFor="register-form-password">Password</label>
+                <input
+                  type="password"
+                  id="register-form-password"
+                  name="register-form-password"
+                  value={this.state.password}
+                  onChange={this.handlePasswordChange}
+                  onKeyUp={this.handleEnter}
+                  placeholder="Password"
+                  required={true}
+                  maxLength={72}
+                />
+              </div>
+              <div className="register-form--group">
+                <label htmlFor="register-form-email">
+                  E-mail &nbsp;
+                  <span className="register-form--sub-label">optional</span>
+                </label>
+                <input
+                  type="text"
+                  id="register-form-email"
+                  name="register-form-email"
+                  value={this.state.email}
+                  onChange={this.handleEmailChange}
+                  onKeyDown={this.handleEmailKeyDown}
+                  onKeyUp={this.handleEnter}
+                  placeholder="example@outlook.com"
+                  maxLength={140}
+                />
+              </div>
+              <div className="register-form--group">
+                <label htmlFor="register-form-location">
+                  Location &nbsp;
+                  <span className="register-form--sub-label">optional</span>
+                </label>
+                <input
+                  type="text"
+                  id="register-form-location"
+                  name="register-form-location"
+                  value={this.state.location}
+                  onChange={this.handleLocationChange}
+                  onKeyUp={this.handleEnter}
+                  placeholder="Bangkok, Thailand"
+                  maxLength={50}
+                />
+              </div>
+              {this.state.emptyRequiredFields && (
+                <div className="input-form--warning">
+                  Please double check all required fields.
                 </div>
-                <div className="register-form--group">
-                  <label htmlFor="register-form-password">Password</label>
-                  <input
-                    type="password"
-                    id="register-form-password"
-                    name="register-form-password"
-                    value={this.state.password}
-                    onChange={this.handlePasswordChange}
-                    onKeyUp={this.handleEnter}
-                    placeholder="Password"
-                    required={true}
-                    maxLength={72}
-                  />
-                </div>
-                <div className="register-form--group">
-                  <label htmlFor="register-form-email">
-                    E-mail &nbsp;
-                    <span className="register-form--sub-label">optional</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="register-form-email"
-                    name="register-form-email"
-                    value={this.state.email}
-                    onChange={this.handleEmailChange}
-                    onKeyDown={this.handleEmailKeyDown}
-                    onKeyUp={this.handleEnter}
-                    placeholder="example@outlook.com"
-                    maxLength={140}
-                  />
-                </div>
-                <div className="register-form--group">
-                  <label htmlFor="register-form-location">
-                    Location &nbsp;
-                    <span className="register-form--sub-label">optional</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="register-form-location"
-                    name="register-form-location"
-                    value={this.state.location}
-                    onChange={this.handleLocationChange}
-                    onKeyUp={this.handleEnter}
-                    placeholder="Bangkok, Thailand"
-                    maxLength={50}
-                  />
-                </div>
-                {this.state.emptyRequiredFields && (
+              )}
+              {!this.state.emptyRequiredFields &&
+                this.state.passwordTooShort && (
                   <div className="input-form--warning">
-                    Please double check all required fields.
+                    Password must be at least 8 characters long.
                   </div>
                 )}
-                {!this.state.emptyRequiredFields &&
-                  this.state.passwordTooShort && (
-                    <div className="input-form--warning">
-                      Password must be at least 8 characters long.
-                    </div>
-                  )}
-                {!this.state.emptyRequiredFields &&
-                  !this.state.passwordTooShort &&
-                  this.state.invalidEmail && (
-                    <div className="input-form--warning">
-                      Please double check your email.
-                    </div>
-                  )}
-                {this.state.apiError && (
+              {!this.state.emptyRequiredFields &&
+                !this.state.passwordTooShort &&
+                this.state.invalidEmail && (
                   <div className="input-form--warning">
-                    An error has occured.
+                    Please double check your email.
                   </div>
                 )}
-                <div className="register-form--group">
-                  <input
-                    type="button"
-                    value="Register"
-                    onClick={this.handleSubmitClick}
-                  />
-                </div>
-              </form>
-            </main>
-          </div>
-        </Main>
+              {this.state.apiError && (
+                <div className="input-form--warning">An error has occured.</div>
+              )}
+              <div className="register-form--group">
+                <input
+                  type="button"
+                  value="Register"
+                  onClick={this.handleSubmitClick}
+                />
+              </div>
+            </form>
+          </main>
+        </div>
       </BaseContainer>
     );
   }

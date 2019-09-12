@@ -8,10 +8,7 @@ export class IndexPage extends Component {
   render() {
     return (
       <BaseContainer>
-        <Sidebar />
-        <Main>
-          <div>Home</div>
-        </Main>
+        <div>Home</div>
       </BaseContainer>
     );
   }
