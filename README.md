@@ -7,8 +7,6 @@ Web app for effortless creation, sharing and management of travel and general it
 
 Built using [TypeScript](https://www.typescriptlang.org/), [Next.js](https://nextjs.org/), and [React.js](https://reactjs.org/).
 
-Work in progress. ETA September 2019.
-
 ## Development
 
 ### `npm run dev`
